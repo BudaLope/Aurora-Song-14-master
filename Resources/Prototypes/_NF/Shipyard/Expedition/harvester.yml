@@ -1,0 +1,45 @@
+# Author Info
+# GitHub: Turtles Github
+# Discord: ???
+
+# Maintainer Info
+# GitHub: ???
+# Discord: ???
+
+# Shuttle Notes:
+#
+- type: vessel
+  id: Harvester
+  parent: BaseVessel
+  name: KC Harvester
+  description: A simple gas mining vessel intended for newer atmosians to get the hang of things
+  price: 65000
+  category: Large
+  group: Expedition
+  shuttlePath: /Maps/_NF/Shuttles/Expedition/Harvester.yml
+  guidebookPage: Null
+  class:
+  - Expedition
+  - Atmospherics
+  engine:
+  - AME
+
+- type: gameMap
+  id: Harvester
+  mapName: 'KC Harvester'
+  mapPath: /Maps/_NF/Shuttles/Expedition/Harvester.yml
+  minPlayers: 0
+  stations:
+    Harvester:
+      stationProto: StandardFrontierExpeditionVessel
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Harvester {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: '14'
+        - type: StationJobs
+          availableJobs:
+            ContractorInterview: [ 0, 0 ]
+            PilotInterview: [ 0, 0 ]
+            MercenaryInterview: [ 0, 0 ]
