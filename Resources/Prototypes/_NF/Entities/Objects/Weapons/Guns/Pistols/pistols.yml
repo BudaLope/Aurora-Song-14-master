@@ -41,6 +41,9 @@
     sprite: _NF/Objects/Weapons/Guns/Pistols/cobra.rsi
   - type: Clothing
     sprite: _NF/Objects/Weapons/Guns/Pistols/cobra.rsi
+  - type: Tag
+    tags:
+    - Cobra # Aurora
 
 #region DeltaV
 - type: entity

@@ -12,6 +12,9 @@
   - type: Item
     sprite: Objects/Tools/emag.rsi
     storedRotation: -90
+  - type: Tag
+    tags:
+    - EMAGTask # Aurora
 
 - type: entity
   parent: EmagUnlimited

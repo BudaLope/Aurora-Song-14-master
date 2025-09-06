@@ -278,6 +278,9 @@
           Quantity: 15
         - ReagentId: TranexamicAcid
           Quantity: 5
+  - type: Tag  #Aurora
+    tags:
+    - BruteAutoInjector
 
 - type: entity
   name: burn auto-injector
@@ -320,6 +323,9 @@
           Quantity: 10
         - ReagentId: Leporazine
           Quantity: 10
+  - type: Tag  #Aurora
+    tags:
+    - BurnAutoInjector
 
 - type: entity
   name: rad auto-injector
@@ -362,6 +368,9 @@
           Quantity: 15
         - ReagentId: Bicaridine
           Quantity: 5
+  - type: Tag  #Aurora
+    tags:
+    - RadAutoInjector
 
 - type: entity
   name: puncturase auto-injector
@@ -404,6 +413,9 @@
           Quantity: 10
         - ReagentId: TranexamicAcid
           Quantity: 5
+  - type: Tag  #Aurora
+    tags:
+    - PunctAutoInjector
 
 - type: entity
   name: pyrazine auto-injector
@@ -446,6 +458,9 @@
           Quantity: 10
         - ReagentId: Dermaline
           Quantity: 10
+  - type: Tag  #Aurora
+    tags:
+    - PyraAutoInjector
 
 - type: entity
   name: airloss auto-injector
@@ -488,6 +503,9 @@
           Quantity: 20
         - ReagentId: DexalinPlus
           Quantity: 20
+  - type: Tag  #Aurora
+    tags:
+    - AirlossAutoInjector
 
 - type: entity
   name: space medipen

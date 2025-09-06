@@ -34,3 +34,106 @@
 #region licenses
 - type: Tag
   id: License
+
+#region Task Whitelist Tags
+- type: Tag
+  id: Mosin
+
+- type: Tag
+  id: Cobra
+
+- type: Tag
+  id: Python
+
+- type: Tag
+  id: EnergySword
+
+- type: Tag
+  id: Hristov
+
+- type: Tag
+  id: c20
+
+- type: Tag
+  id: BloodRedKey
+
+- type: Tag
+  id: Atreides
+
+- type: Tag
+  id: ChinaLake
+
+- type: Tag
+  id: Bulldog
+
+- type: Tag
+  id: L6
+
+- type: Tag
+  id: VoiceMask
+
+- type: Tag
+  id: BlackJetPack
+
+- type: Tag
+  id: BloodRed
+
+- type: Tag
+  id: BloodRedElite
+
+- type: Tag
+  id: Jugsuit
+
+- type: Tag
+  id: ChameleonProjector
+
+- type: Tag
+  id: SyndieJaws
+
+- type: Tag
+  id: EMAGTask
+
+- type: Tag
+  id: AccessBreakerTask
+
+- type: Tag
+  id: SolandMoss
+
+- type: Tag
+  id: EthylredoxrazineAutoInjector
+
+- type: Tag
+  id: PolyAutoInjector
+
+- type: Tag
+  id: BruizAutoInjector
+
+- type: Tag
+  id: LacerAutoInjector
+
+- type: Tag
+  id: CrisisAutoInjector
+
+- type: Tag
+  id: StimulantAutoInjector
+
+- type: Tag
+  id: HemostasisAutoInjector
+
+- type: Tag
+  id: BruteAutoInjector
+
+- type: Tag
+  id: BurnAutoInjector
+
+- type: Tag
+  id: RadAutoInjector
+
+- type: Tag
+  id: PunctAutoInjector
+
+- type: Tag
+  id: PyraAutoInjector
+
+- type: Tag
+  id: AirlossAutoInjector

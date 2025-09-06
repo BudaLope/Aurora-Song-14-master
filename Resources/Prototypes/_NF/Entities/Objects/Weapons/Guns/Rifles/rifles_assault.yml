@@ -14,6 +14,9 @@
     magState: mag
     steps: 4
     zeroVisible: true
+  - type: Tag
+    tags:
+    - SolandMoss # Aurora
 
 - type: entity
   id: NFWeaponRifleAssaultM90

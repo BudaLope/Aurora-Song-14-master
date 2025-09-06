@@ -18,6 +18,9 @@
     - FullAuto
   - type: NFWeaponDetails
     manufacturer: weapon-details-manufacturer-gorlex-steel-works
+  - type: Tag
+    tags:
+    - Bulldog # Aurora
 
 - type: entity
   id: NFWeaponShotgunDoubleBarreled

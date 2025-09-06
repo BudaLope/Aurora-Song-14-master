@@ -15,6 +15,9 @@
     magState: mag
     steps: 4
     zeroVisible: true
+  - type: Tag
+    tags:
+    - L6 # Aurora
 
 - type: entity
   id: NFWeaponLightMachineGunL6C

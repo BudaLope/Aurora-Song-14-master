@@ -537,6 +537,7 @@
     - MonkeyWearable
     - Hardsuit
     - WhitelistChameleon
+    - BloodRed # Aurora
 
 # Syndicate Medic Hardsuit
 - type: entity
@@ -596,6 +597,9 @@
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSyndieElite
+  - type: Tag
+    tags:
+    - BloodRedElite # Aurora
 
 #Syndicate Commander Hardsuit
 - type: entity
@@ -668,6 +672,7 @@
     tags:
     - MonkeyWearable
     - WhitelistChameleon
+    - Jugsuit
 
 #Wizard Hardsuit
 - type: entity

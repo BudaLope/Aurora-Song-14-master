@@ -1,11 +1,280 @@
+#- type: task
+#  id: ExfiltratorTestTask
+#  taskGroup: ExfiltratorTaskGroup
+#  reward: 1
+#  description: test-task-description
+#  itemEntries:
+#  - name: task-item-baseball-bat
+#    amount: 1
+#    whitelist:
+#      tags:
+#      - BaseballBat
+
 - type: task
-  id: ExfiltratorTestTask
+  id: ExfiltratorTaskMosin
   taskGroup: ExfiltratorTaskGroup
   reward: 1
-  description: test-task-description
+  description: task-item-exfil-weapon
   itemEntries:
-  - name: task-item-baseball-bat
+  - name: task-item-mosin
     amount: 1
     whitelist:
       tags:
-      - BaseballBat
+      - Mosin
+
+- type: task
+  id: ExfiltratorTaskCobra
+  taskGroup: ExfiltratorTaskGroup
+  reward: 3
+  description: task-item-exfil-weapon
+  itemEntries:
+  - name: task-item-cobra
+    amount: 1
+    whitelist:
+      tags:
+      - Cobra
+
+- type: task
+  id: ExfiltratorTaskPython
+  taskGroup: ExfiltratorTaskGroup
+  reward: 3
+  description: task-item-exfil-weapon
+  itemEntries:
+  - name: task-item-python
+    amount: 1
+    whitelist:
+      tags:
+      - Python
+
+- type: task
+  id: ExfiltratorTaskEnergySword
+  taskGroup: ExfiltratorTaskGroup
+  reward: 4
+  description: task-item-exfil-weapon
+  itemEntries:
+  - name: task-item-esword
+    amount: 1
+    whitelist:
+      tags:
+      - EnergySword
+
+- type: task
+  id: ExfiltratorTaskHristov
+  taskGroup: ExfiltratorTaskGroup
+  reward: 5
+  description: task-item-exfil-weapon
+  itemEntries:
+  - name: task-item-hristov
+    amount: 1
+    whitelist:
+      tags:
+      - Hristov
+
+- type: task
+  id: ExfiltratorTaskc20
+  taskGroup: ExfiltratorTaskGroup
+  reward: 5
+  description: task-item-exfil-weapon
+  itemEntries:
+  - name: task-item-c20
+    amount: 1
+    whitelist:
+      tags:
+      - c20
+
+- type: task
+  id: ExfiltratorTaskAtredies
+  taskGroup: ExfiltratorTaskGroup
+  reward: 5
+  description: task-item-exfil-weapon
+  itemEntries:
+  - name: task-item-atreides
+    amount: 1
+    whitelist:
+      tags:
+      - Atreides
+
+- type: task
+  id: ExfiltratorTaskChinaLake
+  taskGroup: ExfiltratorTaskGroup
+  reward: 15
+  description: task-item-exfil-weapon
+  itemEntries:
+  - name: task-item-china-lake
+    amount: 1
+    whitelist:
+      tags:
+      - ChinaLake
+
+- type: task
+  id: ExfiltratorTaskL6
+  taskGroup: ExfiltratorTaskGroup
+  reward: 15
+  description: task-item-exfil-weapon
+  itemEntries:
+  - name: task-item-l6
+    amount: 1
+    whitelist:
+      tags:
+      - L6
+
+
+- type: task
+  id: ExfiltratorTaskBulldog
+  taskGroup: ExfiltratorTaskGroup
+  reward: 15
+  description: task-item-exfil-weapon
+  itemEntries:
+  - name: task-item-bulldog
+    amount: 1
+    whitelist:
+      tags:
+      - Bulldog
+
+
+- type: task
+  id: ExfiltratorTaskVoiceMask
+  taskGroup: ExfiltratorTaskGroup
+  reward: 2
+  description: task-item-exfil-infiltration
+  itemEntries:
+  - name: task-item-voice-mask
+    amount: 1
+    whitelist:
+      tags:
+      - VoiceMask
+
+
+- type: task
+  id: ExfiltratorTaskJetpack
+  taskGroup: ExfiltratorTaskGroup
+  reward: 1
+  description: task-item-exfil-infiltration
+  itemEntries:
+  - name: task-item-jetpack
+    amount: 1
+    whitelist:
+      tags:
+      - BlackJetPack
+
+
+- type: task
+  id: ExfiltratorTaskBloodRed
+  taskGroup: ExfiltratorTaskGroup
+  reward: 7
+  description: task-item-exfil-armor
+  itemEntries:
+  - name: task-item-bloodred
+    amount: 1
+    whitelist:
+      tags:
+      - BloodRed
+
+- type: task
+  id: ExfiltratorTaskEliteSuit
+  taskGroup: ExfiltratorTaskGroup
+  reward: 10
+  description: task-item-exfil-armor
+  itemEntries:
+  - name: task-item-elitesuit
+    amount: 1
+    whitelist:
+      tags:
+      - BloodRedElite
+
+- type: task
+  id: ExfiltratorTaskJugsuit
+  taskGroup: ExfiltratorTaskGroup
+  reward: 12
+  description: task-item-exfil-armor
+  itemEntries:
+  - name: task-item-jugsuit
+    amount: 1
+    whitelist:
+      tags:
+      - Jugsuit
+
+- type: task
+  id: ExfiltratorTaskEncryptionKey
+  taskGroup: ExfiltratorTaskGroup
+  reward: 1
+  description: task-item-exfil-infiltration
+  itemEntries:
+  - name: task-item-encryption-key
+    amount: 1
+    whitelist:
+      tags:
+      - BloodRedKey
+
+- type: task
+  id: ExfiltratorTaskEncryptionKeyCleanup
+  taskGroup: ExfiltratorTaskGroup
+  reward: 5
+  description: task-item-exfil-infiltration
+  itemEntries:
+  - name: task-item-encryption-key
+    amount: 4
+    whitelist:
+      tags:
+      - BloodRedKey
+
+- type: task
+  id: ExfiltratorTaskChameleon
+  taskGroup: ExfiltratorTaskGroup
+  reward: 6
+  description: task-item-exfil-infiltration
+  itemEntries:
+  - name: task-item-chameleon
+    amount: 1
+    whitelist:
+      tags:
+      - ChameleonProjector
+
+
+- type: task
+  id: ExfiltratorTaskSyndieJaws
+  taskGroup: ExfiltratorTaskGroup
+  reward: 1
+  description: task-item-exfil-infiltration
+  itemEntries:
+  - name: task-item-syndicate-jaws
+    amount: 1
+    whitelist:
+      tags:
+      - SyndieJaws
+
+- type: task
+  id: ExfiltratorTaskEmag
+  taskGroup: ExfiltratorTaskGroup
+  reward: 3
+  description: task-item-exfil-infiltration
+  itemEntries:
+  - name: task-item-emag
+    amount: 1
+    whitelist:
+      tags:
+      - EMAGTask
+
+- type: task
+  id: ExfiltratorTaskAB
+  taskGroup: ExfiltratorTaskGroup
+  reward: 3
+  description: task-item-exfil-infiltration
+  itemEntries:
+  - name: task-item-ab
+    amount: 1
+    whitelist:
+      tags:
+      - AccessBreakerTask
+
+- type: task
+  id: ExfiltratorTaskSolandMoss
+  taskGroup: ExfiltratorTaskGroup
+  reward: 5
+  description: task-item-exfil-weapon
+  itemEntries:
+  - name: task-item-SolandMoss
+    amount: 1
+    whitelist:
+      tags:
+      - SolandMoss

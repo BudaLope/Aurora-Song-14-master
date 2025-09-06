@@ -132,6 +132,7 @@
   - type: Tag
     tags:
       - DemagImmune
+      - BlackJetPack # Aurora
   - type: Jetpack
     radarBlip: false
   # End Frontier: emaggable jetpacks

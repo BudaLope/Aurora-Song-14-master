@@ -91,6 +91,9 @@
       map: [ "blade" ]
   - type: Item
     sprite: Objects/Weapons/Melee/e_sword-inhands.rsi
+  - type: Tag
+    tags:
+    - EnergySword # Aurora
 
 - type: entity
   name: energy dagger

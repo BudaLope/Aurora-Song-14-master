@@ -13,6 +13,9 @@
     sprite: _NF/Objects/Weapons/Guns/SMGs/atreides.rsi
   - type: Clothing
     sprite: _NF/Objects/Weapons/Guns/SMGs/atreides.rsi
+  - type: Tag
+    tags:
+    - Atreides # Aurora
 
 - type: entity
   id: NFWeaponSubMachineGunC20r
@@ -34,6 +37,9 @@
     magState: mag
     steps: 6
     zeroVisible: true
+  - type: Tag
+    tags:
+    - c20
 
 - type: entity
   id: NFWeaponSubMachineGunDrozd

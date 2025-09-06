@@ -19,6 +19,9 @@
     proto: NFGrenadeFrag
   - type: NFWeaponDetails
     manufacturer: weapon-details-manufacturer-gorlex-steel-works
+  - type: Tag
+    tags:
+    - ChinaLake # Aurora
 
 - type: entity
   id: NFWeaponLauncherRocket

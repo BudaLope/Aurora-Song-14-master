@@ -1,11 +1,168 @@
+#- type: task
+#  id: MedicalTestTask
+#  taskGroup: MedicalTaskGroup
+#  reward: 1
+#  description: test-task-description
+#  itemEntries:
+#  - name: task-item-baseball-bat
+#    amount: 1
+#    whitelist:
+#      tags:
+#      - BaseballBat
+
 - type: task
-  id: MedicalTestTask
+  id: EthylredoxrazineAutoInjectorTask
   taskGroup: MedicalTaskGroup
-  reward: 1
-  description: test-task-description
+  reward: 15000
+  description: task-item-meds
   itemEntries:
-  - name: task-item-baseball-bat
-    amount: 1
+  - name: task-item-ethylredoxrazineautoinjector
+    amount: 5
     whitelist:
       tags:
-      - BaseballBat
+      - EthylredoxrazineAutoInjector
+
+- type: task
+  id: PolyAutoInjectorTask
+  taskGroup: MedicalTaskGroup
+  reward: 15000
+  description: task-item-meds
+  itemEntries:
+  - name: task-item-polyautoinjector
+    amount: 5
+    whitelist:
+      tags:
+      - PolyAutoInjector
+
+- type: task
+  id: BruizAutoInjectorTask
+  taskGroup: MedicalTaskGroup
+  reward: 15000
+  description: task-item-meds
+  itemEntries:
+  - name: task-item-bruizautoinjector
+    amount: 5
+    whitelist:
+      tags:
+      - BruizAutoInjector
+
+- type: task
+  id: LacerAutoInjectorTask
+  taskGroup: MedicalTaskGroup
+  reward: 15000
+  description: task-item-meds
+  itemEntries:
+  - name: task-item-lacerautoinjector
+    amount: 5
+    whitelist:
+      tags:
+      - LacerAutoInjector
+
+- type: task
+  id: CrisisAutoInjectorTask
+  taskGroup: MedicalTaskGroup
+  reward: 15000
+  description: task-item-meds
+  itemEntries:
+  - name: task-item-crisisautoinjector
+    amount: 5
+    whitelist:
+      tags:
+      - CrisisAutoInjector
+
+- type: task
+  id: StimulantAutoInjectorTask
+  taskGroup: MedicalTaskGroup
+  reward: 15000
+  description: task-item-meds
+  itemEntries:
+  - name: task-item-stimulantautoinjector
+    amount: 5
+    whitelist:
+      tags:
+      - StimulantAutoInjector
+
+- type: task
+  id: HemostasisAutoInjectorTask
+  taskGroup: MedicalTaskGroup
+  reward: 15000
+  description: task-item-meds
+  itemEntries:
+  - name: task-item-hemostasisautoinjector
+    amount: 5
+    whitelist:
+      tags:
+      - HemostasisAutoInjector
+
+- type: task
+  id: BruteAutoInjectorTask
+  taskGroup: MedicalTaskGroup
+  reward: 15000
+  description: task-item-meds
+  itemEntries:
+  - name: task-item-bruteautoinjector
+    amount: 5
+    whitelist:
+      tags:
+      - BruteAutoInjector
+
+- type: task
+  id: BurnAutoInjectorTask
+  taskGroup: MedicalTaskGroup
+  reward: 15000
+  description: task-item-meds
+  itemEntries:
+  - name: task-item-burnautoinjector
+    amount: 5
+    whitelist:
+      tags:
+      - BurnAutoInjector
+
+- type: task
+  id: RadAutoInjectorTask
+  taskGroup: MedicalTaskGroup
+  reward: 15000
+  description: task-item-meds
+  itemEntries:
+  - name: task-item-radautoinjector
+    amount: 5
+    whitelist:
+      tags:
+      - RadAutoInjector
+
+- type: task
+  id: PunctAutoInjectorTask
+  taskGroup: MedicalTaskGroup
+  reward: 15000
+  description: task-item-meds
+  itemEntries:
+  - name: task-item-punctautoinjector
+    amount: 5
+    whitelist:
+      tags:
+      - PunctAutoInjector
+
+- type: task
+  id: PyraAutoInjectorTask
+  taskGroup: MedicalTaskGroup
+  reward: 15000
+  description: task-item-meds
+  itemEntries:
+  - name: task-item-pyraautoinjector
+    amount: 5
+    whitelist:
+      tags:
+      - PyraAutoInjector
+
+
+- type: task
+  id: AirlossAutoInjectorTask
+  taskGroup: MedicalTaskGroup
+  reward: 15000
+  description: task-item-meds
+  itemEntries:
+  - name: task-item-airlossautoinjector
+    amount: 5
+    whitelist:
+      tags:
+      - AirlossAutoInjector

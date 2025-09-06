@@ -11,6 +11,9 @@
     sprite: Objects/Weapons/Guns/Snipers/bolt_gun_wood.rsi
   - type: AltFireMelee
     attackType: Light
+  - type: Tag
+    tags:
+    - Mosin # Aurora
 
 - type: entity
   id: NFWeaponRifleMusket

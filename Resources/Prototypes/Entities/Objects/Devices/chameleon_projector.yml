@@ -20,6 +20,9 @@
       - MindContainer # no
       - Pda # PDAs currently make you invisible /!\
     disguiseProto: ChameleonDisguise
+  - type: Tag
+    tags:
+    - ChameleonProjector # Aurora
 
 - type: entity
   categories: [ HideSpawnMenu ]

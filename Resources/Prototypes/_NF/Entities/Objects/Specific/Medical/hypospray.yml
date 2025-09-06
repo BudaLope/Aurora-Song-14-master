@@ -148,6 +148,9 @@
           Quantity: 5
         - ReagentId: Saline
           Quantity: 15
+  - type: Tag #Aurora
+    tags:
+    - HemostasisAutoInjector
 
 - type: entity
   name: stimulant auto-injector
@@ -185,6 +188,9 @@
           Quantity: 10
         - ReagentId: Dylovene
           Quantity: 10
+  - type: Tag  #Aurora
+    tags:
+    - StimulantAutoInjector
 
 - type: entity
   name: crisis auto-injector
@@ -222,6 +228,9 @@
           Quantity: 10
         - ReagentId: DexalinPlus
           Quantity: 10
+  - type: Tag  #Aurora
+    tags:
+    - CrisisAutoInjector
 
 - type: entity
   name: lacerinol auto-injector
@@ -257,6 +266,9 @@
           Quantity: 10
         - ReagentId: TranexamicAcid
           Quantity: 5
+  - type: Tag  #Aurora
+    tags:
+    - LacerAutoInjector
 
 - type: entity
   name: bruizine auto-injector
@@ -292,6 +304,9 @@
           Quantity: 10
         - ReagentId: TranexamicAcid
           Quantity: 5
+  - type: Tag  #Aurora
+    tags:
+    - BruizAutoInjector
 
 - type: entity
   name: polypyrylium oligomers auto-injector
@@ -325,6 +340,9 @@
         reagents:
         - ReagentId: PolypyryliumOligomers
           Quantity: 15
+  - type: Tag  #Aurora
+    tags:
+    - PolyAutoInjector
 
 - type: entity
   name: barkeeper's friend auto-injector
@@ -364,6 +382,9 @@
           Quantity: 5
   - type: StaticPrice #to sell in the booze-o-mat
     price: 225
+  - type: Tag  #Aurora
+    tags:
+    - EthylredoxrazineAutoInjector
 
 - type: entity
   parent: BaseItem

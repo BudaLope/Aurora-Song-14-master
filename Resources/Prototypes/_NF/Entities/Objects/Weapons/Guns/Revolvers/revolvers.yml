@@ -70,6 +70,9 @@
     sprite: Objects/Weapons/Guns/Revolvers/python.rsi
   - type: Clothing
     sprite: Objects/Weapons/Guns/Revolvers/python.rsi
+  - type: Tag
+    tags:
+    - Python # Aurora
 
 - type: entity
   id: NFWeaponRevolverPirate

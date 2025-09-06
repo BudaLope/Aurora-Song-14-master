@@ -42,6 +42,7 @@
     - type: Tag
       tags:
       - IPCMaskWearable # EE - IPCs
+      - VoiceMask # Aurora
 
 - type: entity
   parent: ClothingMaskBase

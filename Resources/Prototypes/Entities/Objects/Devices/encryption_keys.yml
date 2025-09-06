@@ -255,6 +255,9 @@
     layers:
     - state: crypt_red
     - state: synd_label
+  - type: Tag
+    tags:
+    - BloodRedKey # Aurora
 
 - type: entity
   parent: [EncryptionKey, RecyclableItemDeviceTiny] # Frontier: added RecyclableItemDeviceTiny, removed BaseSiliconScienceContraband
