@@ -1,7 +1,8 @@
-﻿using Content.Shared.Bed.Sleep;
 using Content.Shared.CCVar;
+using Content.Shared.StatusEffectNew;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.SSDIndicator;
@@ -11,8 +12,11 @@ namespace Content.Shared.SSDIndicator;
 /// </summary>
 public sealed class SSDIndicatorSystem : EntitySystem
 {
+    public static readonly EntProtoId StatusEffectSSDSleeping = "StatusEffectSSDSleeping";
+
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
 
     private bool _icSsdSleep;
     private float _icSsdSleepTime;
@@ -35,12 +39,9 @@ public sealed class SSDIndicatorSystem : EntitySystem
         if (_icSsdSleep)
         {
             component.FallAsleepTime = TimeSpan.Zero;
-            if (component.ForcedSleepAdded) // Remove component only if it has been added by this system
-            {
-                EntityManager.RemoveComponent<ForcedSleepingComponent>(uid);
-                component.ForcedSleepAdded = false;
-            }
+            _statusEffects.TryRemoveStatusEffect(uid, StatusEffectSSDSleeping);
         }
+
         Dirty(uid, component);
     }
 
@@ -53,18 +54,19 @@ public sealed class SSDIndicatorSystem : EntitySystem
         {
             component.FallAsleepTime = _timing.CurTime + TimeSpan.FromSeconds(_icSsdSleepTime);
         }
+
         Dirty(uid, component);
     }
 
     // Prevents mapped mobs to go to sleep immediately
     private void OnMapInit(EntityUid uid, SSDIndicatorComponent component, MapInitEvent args)
     {
-        if (_icSsdSleep &&
-            component.IsSSD &&
-            component.FallAsleepTime == TimeSpan.Zero)
-        {
-            component.FallAsleepTime = _timing.CurTime + TimeSpan.FromSeconds(_icSsdSleepTime);
-        }
+        if (!_icSsdSleep || !component.IsSSD)
+            return;
+
+        component.FallAsleepTime = _timing.CurTime + TimeSpan.FromSeconds(_icSsdSleepTime);
+        component.NextUpdate = _timing.CurTime + component.UpdateInterval;
+        Dirty(uid, component);
     }
 
     public override void Update(float frameTime)
@@ -74,6 +76,7 @@ public sealed class SSDIndicatorSystem : EntitySystem
         if (!_icSsdSleep)
             return;
 
+        var curTime = _timing.CurTime;
         var query = EntityQueryEnumerator<SSDIndicatorComponent>();
 
         while (query.MoveNext(out var uid, out var ssd))

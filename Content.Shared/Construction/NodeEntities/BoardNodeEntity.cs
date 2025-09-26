@@ -13,8 +13,10 @@ namespace Content.Shared.Construction.NodeEntities;
 [DataDefinition]
 public sealed partial class BoardNodeEntity : IGraphNodeEntity
 {
-    [DataField("container")] public string Container { get; private set; } = string.Empty;
-    [DataField] public ComputerType Computer { get; private set; } = ComputerType.Default; // Frontier
+    [DataField("container")]
+    public string Container { get; private set; } = string.Empty;
+    [DataField]
+    public ComputerType Computer { get; private set; } = ComputerType.Default; // Frontier
 
     public string? GetId(EntityUid? uid, EntityUid? userUid, GraphNodeEntityArgs args)
     {
@@ -52,6 +54,9 @@ public sealed partial class BoardNodeEntity : IGraphNodeEntity
 
         if (args.EntityManager.TryGetComponent(board, out ComputerBoardComponent? computer))
             return computer.Prototype;
+
+        if (args.EntityManager.TryGetComponent(board, out ElectronicsBoardComponent? electronics))
+            return electronics.Prototype;
 
         return null;
     }

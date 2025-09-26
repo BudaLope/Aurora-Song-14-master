@@ -46,7 +46,7 @@
   - type: SelectableBorgModule
   - type: ContainerContainer
     containers:
-      provided_container: !type:Container { }
+      holding_container: !type:Container { }
 
 - type: entity
   parent: BaseAction
@@ -495,6 +495,36 @@
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: tool-module }
 
+- type: entity
+  id: BorgModuleInflatable
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: inflatable cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: generic
+    - state: icon-inflatable
+  - type: ItemBorgModule
+    hands:
+    - item: InflatableDoorStack
+      hand:
+        emptyRepresentative: InflatableDoorStack
+        emptyLabel: borg-slot-inflatable-door-empty
+        whitelist:
+          tags:
+          - Inflatable
+    - item: InflatableWallStack
+      hand:
+        emptyRepresentative: InflatableWallStack
+        emptyLabel: borg-slot-inflatable-wall-empty
+        whitelist:
+          tags:
+          - Inflatable
+    - item: BoxInflatable
+    - item: WeaponMeleeNeedle
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: inflatable-module }
+
 # cargo modules
 - type: entity
   id: BorgModuleAppraisal
@@ -633,6 +663,14 @@
     - MaintenanceJack # Frontier
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: adv-tools-module }
+
+- type: entity
+  id: BorgModuleConstructionMaterialPlaceholder
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: Objects/Materials/Sheets/other.rsi
+    state: generic_materials
 
 - type: entity
   id: BorgModuleConstruction
@@ -1267,6 +1305,26 @@
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: clowning-module }
 
+- type: entity
+  id: BorgModuleAdvancedClowning
+  parent: [ BaseBorgModuleService, BaseProviderBorgModule ]
+  name: advanced clowning cyborg module
+  description: Advanced service module for only the silliest cyborgs! Comes with a built-in oven that bakes pies automatically over time, a holopeel projector, and a push horn.
+  components:
+  - type: Sprite
+    layers:
+    - state: service
+    - state: icon-clown-adv
+  - type: ItemBorgModule
+    hands:
+    - item: HoloprojectorClownBorg
+    - item: BorgLauncherCreamPie
+    - item: ClownRecorder
+    - item: PushHorn
+    - item: BikeHornInstrument
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: adv-clowning-module }
+
 #syndicate modules
 - type: entity
   id: BorgModuleSyndicateWeapon
@@ -1302,6 +1360,8 @@
       - state: base-part-inhand-right
       - state: base-stripes-inhand-right
         color: "#7B0F12"
+  - type: StaticPrice
+    price: 2500
 
 - type: entity
   id: BorgModuleOperative
@@ -1327,7 +1387,7 @@
   id: BorgModuleEsword
   parent: [ BaseBorgModuleSyndicate, BaseProviderBorgModule, BaseC3SyndicateContraband ] # Frontier: BaseSyndicateContraband<BaseC3SyndicateContraband
   name: energy sword cyborg module
-  description: A module that comes with a double energy sword.
+  description: A weapons module that comes with an energy sword.
   components:
     - type: Sprite
       layers:
@@ -1393,13 +1453,15 @@
         - state: base-part-inhand-right
         - state: base-stripes-inhand-right
           color: "#7B0F12"
+    - type: StaticPrice
+      price: 2000
 
 # xenoborg modules
 - type: entity
   parent: [ BaseXenoborgModuleGeneric, BaseProviderBorgModule, BaseXenoborgContraband ]
   id: XenoborgModuleBasic
   name: basic xenoborg module
-  description: Essential items for any xenoborg.
+  description: Essential items for any Xenoborg.
   components:
   - type: Sprite
     layers:
@@ -1418,7 +1480,7 @@
   parent: [ BaseXenoborgModuleGeneric, BaseProviderBorgModule, BaseXenoborgContraband ]
   id: XenoborgModuleTool
   name: tool xenoborg module
-  description: Simple tools for most xenoborgs.
+  description: Simple tools for most Xenoborgs.
   components:
   - type: Sprite
     layers:
@@ -1525,7 +1587,7 @@
   parent: [ BaseXenoborgModuleScout, BaseProviderBorgModule, BaseXenoborgContraband ]
   id: XenoborgModuleSpaceMovement
   name: space movement xenoborg module
-  description: Module that helps a xenoborg move better in space.
+  description: Module that helps a Xenoborg move better in space.
   components:
   - type: Sprite
     layers:
@@ -1628,3 +1690,19 @@
     - CloakingDevice
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-eye-module }
+
+- type: entity
+  parent: [ BaseXenoborgModuleStealth, BaseProviderBorgModule, BaseXenoborgContraband ]
+  id: XenoborgModuleSuperCloakDevice
+  name: cloaking device xenoborg module
+  description: Module with a device that allows xenoborgs to become truly invisible for less time.
+  components:
+  - type: Sprite
+    layers:
+    - state: xenoborg_stealth
+    - state: icon-xenoborg-cloak2
+  - type: ItemBorgModule
+    hands:
+    - item: SuperCloakingDevice
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-eye2-module }

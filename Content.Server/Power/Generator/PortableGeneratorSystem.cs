@@ -214,12 +214,6 @@ public sealed class PortableGeneratorSystem : SharedPortableGeneratorSystem
         }
     }
 
-    private void OnSwitchPowerCheck(EntityUid uid, FuelGeneratorComponent comp, ref SwitchPowerCheckEvent args)
-    {
-        if (comp.On)
-            args.DisableMessage = Loc.GetString("fuel-generator-verb-disable-on");
-    }
-
     public override void Update(float frameTime)
     {
         var query = EntityQueryEnumerator<PortableGeneratorComponent, FuelGeneratorComponent, PowerSupplierComponent>();

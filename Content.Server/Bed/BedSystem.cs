@@ -6,7 +6,6 @@ using Content.Shared._EE.Silicon.Components;
 using Content.Shared.Bed;
 using Content.Shared.Bed.Components;
 using Content.Shared.Bed.Sleep;
-using Content.Shared.Body.Components;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Damage;
 using Content.Shared.Emag.Components;
@@ -20,8 +19,6 @@ namespace Content.Server.Bed
     public sealed class BedSystem : SharedBedSystem
     {
         [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-        [Dependency] private readonly EmagSystem _emag = default!;
-        [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
         [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
 
         private EntityQuery<SleepingComponent> _sleepingQuery;

@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Numerics;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
 using Robust.Shared.Prototypes;
@@ -27,7 +28,7 @@ public sealed partial class HumanoidCharacterAppearance : ICharacterAppearance, 
     public Color EyeColor { get; set; } = Color.Black;
 
     [DataField]
-    public Color SkinColor { get; set; } = Humanoid.SkinColor.ValidHumanSkinTone;
+    public Color SkinColor { get; set; } = Color.FromHsv(new Vector4(0.07f, 0.2f, 1f, 1f));
 
     [DataField]
     public List<Marking> Markings { get; set; } = new();
@@ -156,10 +157,10 @@ public sealed partial class HumanoidCharacterAppearance : ICharacterAppearance, 
 
         var newHairStyle = hairStyles.Count > 0
             ? random.Pick(hairStyles)
-            : HairStyles.DefaultHairStyle;
+            : HairStyles.DefaultHairStyle.Id;
 
         var newFacialHairStyle = facialHairStyles.Count == 0 || sex == Sex.Female
-            ? HairStyles.DefaultFacialHairStyle
+            ? HairStyles.DefaultFacialHairStyle.Id
             : random.Pick(facialHairStyles);
 
         var newHairColor = random.Pick(HairStyles.RealisticHairColors);
@@ -247,10 +248,8 @@ public sealed partial class HumanoidCharacterAppearance : ICharacterAppearance, 
             markingSet = new MarkingSet(appearance.Markings, speciesProto.MarkingPoints, markingManager, proto);
             markingSet.EnsureValid(markingManager);
 
-            if (!Humanoid.SkinColor.VerifySkinColor(speciesProto.SkinColoration, skinColor))
-            {
-                skinColor = Humanoid.SkinColor.ValidSkinTone(speciesProto.SkinColoration, skinColor);
-            }
+            var strategy = proto.Index(speciesProto.SkinColoration).Strategy;
+            skinColor = strategy.EnsureVerified(skinColor);
 
             markingSet.EnsureSpecies(species, skinColor, markingManager);
             markingSet.EnsureSexes(sex, markingManager);

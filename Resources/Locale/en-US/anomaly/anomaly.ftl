@@ -55,6 +55,8 @@ anomaly-sync-examine-connected = It is [color=darkgreen]attached[/color] to an a
 anomaly-sync-examine-not-connected = It is [color=darkred]not attached[/color] to an anomaly.
 anomaly-sync-connect-verb-text = Attach anomaly
 anomaly-sync-connect-verb-message = Attach a nearby anomaly to {THE($machine)}.
+anomaly-sync-disconnect-verb-text = Detach anomaly
+anomaly-sync-disconnect-verb-message = Detach the connected anomaly from {THE($machine)}.
 
 anomaly-generator-ui-title = Anomaly Generator
 # Frontier: Plasma<Anomalite

@@ -2,7 +2,7 @@
   id: ScarEyeRight
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf,  Goblin, Sheleg, Felinid, Harpy, Oni, Vulpkanin, Rodentia, Feroxi, Tajaran]
+  speciesRestriction: [Human, Dwarf, SlimePerson,  Goblin, Sheleg, Felinid, Harpy, Oni, Vulpkanin, Rodentia, Feroxi, Tajaran]
   followSkinColor: true
   sprites:
   - sprite: Mobs/Customization/scars.rsi
@@ -12,7 +12,7 @@
   id: ScarEyeLeft
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf, Goblin, Sheleg, Felinid, Harpy, Oni, Vulpkanin, Rodentia, Feroxi, Tajaran] # Delta V - Felinid, Oni, Harpy, Rodentia
+  speciesRestriction: [Human, Dwarf, SlimePerson, Goblin, Sheleg, Felinid, Harpy, Oni, Vulpkanin, Rodentia, Feroxi, Tajaran] # Delta V - Felinid, Oni, Harpy, Rodentia
   followSkinColor: true
   sprites:
   - sprite: Mobs/Customization/scars.rsi
@@ -22,7 +22,7 @@
   id: ScarTopSurgeryShort
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Goblin, Sheleg, Felinid, Harpy, Oni, Vulpkanin, Feroxi, Tajaran]
+  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Moth, Arachnid, Diona, Goblin, Sheleg, Felinid, Harpy, Oni, Vulpkanin, Feroxi, Tajaran]
   sexRestriction: [Male]
   followSkinColor: true
   sprites:
@@ -33,7 +33,7 @@
   id: ScarTopSurgeryLong
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Goblin, Sheleg, Felinid, Harpy, Oni, Vulpkanin, Feroxi, Tajaran]
+  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Moth, Arachnid, Diona, Goblin, Sheleg, Felinid, Harpy, Oni, Vulpkanin, Feroxi, Tajaran]
   sexRestriction: [Male]
   followSkinColor: true
   sprites:
@@ -44,7 +44,7 @@
   id: ScarChest
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Goblin, Sheleg, Felinid, Harpy, Oni, Vulpkanin, Feroxi, Tajaran] #Einstein Engines - Felinid, Oni
+  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Moth, Arachnid, Diona, Goblin, Sheleg, Felinid, Harpy, Oni, Vulpkanin, Feroxi, Tajaran] #Einstein Engines - Felinid, Oni
   sexRestriction: [Male] # DeltaV: Splitting the scars and tattoos
   followSkinColor: true
   sprites:
@@ -55,7 +55,7 @@
   id: ScarNeck
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf, Goblin, Sheleg, Felinid, Harpy, Oni, Vulpkanin] # Frontier: added Goblin and afterwards
+  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Goblin, Sheleg, Felinid, Harpy, Oni, Vulpkanin] # Frontier: added Goblin and afterwards
   followSkinColor: true
   sprites:
   - sprite: Mobs/Customization/scars.rsi
@@ -65,7 +65,7 @@
   id: ScarChestBullets
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Goblin, Sheleg, Felinid, Harpy, Oni, Vulpkanin] # Frontier: added Goblin and afterwards
+  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Moth, Arachnid, Goblin, Sheleg, Felinid, Harpy, Oni, Vulpkanin] # Frontier: added Goblin and afterwards
   followSkinColor: true
   sprites:
   - sprite: Mobs/Customization/scars.rsi
@@ -75,7 +75,7 @@
   id: ScarStomachBullets
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Goblin, Sheleg, Felinid, Harpy, Oni, Vulpkanin] # Frontier: added Goblin and afterwards
+  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Moth, Arachnid, Goblin, Sheleg, Felinid, Harpy, Oni, Vulpkanin] # Frontier: added Goblin and afterwards
   followSkinColor: true
   sprites:
   - sprite: Mobs/Customization/scars.rsi
@@ -85,7 +85,7 @@
   id: ScarFace1
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Dwarf, Goblin, Sheleg, Felinid, Harpy, Oni, Vulpkanin] # Frontier: added Goblin and afterwards
+  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Moth, Goblin, Sheleg, Felinid, Harpy, Oni, Vulpkanin] # Frontier: added Goblin and afterwards
   followSkinColor: true
   sprites:
   - sprite: Mobs/Customization/scars.rsi
@@ -95,8 +95,29 @@
   id: ScarFace2
   bodyPart: Head
   markingCategory: Head
-  speciesRestriction: [Human, Goblin, Sheleg, Felinid, Harpy, Oni, Vulpkanin] # Frontier: added Goblin and afterwards
+  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson, Moth, Goblin, Sheleg, Felinid, Harpy, Oni, Vulpkanin] # Frontier: added Goblin and afterwards
   followSkinColor: true
   sprites:
   - sprite: Mobs/Customization/scars.rsi
     state: scar_face_2
+
+- type: marking
+  id: ScarEyeRightSmall
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson]
+  followSkinColor: true
+  sprites:
+  - sprite: Mobs/Customization/scars.rsi
+    state: scar_eye_right_small
+
+- type: marking
+  id: ScarEyeLeftSmall
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [Human, Dwarf, Reptilian, SlimePerson]
+  followSkinColor: true
+  sprites:
+  - sprite: Mobs/Customization/scars.rsi
+    state: scar_eye_left_small
+

@@ -489,6 +489,8 @@
   params:
     variation: 0.05
   sounds:
+    Scream:
+      collection: XenoborgScream
     Laugh:
       collection: XenoborgLaugh
     Beep:
@@ -503,6 +505,63 @@
       collection: XenoborgBikeHorn
     Ping:
       collection: XenoborgPing
+
+# Vulp Sounds
+- type: emoteSounds
+  id: MaleVulpkanin
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: MaleLaugh
+    Sneeze:
+      collection: MaleSneezes
+    Cough:
+      collection: MaleCoughs
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: MaleSigh
+    Scream:
+      collection: VulpkaninScreams
+    Growl:
+      collection: VulpkaninGrowls
+    Snarl:
+      collection: VulpkaninSnarls
+    Bark:
+      collection: VulpkaninBarks
+    Whine:
+      collection: VulpkaninWhines
+    Howl:
+      collection: VulpkaninHowls
+
+- type: emoteSounds
+  id: FemaleVulpkanin
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: FemaleLaugh
+    Sneeze:
+      collection: FemaleSneezes
+    Cough:
+      collection: FemaleCoughs
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: FemaleSigh
+    Scream:
+      collection: VulpkaninScreams
+    Growl:
+      collection: VulpkaninGrowls
+    Snarl:
+      collection: VulpkaninSnarls
+    Bark:
+      collection: VulpkaninBarks
+    Whine:
+      collection: VulpkaninWhines
+    Howl:
+      collection: VulpkaninHowls
 
 # body emotes
 - type: emoteSounds
@@ -635,6 +694,20 @@
   params:
     variation: 0.125
   sounds:
+    Thump:
+      path: /Audio/Effects/soft_thump.ogg
+      params:
+        variation: 0.125
+    Clap:
+      collection: Claps
+    ClapSingle:
+      collection: ClapSingle
+    Snap:
+      collection: Snaps
+      params:
+        volume: -6
+    Salute:
+      collection: Salutes
     Laugh:
       collection: WawaLaugh
     Sneeze:
@@ -647,3 +720,19 @@
       collection: WawaSigh
     Scream:
       collection: WawaScream
+    Yawn:
+      collection: WawaYawn
+    Crying:
+      collection: WawaCry
+    Snore:
+      collection: Snores
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Honk:
+      collection: BikeHorn
+    Gasp:
+      collection: MaleGasp
+    DefaultDeathgasp:
+      collection: WawaDeath

@@ -22,8 +22,6 @@ namespace Content.Server.Stack
         public override void Initialize()
         {
             base.Initialize();
-
-            SubscribeLocalEvent<StackComponent, GetVerbsEvent<AlternativeVerb>>(OnStackAlternativeInteract);
         }
 
         public override void SetCount(EntityUid uid, int amount, StackComponent? component = null)
@@ -34,7 +32,7 @@ namespace Content.Server.Stack
             base.SetCount(uid, amount, component);
 
             // Queue delete stack if count reaches zero.
-            if (component.Count <= 0 && !component.Lingering)
+            if (component.Count <= 0)
                 QueueDel(uid);
         }
 

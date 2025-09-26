@@ -52,7 +52,7 @@ public sealed class EmpSystem : SharedEmpSystem
     /// <param name="energyConsumption">The amount of energy consumed by the EMP pulse.</param>
     /// <param name="duration">The duration of the EMP effects.</param>
     /// <param name="immuneGrids">Frontier: a list of the grids that should not be affected by the pulse.</param>
-    public void EmpPulse(MapCoordinates coordinates, float range, float energyConsumption, float duration, List<EntityUid>? immuneGrids = null)
+    public override EmpPulse(MapCoordinates coordinates, float range, float energyConsumption, float duration, List<EntityUid>? immuneGrids = null)
     {
         foreach (var uid in _lookup.GetEntitiesInRange(coordinates, range))
         {
@@ -119,8 +119,8 @@ public sealed class EmpSystem : SharedEmpSystem
     {
         var ev = new EmpPulseEvent(energyConsumption, false, false, TimeSpan.FromSeconds(duration));
         RaiseLocalEvent(uid, ref ev);
+
         if (ev.Affected)
-        {
             Spawn(EmpDisabledEffectPrototype, Transform(uid).Coordinates);
         }
         if (ev.Disabled)
@@ -242,9 +242,7 @@ public sealed class EmpSystem : SharedEmpSystem
 /// <summary>
 /// Raised on an entity before <see cref="EmpPulseEvent"/>. Cancel this to prevent the emp event being raised.
 /// </summary>
-public sealed partial class EmpAttemptEvent : CancellableEntityEventArgs
-{
-}
+public sealed partial class EmpAttemptEvent : CancellableEntityEventArgs;
 
 [ByRefEvent]
 public record struct EmpPulseEvent(float EnergyConsumption, bool Affected, bool Disabled, TimeSpan Duration);

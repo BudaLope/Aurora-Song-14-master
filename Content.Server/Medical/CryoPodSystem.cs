@@ -1,36 +1,18 @@
-using Content.Server.Administration.Logs;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Atmos.Piping.Components;
 using Content.Server.Atmos.Piping.Unary.EntitySystems;
-using Content.Server.Body.Components;
-using Content.Server.Body.Systems;
 using Content.Server.Medical.Components;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.NodeGroups;
 using Content.Server.NodeContainer.Nodes;
 using Content.Server.Temperature.Components;
-using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Atmos;
-using Content.Shared.UserInterface;
-using Content.Shared.Chemistry;
-using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.Components.SolutionManager;
-using Content.Shared.Climbing.Systems;
-using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Database;
-using Content.Shared.DoAfter;
-using Content.Shared.DragDrop;
-using Content.Shared.Emag.Systems;
-using Content.Shared.Examine;
-using Content.Shared.Interaction;
+using Content.Shared.Body.Components;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Medical.Cryogenics;
 using Content.Shared.MedicalScanner;
-using Content.Shared.Power;
-using Content.Shared.Verbs;
-using Robust.Server.GameObjects;
+using Content.Shared.UserInterface;
 using Robust.Shared.Containers;
-using Robust.Shared.Timing;
-using SharedToolSystem = Content.Shared.Tools.Systems.SharedToolSystem;
 
 namespace Content.Server.Medical;
 
@@ -38,8 +20,8 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
 {
     [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
     [Dependency] private readonly GasCanisterSystem _gasCanisterSystem = default!;
-    [Dependency] private readonly ClimbSystem _climbSystem = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
+    [Dependency] private readonly NodeContainerSystem _nodeContainer = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private readonly BloodstreamSystem _bloodstreamSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
@@ -58,6 +40,7 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<CryoPodComponent, AfterActivatableUIOpenEvent>(OnActivateUI);
         SubscribeLocalEvent<CryoPodComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<CryoPodComponent, GetVerbsEvent<AlternativeVerb>>(AddAlternativeVerbs);
         SubscribeLocalEvent<CryoPodComponent, GotEmaggedEvent>(OnEmagged);
@@ -66,13 +49,7 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
         SubscribeLocalEvent<CryoPodComponent, CryoPodPryFinished>(OnCryoPodPryFinished);
 
         SubscribeLocalEvent<CryoPodComponent, AtmosDeviceUpdateEvent>(OnCryoPodUpdateAtmosphere);
-        SubscribeLocalEvent<CryoPodComponent, DragDropTargetEvent>(HandleDragDropOn);
-        SubscribeLocalEvent<CryoPodComponent, InteractUsingEvent>(OnInteractUsing);
-        SubscribeLocalEvent<CryoPodComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<CryoPodComponent, PowerChangedEvent>(OnPowerChanged);
         SubscribeLocalEvent<CryoPodComponent, GasAnalyzerScanEvent>(OnGasAnalyzed);
-        SubscribeLocalEvent<CryoPodComponent, ActivatableUIOpenAttemptEvent>(OnActivateUIAttempt);
-        SubscribeLocalEvent<CryoPodComponent, AfterActivatableUIOpenEvent>(OnActivateUI);
         SubscribeLocalEvent<CryoPodComponent, EntRemovedFromContainerMessage>(OnEjected);
     }
 
@@ -219,54 +196,6 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
         ));
     }
 
-    private void OnInteractUsing(Entity<CryoPodComponent> entity, ref InteractUsingEvent args)
-    {
-        if (args.Handled || !entity.Comp.Locked || entity.Comp.BodyContainer.ContainedEntity == null)
-            return;
-
-        args.Handled = _toolSystem.UseTool(args.Used, args.User, entity.Owner, entity.Comp.PryDelay, "Prying", new CryoPodPryFinished());
-    }
-
-    private void OnExamined(Entity<CryoPodComponent> entity, ref ExaminedEvent args)
-    {
-        var container = _itemSlotsSystem.GetItemOrNull(entity.Owner, entity.Comp.SolutionContainerName);
-        if (args.IsInDetailsRange && container != null && _solutionContainerSystem.TryGetFitsInDispenser(container.Value, out _, out var containerSolution))
-        {
-            using (args.PushGroup(nameof(CryoPodComponent)))
-            {
-                args.PushMarkup(Loc.GetString("cryo-pod-examine", ("beaker", Name(container.Value))));
-                if (containerSolution.Volume == 0)
-                {
-                    args.PushMarkup(Loc.GetString("cryo-pod-empty-beaker"));
-                }
-            }
-        }
-    }
-
-    private void OnPowerChanged(Entity<CryoPodComponent> entity, ref PowerChangedEvent args)
-    {
-        // Needed to avoid adding/removing components on a deleted entity
-        if (Terminating(entity))
-        {
-            return;
-        }
-
-        if (args.Powered)
-        {
-            EnsureComp<ActiveCryoPodComponent>(entity);
-        }
-        else
-        {
-            RemComp<ActiveCryoPodComponent>(entity);
-            _uiSystem.CloseUi(entity.Owner, HealthAnalyzerUiKey.Key);
-        }
-        UpdateAppearance(entity.Owner, entity.Comp);
-    }
-
-    #endregion
-
-    #region Atmos handler
-
     private void OnCryoPodUpdateAtmosphere(Entity<CryoPodComponent> entity, ref AtmosDeviceUpdateEvent args)
     {
         if (!_nodeContainer.TryGetNode(entity.Owner, entity.Comp.PortName, out PortablePipeNode? portNode))
@@ -311,6 +240,4 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
         // if body is ejected - no need to display health-analyzer
         _uiSystem.CloseUi(cryoPod.Owner, HealthAnalyzerUiKey.Key);
     }
-
-    #endregion
 }

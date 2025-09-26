@@ -6,7 +6,7 @@
   components:
   - type: Sprite
     sprite: Structures/Doors/Windoors/clockwork_windoor.rsi
-  - type: Destructible # Wizden#37444
+  - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger

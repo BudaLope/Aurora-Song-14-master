@@ -1,6 +1,4 @@
 using Content.Shared.Administration.Logs;
-using Content.Shared.Charges.Components;
-using Content.Shared.Charges.Systems;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -181,7 +179,7 @@ public abstract class SharedSprayPainterSystem : EntitySystem
 
         if (ent.Comp.Group is not { } group
             || !painter.StylesByGroup.TryGetValue(group, out var selectedStyle)
-            || !Proto.TryIndex(group, out PaintableGroupPrototype? targetGroup))
+            || !Proto.Resolve(group, out PaintableGroupPrototype? targetGroup))
             return;
 
         // Valid paint target.

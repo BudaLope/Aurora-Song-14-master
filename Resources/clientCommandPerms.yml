@@ -72,13 +72,18 @@
     - localdelete
     - fullstatereset
     - dumpentities
+    - showaccessreaders
     - fuckrules # Frontier
 
 - Flags: MAPPING
   Commands:
     - mapping
+    - mappingclientsidesetup
+    - showsubfloor
+    - showsubfloorforever
     - toggleautosave
     - toggledecals
+    - showaccessreaders
 
 - Flags: QUERY
   Commands:

@@ -126,6 +126,7 @@
       - state: inhand-left-mag
       right:
       - state: inhand-right-mag
+      - state: inhand-right-stripe
 
 - type: entity
   categories: [ HideSpawnMenu ] # Frontier
@@ -139,10 +140,12 @@
     capacity: 10
   - type: Sprite
     layers:
-    - state: practice
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#dbdbdb"
   - type: MagazineVisuals
     magState: mag
     steps: 6
@@ -153,11 +156,11 @@
       left:
       - state: inhand-left-mag
       - state: inhand-left-stripe
-        color: "#ea5800"
+        color: "#dbdbdb"
       right:
       - state: inhand-right-mag
       - state: inhand-right-stripe
-        color: "#ea5800"
+        color: "#dbdbdb"
 
 - type: entity
   categories: [ HideSpawnMenu ] # Frontier
@@ -169,7 +172,7 @@
     # proto: CartridgeCaselessRifle # Frontier
   - type: Sprite
     layers:
-    - state: red
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -177,12 +180,8 @@
     inhandVisuals:
       left:
       - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#9b0000"
       right:
       - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#9b0000"
 
 - type: entity
   categories: [ HideSpawnMenu ] # Frontier
@@ -194,16 +193,18 @@
     # proto: CartridgeCaselessRiflePractice # Frontier
   - type: Sprite
     layers:
-    - state: practice
+    - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#dbdbdb"
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
       - state: inhand-left-stripe
-        color: "#ea5800"
+        color: "#dbdbdb"
       right:
       - state: inhand-right-mag
       - state: inhand-right-stripe

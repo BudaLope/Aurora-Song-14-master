@@ -2,6 +2,7 @@
 using Content.Server.Radio.Components;
 using Content.Shared._Corvax.Silicons.Borgs.Components;
 using Content.Shared.Inventory;
+using Content.Shared.Radio.Components;
 using Content.Shared.Silicons.Borgs;
 using Content.Shared.Silicons.Borgs.Components;
 using Robust.Shared.Prototypes;
@@ -28,7 +29,7 @@ public sealed class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeSystem
 
         if (TryComp(ent, out ActiveRadioComponent? activeRadio))
             activeRadio.Channels = [.. radioChannels];
-            
+
         // Corvax-Next-AiRemoteControl-Start
         if (TryComp(ent, out AiRemoteControllerComponent? aiRemoteComp))
         {
@@ -78,7 +79,7 @@ public sealed class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeSystem
         }
 
         // Configure special components
-        if (Prototypes.TryIndex(ent.Comp.SelectedBorgType, out var previousPrototype))
+        if (Prototypes.Resolve(ent.Comp.SelectedBorgType, out var previousPrototype))
         {
             if (previousPrototype.AddComponents is { } removeComponents)
                 EntityManager.RemoveComponents(ent, removeComponents);

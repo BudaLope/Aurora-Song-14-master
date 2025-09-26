@@ -130,6 +130,7 @@
     - PartsStatic
     - AtmosStatic
     - CablesStatic
+    - PaperworkStatic
     - CargoStatic
     - MaterialsStatic
     - BasicChemistryStatic

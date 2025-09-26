@@ -44,6 +44,11 @@ namespace Content.Client.GameTicking.Managers
                 kvp => kvp.Value.StationName
             );
 
+        public override IReadOnlyList<(TimeSpan, string)> AllPreviousGameRules => new List<(TimeSpan, string)>();
+
+        [ViewVariables] public IReadOnlyDictionary<NetEntity, Dictionary<ProtoId<JobPrototype>, int?>> JobsAvailable => _jobsAvailable;
+        [ViewVariables] public IReadOnlyDictionary<NetEntity, string> StationNames => _stationNames;
+
         public event Action? InfoBlobUpdated;
         public event Action? LobbyStatusUpdated;
         public event Action? LobbyLateJoinStatusUpdated;

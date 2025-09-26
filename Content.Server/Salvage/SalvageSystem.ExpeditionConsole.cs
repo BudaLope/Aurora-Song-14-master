@@ -20,8 +20,8 @@ namespace Content.Server.Salvage;
 
 public sealed partial class SalvageSystem
 {
-    [ValidatePrototypeId<EntityPrototype>]
-    public const string CoordinatesDisk = "CoordinatesDisk";
+    public static readonly EntProtoId CoordinatesDisk = "CoordinatesDisk";
+    public static readonly ProtoId<LocalizedDatasetPrototype> PlanetNames = "NamesBorer";
 
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!; // Frontier
     [Dependency] private readonly SalvageSystem _salvage = default!; // Frontier

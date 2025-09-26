@@ -1,6 +1,7 @@
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Managers;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
 using Content.Shared.Doors.Systems;
@@ -17,7 +18,6 @@ using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.StationAi;
 using Content.Shared.Verbs;
-using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -27,6 +27,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Utility;
 using Content.Shared._Corvax.Silicons.Borgs;
@@ -71,8 +72,8 @@ public abstract partial class SharedStationAiSystem : EntitySystem
     private EntityQuery<BroadphaseComponent> _broadphaseQuery;
     private EntityQuery<MapGridComponent> _gridQuery;
 
-    [ValidatePrototypeId<EntityPrototype>]
     private static readonly EntProtoId DefaultAi = "StationAiBrain";
+    private readonly ProtoId<ChatNotificationPrototype> _downloadChatNotificationPrototype = "IntellicardDownload";
 
     private const float MaxVisionMultiplier = 5f;
 
@@ -124,6 +125,8 @@ public abstract partial class SharedStationAiSystem : EntitySystem
                 Category = VerbCategory.Debug,
                 Act = () =>
                 {
+                    if (_net.IsClient)
+                        return;
                     var brain = SpawnInContainerOrDrop(DefaultAi, ent.Owner, StationAiCoreComponent.Container);
                     _mind.ControlMob(user, brain);
                 },
@@ -145,18 +148,17 @@ public abstract partial class SharedStationAiSystem : EntitySystem
 
     private void OnAiAccessible(Entity<StationAiOverlayComponent> ent, ref AccessibleOverrideEvent args)
     {
+        // We don't want to allow entities to access the AI just because the eye is nearby.
+        // Only let the AI access entities through the eye.
+        if (args.Accessible || args.User != ent.Owner)
+            return;
+
         args.Handled = true;
 
         // Hopefully AI never needs storage
-        if (_containers.TryGetContainingContainer(args.Target, out var targetContainer))
-        {
+        if (_containers.TryGetContainingContainer(args.Target, out var targetContainer) ||
+            !_containers.IsInSameOrTransparentContainer(ent.Owner, args.Target, otherContainer: targetContainer))
             return;
-        }
-
-        if (!_containers.IsInSameOrTransparentContainer(args.User, args.Target, otherContainer: targetContainer))
-        {
-            return;
-        }
 
         args.Accessible = true;
     }
@@ -295,17 +297,11 @@ public abstract partial class SharedStationAiSystem : EntitySystem
             return;
         }
 
-        if (TryGetHeld((args.Target.Value, targetHolder), out var held) && _timing.CurTime > intelliComp.NextWarningAllowed)
+        if (TryGetHeld((args.Target.Value, targetHolder), out var held))
         {
-            intelliComp.NextWarningAllowed = _timing.CurTime + intelliComp.WarningDelay;
-            AnnounceIntellicardUsage(held, intelliComp.WarningSound);
+            var ev = new ChatNotificationEvent(_downloadChatNotificationPrototype, args.Used, args.User);
+            RaiseLocalEvent(held, ref ev);
         }
-
-        // Corvax-Next-AiRemoteControl-Start
-        if (TryComp<StationAiHeldComponent>(held, out var heldComp))
-            if (heldComp.CurrentConnectedEntity != null)
-                AnnounceIntellicardUsage(heldComp.CurrentConnectedEntity.Value, intelliComp.WarningSound);
-        // Corvax-Next-AiRemoteControl-End
 
         var doAfterArgs = new DoAfterArgs(EntityManager, args.User, cardHasAi ? intelliComp.UploadTime : intelliComp.DownloadTime, new IntellicardDoAfterEvent(), args.Target, ent.Owner)
         {
@@ -465,6 +461,9 @@ public abstract partial class SharedStationAiSystem : EntitySystem
         }
 
         _mover.SetRelay(user, ent.Comp.RemoteEntity.Value);
+
+        var eyeName = Loc.GetString("station-ai-eye-name", ("name", Name(user)));
+        _metadata.SetEntityName(ent.Comp.RemoteEntity.Value, eyeName);
     }
 
     private EntityUid? GetInsertedAI(Entity<StationAiCoreComponent> ent)
@@ -538,8 +537,6 @@ public abstract partial class SharedStationAiSystem : EntitySystem
         // Otherwise let generic visualizers handle the appearance update
         _appearance.SetData(entity.Owner, StationAiVisualState.Key, state);
     }
-
-    public virtual void AnnounceIntellicardUsage(EntityUid uid, SoundSpecifier? cue = null) { }
 
     public virtual bool SetVisionEnabled(Entity<StationAiVisionComponent> entity, bool enabled, bool announce = false)
     {

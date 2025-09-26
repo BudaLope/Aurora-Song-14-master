@@ -1,60 +1,20 @@
-using Content.Server.DeviceLinking.Systems;
-using Content.Server.DeviceNetwork;
-using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Emp;
 using Content.Server.Ghost;
-using Content.Server.Light.Components;
-using Content.Server.Power.Components;
-using Content.Shared.Audio;
-using Content.Shared.Damage;
-using Content.Shared.DeviceLinking.Events;
-using Content.Shared.DoAfter;
-using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Interaction;
-using Content.Shared.Light;
 using Content.Shared.Light.Components;
-using Robust.Server.GameObjects;
-using Robust.Shared.Containers;
-using Robust.Shared.Timing;
-using Robust.Shared.Audio.Systems;
-using Content.Shared.Damage.Systems;
-using Content.Shared.Damage.Components;
-using Content.Shared.DeviceNetwork;
-using Content.Shared.DeviceNetwork.Events;
-using Content.Shared.Power;
+using Content.Shared.Light.EntitySystems;
 using Robust.Shared.Random; // Frontier
 
-namespace Content.Server.Light.EntitySystems
+namespace Content.Server.Light.EntitySystems;
+
+/// <summary>
+///     System for the PoweredLightComponents
+/// </summary>
+public sealed class PoweredLightSystem : SharedPoweredLightSystem
 {
-    /// <summary>
-    ///     System for the PoweredLightComponents
-    /// </summary>
-    public sealed class PoweredLightSystem : EntitySystem
+    public override void Initialize()
     {
-        [Dependency] private readonly IGameTiming _gameTiming = default!;
-        [Dependency] private readonly SharedAmbientSoundSystem _ambientSystem = default!;
-        [Dependency] private readonly LightBulbSystem _bulbSystem = default!;
-        [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-        [Dependency] private readonly DeviceLinkSystem _signalSystem = default!;
-        [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-        [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
-        [Dependency] private readonly SharedAudioSystem _audio = default!;
-        [Dependency] private readonly PointLightSystem _pointLight = default!;
-        [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-        [Dependency] private readonly DamageOnInteractSystem _damageOnInteractSystem = default!;
-
-        [Dependency] private readonly IRobustRandom _random = default!; // Frontier
-
-        private static readonly TimeSpan ThunkDelay = TimeSpan.FromSeconds(2);
-        public const string LightBulbContainer = "light_bulb";
-
-        public override void Initialize()
-        {
-            base.Initialize();
-            SubscribeLocalEvent<PoweredLightComponent, ComponentInit>(OnInit);
-            SubscribeLocalEvent<PoweredLightComponent, MapInitEvent>(OnMapInit);
-            SubscribeLocalEvent<PoweredLightComponent, InteractUsingEvent>(OnInteractUsing);
-            SubscribeLocalEvent<PoweredLightComponent, InteractHandEvent>(OnInteractHand);
+        base.Initialize();
+        SubscribeLocalEvent<PoweredLightComponent, MapInitEvent>(OnMapInit);
 
             SubscribeLocalEvent<PoweredLightComponent, GhostBooEvent>(OnGhostBoo);
             SubscribeLocalEvent<PoweredLightComponent, DamageChangedEvent>(HandleLightDamaged);
@@ -68,88 +28,43 @@ namespace Content.Server.Light.EntitySystems
             SubscribeLocalEvent<PoweredLightComponent, EmpPulseEvent>(OnEmpPulse);
         }
 
-        private void OnInit(EntityUid uid, PoweredLightComponent light, ComponentInit args)
-        {
-            light.LightBulbContainer = _containerSystem.EnsureContainer<ContainerSlot>(uid, LightBulbContainer);
-            _signalSystem.EnsureSinkPorts(uid, light.OnPort, light.OffPort, light.TogglePort);
-        }
+    private void OnGhostBoo(EntityUid uid, PoweredLightComponent light, GhostBooEvent args)
+    {
+        if (light.IgnoreGhostsBoo)
+            return;
 
-        private void OnMapInit(EntityUid uid, PoweredLightComponent light, MapInitEvent args)
+        // check cooldown first to prevent abuse
+        var time = GameTiming.CurTime;
+        if (light.LastGhostBlink != null)
         {
-            // TODO: Use ContainerFill dog
-            if (light.HasLampOnSpawn != null)
-            {
-                var entity = EntityManager.SpawnEntity(light.HasLampOnSpawn, EntityManager.GetComponent<TransformComponent>(uid).Coordinates);
-                _containerSystem.Insert(entity, light.LightBulbContainer);
-            }
-            // need this to update visualizers
-            UpdateLight(uid, light);
-        }
-
-        private void OnInteractUsing(EntityUid uid, PoweredLightComponent component, InteractUsingEvent args)
-        {
-            if (args.Handled)
+            if (time <= light.LastGhostBlink + light.GhostBlinkingCooldown)
                 return;
-
-            args.Handled = InsertBulb(uid, args.Used, component);
         }
 
-        private void OnInteractHand(EntityUid uid, PoweredLightComponent light, InteractHandEvent args)
+        light.LastGhostBlink = time;
+
+        ToggleBlinkingLight(uid, light, true);
+        uid.SpawnTimer(light.GhostBlinkingTime, () =>
         {
-            if (args.Handled)
-                return;
+            ToggleBlinkingLight(uid, light, false);
+        });
 
-            // check if light has bulb to eject
-            var bulbUid = GetBulb(uid, light);
-            if (bulbUid == null)
-                return;
+        args.Handled = true;
+    }
 
-            var userUid = args.User;
-            //removing a broken/burned bulb, so allow instant removal
-            if(TryComp<LightBulbComponent>(bulbUid.Value, out var bulb) && bulb.State != LightBulbState.Normal)
-            {
-                args.Handled = EjectBulb(uid, userUid, light) != null;
-                return;
-            }
-
-            // removing a working bulb, so require a delay
-            _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, userUid, light.EjectBulbDelay, new PoweredLightDoAfterEvent(), uid, target: uid)
-            {
-                BreakOnMove = true,
-                BreakOnDamage = true,
-            });
-
-            args.Handled = true;
-        }
-
-        #region Bulb Logic API
-        /// <summary>
-        ///     Inserts the bulb if possible.
-        /// </summary>
-        /// <returns>True if it could insert it, false if it couldn't.</returns>
-        public bool InsertBulb(EntityUid uid, EntityUid bulbUid, PoweredLightComponent? light = null)
+    private void OnMapInit(EntityUid uid, PoweredLightComponent light, MapInitEvent args)
+    {
+        // TODO: Use ContainerFill dog
+        if (light.HasLampOnSpawn != null)
         {
-            if (!Resolve(uid, ref light))
-                return false;
-
-            // check if light already has bulb
-            if (GetBulb(uid, light) != null)
-                return false;
-
-            // check if bulb fits
-            if (!EntityManager.TryGetComponent(bulbUid, out LightBulbComponent? lightBulb))
-                return false;
-            if (lightBulb.Type != light.BulbType)
-                return false;
-
-            // try to insert bulb in container
-            if (!_containerSystem.Insert(bulbUid, light.LightBulbContainer))
-                return false;
-
-            UpdateLight(uid, light);
-            return true;
+            var entity = EntityManager.SpawnEntity(light.HasLampOnSpawn, EntityManager.GetComponent<TransformComponent>(uid).Coordinates);
+            ContainerSystem.Insert(entity, light.LightBulbContainer);
         }
+        // need this to update visualizers
+        UpdateLight(uid, light);
+    }
 
+<<<<<<< HEAD
         /// <summary>
         ///     Ejects the bulb to a mob's hand if possible.
         /// </summary>
