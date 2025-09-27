@@ -160,7 +160,7 @@ public abstract partial class SharedCryoPodSystem : EntitySystem
         args.Handled = _tool.UseTool(args.Used, args.User, ent.Owner, ent.Comp.PryDelay, ent.Comp.UnlockToolQuality, new CryoPodPryFinished());
     }
 
-    private void OnCryoPodPryFinished(EntityUid uid, CryoPodComponent cryoPodComponent, CryoPodPryFinished args)
+    protected void OnCryoPodPryFinished(EntityUid uid, CryoPodComponent cryoPodComponent, CryoPodPryFinished args)
     {
         if (args.Cancelled)
             return;
@@ -216,7 +216,7 @@ public abstract partial class SharedCryoPodSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnComponentInit(EntityUid uid, CryoPodComponent cryoPodComponent, ComponentInit args)
+    protected void OnComponentInit(EntityUid uid, CryoPodComponent cryoPodComponent, ComponentInit args)
     {
         cryoPodComponent.BodyContainer = _container.EnsureContainer<ContainerSlot>(uid, CryoPodComponent.BodyContainerName);
     }
@@ -358,16 +358,6 @@ public abstract partial class SharedCryoPodSystem : EntitySystem
         args.Handled = true;
     }
     // End Frontier: demag
-
-    protected void OnCryoPodPryFinished(EntityUid uid, CryoPodComponent cryoPodComponent, CryoPodPryFinished args)
-    {
-        if (args.Cancelled)
-            return;
-
-        var ejected = EjectBody(uid, cryoPodComponent);
-        if (ejected != null)
-            _adminLogger.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(ejected.Value)} pried out of {ToPrettyString(uid)} by {ToPrettyString(args.User)}");
-    }
 
     [Serializable, NetSerializable]
     public sealed partial class CryoPodPryFinished : SimpleDoAfterEvent;

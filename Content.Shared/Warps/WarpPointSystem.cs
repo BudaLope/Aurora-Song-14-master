@@ -1,16 +1,13 @@
 ﻿using Content.Shared.Examine;
 using Content.Shared.Ghost;
-<<<<<<< HEAD:Content.Server/Warps/WarpPointSystem.cs
 using Content.Shared.Warps;
-using Content.Server.Station.Systems; // Frontier
-=======
->>>>>>> wizden/stable:Content.Shared/Warps/WarpPointSystem.cs
+using Content.Shared.Station;
 
 namespace Content.Shared.Warps;
 
 public sealed class WarpPointSystem : EntitySystem
 {
-    [Dependency] private readonly StationSystem _station = default!; // Frontier
+    [Dependency] private readonly SharedStationSystem _station = default!; // Frontier
     public override void Initialize()
     {
         base.Initialize();

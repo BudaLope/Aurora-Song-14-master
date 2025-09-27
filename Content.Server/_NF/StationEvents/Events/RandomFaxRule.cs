@@ -5,6 +5,7 @@ using Content.Shared.Fax.Components;
 using Content.Server.Fax;
 using Content.Server.Station.Systems;
 using Robust.Shared.Random;
+using Content.Shared.Station.Components;
 
 namespace Content.Server.StationEvents.Events;
 
@@ -63,7 +64,7 @@ public sealed class RandomFaxRule : StationEventSystem<RandomFaxRuleComponent>
                 continue;
             }
 
-            var grid = StationSystem.GetLargestGrid(stationData);
+            var grid = StationSystem.GetLargestGrid((chosenStation.Value, stationData));
 
             if (grid is null)
             {

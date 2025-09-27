@@ -21,6 +21,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared.Salvage.Expeditions;
 
 namespace Content.Shared.Medical.SuitSensors;
 
@@ -334,6 +335,7 @@ public abstract class SharedSuitSensorSystem : EntitySystem
         var userJob = Loc.GetString("suit-sensor-component-unknown-job");
         var userJobIcon = "JobIconNoId";
         var userJobDepartments = new List<string>();
+        var userLocationName = Loc.GetString("suit-sensor-location-unknown"); // Frontier
 
         if (_idCardSystem.TryFindIdCard(sensor.User.Value, out var card))
         {
@@ -363,7 +365,7 @@ public abstract class SharedSuitSensorSystem : EntitySystem
             totalDamageThreshold = critThreshold.Value.Int();
 
         // finally, form suit sensor status
-        var status = new SuitSensorStatus(GetNetEntity(sensor.User.Value), GetNetEntity(ent.Owner), userName, userJob, userJobIcon, userJobDepartments);
+        var status = new SuitSensorStatus(GetNetEntity(sensor.User.Value), GetNetEntity(ent.Owner), userName, userJob, userJobIcon, userJobDepartments, userLocationName);
         switch (sensor.Mode)
         {
             case SuitSensorMode.SensorBinary:
@@ -380,21 +382,33 @@ public abstract class SharedSuitSensorSystem : EntitySystem
                 status.TotalDamageThreshold = totalDamageThreshold;
                 EntityCoordinates coordinates;
                 var xformQuery = GetEntityQuery<TransformComponent>();
+                var locationName = "";
 
                 if (transform.GridUid != null)
                 {
                     coordinates = new EntityCoordinates(transform.GridUid.Value,
                         Vector2.Transform(_transform.GetWorldPosition(transform, xformQuery),
                             _transform.GetInvWorldMatrix(xformQuery.GetComponent(transform.GridUid.Value), xformQuery)));
+
+                    // Frontier: check if sensor is on expedition
+                    if (TryComp<SharedSalvageExpeditionComponent>(transform.MapUid, out var salvageComp))
+                        locationName = Loc.GetString("suit-sensor-location-expedition");
+                    else if (TryComp(transform.GridUid, out MetaDataComponent? meta))
+                        locationName = meta.EntityName;
+                    else
+                        locationName = Loc.GetString("suit-sensor-location-unknown"); // Frontier
+                    // End Frontier
                 }
                 else if (transform.MapUid != null)
                 {
                     coordinates = new EntityCoordinates(transform.MapUid.Value,
                         _transform.GetWorldPosition(transform, xformQuery));
+                    locationName = Loc.GetString("suit-sensor-location-space"); // Frontier
                 }
                 else
                 {
                     coordinates = EntityCoordinates.Invalid;
+                    locationName = Loc.GetString("suit-sensor-location-unknown"); // Frontier
                 }
 
                 status.Coordinates = GetNetCoordinates(coordinates);
@@ -450,13 +464,14 @@ public abstract class SharedSuitSensorSystem : EntitySystem
         if (!payload.TryGetValue(SuitSensorConstants.NET_IS_ALIVE, out bool? isAlive)) return null;
         if (!payload.TryGetValue(SuitSensorConstants.NET_SUIT_SENSOR_UID, out NetEntity suitSensorUid)) return null;
         if (!payload.TryGetValue(SuitSensorConstants.NET_OWNER_UID, out NetEntity ownerUid)) return null;
+        if (!payload.TryGetValue(SuitSensorConstants.NET_LOCATION_NAME, out string? location)) return null; // Frontier
 
         // try get total damage and cords (optionals)
         payload.TryGetValue(SuitSensorConstants.NET_TOTAL_DAMAGE, out int? totalDamage);
         payload.TryGetValue(SuitSensorConstants.NET_TOTAL_DAMAGE_THRESHOLD, out int? totalDamageThreshold);
         payload.TryGetValue(SuitSensorConstants.NET_COORDINATES, out NetCoordinates? coords);
 
-        var status = new SuitSensorStatus(ownerUid, suitSensorUid, name, job, jobIcon, jobDepartments)
+        var status = new SuitSensorStatus(ownerUid, suitSensorUid, name, job, jobIcon, jobDepartments, location)
         {
             IsAlive = isAlive.Value,
             TotalDamage = totalDamage,

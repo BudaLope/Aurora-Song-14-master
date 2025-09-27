@@ -49,6 +49,31 @@ namespace Content.IntegrationTests.Tests
             // End Frontier
         };
 
+        /// <summary>
+        /// A dictionary linking maps to collections of entity prototype ids that should be exempt from "DoNotMap" restrictions.
+        /// </summary>
+        /// <remarks>
+        /// This declares that the listed entity prototypes are allowed to be present on the map
+        /// despite being categorized as "DoNotMap", while any unlisted prototypes will still
+        /// cause the test to fail.
+        /// </remarks>
+        private static readonly Dictionary<string, HashSet<EntProtoId>> DoNotMapWhitelistSpecific = new()
+        {
+            {"/Maps/bagel.yml", ["RubberStampMime"]},
+            {"/Maps/reach.yml", ["HandheldCrewMonitor"]},
+            {"/Maps/Shuttles/ShuttleEvent/honki.yml", ["GoldenBikeHorn", "RubberStampClown"]},
+            {"/Maps/Shuttles/ShuttleEvent/syndie_evacpod.yml", ["RubberStampSyndicate"]},
+            {"/Maps/Shuttles/ShuttleEvent/cruiser.yml", ["ShuttleGunPerforator"]},
+            {"/Maps/Shuttles/ShuttleEvent/instigator.yml", ["ShuttleGunFriendship"]},
+        };
+
+        /// <summary>
+        /// Maps listed here are given blanket freedom to contain "DoNotMap" entities. Use sparingly.
+        /// </summary>
+        /// <remarks>
+        /// It is also possible to whitelist entire directories here. For example, adding
+        /// "/Maps/Shuttles/**" will whitelist all shuttle maps.
+        /// </remarks>
         private static readonly string[] DoNotMapWhitelist =
         {
             // Frontier: no upstream maps
@@ -73,6 +98,17 @@ namespace Content.IntegrationTests.Tests
         private static readonly string[] GameMaps = FrontierConstants.GameMapPrototypes; // Frontier: not inline constants
         // Frontier: comment out upstream game maps
         /*
+            "/Maps/centcomm.yml",
+            "/Maps/Shuttles/AdminSpawn/**" // admin gaming
+        };
+
+        /// <summary>
+        /// Converts the above globs into regex so your eyes dont bleed trying to add filepaths.
+        /// </summary>
+        private static readonly Regex[] DoNotMapWhiteListRegexes = DoNotMapWhitelist
+            .Select(glob => new Regex(GlobToRegex(glob), RegexOptions.IgnoreCase | RegexOptions.Compiled))
+            .ToArray();
+
         private static readonly string[] GameMaps =
         {
             "Dev",
@@ -96,6 +132,8 @@ namespace Content.IntegrationTests.Tests
         };
         */
         // End Frontier: comment out upstream game maps
+
+        private static readonly ProtoId<EntityCategoryPrototype> DoNotMapCategory = "DoNotMap";
 
         /// <summary>
         /// Asserts that specific files have been saved as grids and not maps.
@@ -283,17 +321,13 @@ namespace Content.IntegrationTests.Tests
         /// </summary>
         private void CheckDoNotMap(ResPath map, YamlNode node, IPrototypeManager protoManager)
         {
-            foreach (var regex in DoNotMapWhiteListRegexes)
-            {
-                if (regex.IsMatch(map.ToString()))
-                    return;
-            }
+            if (DoNotMapWhitelist.Contains(map.ToString()))
+                return;
 
             var yamlEntities = node["entities"];
-            var dnmCategory = protoManager.Index(DoNotMapCategory);
+            if (!protoManager.TryIndex<EntityCategoryPrototype>("DoNotMap", out var dnmCategory))
+                return;
 
-            // Make a set containing all the specific whitelisted proto ids for this map
-            HashSet<EntProtoId> unusedExemptions = DoNotMapWhitelistSpecific.TryGetValue(map.ToString(), out var exemptions) ? new(exemptions) : [];
             Assert.Multiple(() =>
             {
                 foreach (var yamlEntity in (YamlSequenceNode)yamlEntities)
@@ -301,20 +335,13 @@ namespace Content.IntegrationTests.Tests
                     var protoId = yamlEntity["proto"].AsString();
 
                     // This doesn't properly handle prototype migrations, but thats not a significant issue.
-                    if (!protoManager.TryIndex(protoId, out var proto))
+                    if (!protoManager.TryIndex(protoId, out var proto, false))
                         continue;
 
-                    Assert.That(!proto.Categories.Contains(dnmCategory) || IsWhitelistedForMap(protoId, map),
+                    Assert.That(!proto.Categories.Contains(dnmCategory),
                         $"\nMap {map} contains entities in the DO NOT MAP category ({proto.Name})");
-
-                    // The proto id is used on this map, so remove it from the set
-                    unusedExemptions.Remove(protoId);
                 }
             });
-
-            // If there are any proto ids left, they must not have been used in the map!
-            Assert.That(unusedExemptions, Is.Empty,
-                $"Map {map} has DO NOT MAP entities whitelisted that are not present in the map: {string.Join(", ", unusedExemptions)}");
         }
 
         private bool IsPreInit(ResPath map,

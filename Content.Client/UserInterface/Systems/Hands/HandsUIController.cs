@@ -150,13 +150,6 @@ public sealed class HandsUIController : UIController, IOnStateEntered<GameplaySt
                 handButton.SetEntity(virt.BlockingEntity);
                 handButton.Blocked = true;
             }
-            // Frontier - borg hand placeholder
-            else if (_entities.TryGetComponent(hand.HeldEntity, out HandPlaceholderVisualsComponent? placeholder))
-            {
-                handButton.SetEntity(placeholder.Dummy);
-                handButton.Blocked = true;
-            }
-            // End Frontier - borg hand placeholder
             else
             {
                 if (hand.EmptyRepresentative is { } representative)

@@ -5,8 +5,6 @@ using Content.Server.Power.EntitySystems;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
-using Content.Shared.Storage;
-using Content.Shared.Storage.Components;
 using Robust.Server.Audio;
 
 namespace Content.Server.Materials;
@@ -24,7 +22,6 @@ public sealed class ProduceMaterialExtractorSystem : EntitySystem
         SubscribeLocalEvent<ProduceMaterialExtractorComponent, AfterInteractUsingEvent>(OnInteractUsing);
     }
 
-    // BEGIN Frontier - Cherry pick wizden#32633
     private void OnInteractUsing(Entity<ProduceMaterialExtractorComponent> ent, ref AfterInteractUsingEvent args)
     {
         if (args.Handled)
@@ -33,32 +30,11 @@ public sealed class ProduceMaterialExtractorSystem : EntitySystem
         if (!this.IsPowered(ent, EntityManager))
             return;
 
-        bool success = false;
+        if (!TryComp<ProduceComponent>(args.Used, out var produce))
+            return;
 
-        // Handle using bags (mainly plant bags)
-        if (ExtractFromStorage(ent, args.Used))
-            success = true;
-
-        // Handle using produce directly
-        if (ExtractFromProduce(ent, args.Used))
-            success = true;
-
-        // TODO: What if a bag is also a plant?
-
-        if (success)
-        {
-            _audio.PlayPvs(ent.Comp.ExtractSound, ent);
-            args.Handled = true;
-        }
-    }
-
-    private bool ExtractFromProduce(Entity<ProduceMaterialExtractorComponent> ent, EntityUid used)
-    {
-        if (!TryComp<ProduceComponent>(used, out var produce))
-            return false;
-
-        if (!_solutionContainer.TryGetSolution(used, produce.SolutionName, out var solution))
-            return false;
+        if (!_solutionContainer.TryGetSolution(args.Used, produce.SolutionName, out var solution))
+            return;
 
         // Can produce even have fractional amounts? Does it matter if they do?
         // Questions man was never meant to answer.
@@ -76,23 +52,8 @@ public sealed class ProduceMaterialExtractorSystem : EntitySystem
 
         _materialStorage.TryChangeMaterialAmount(ent, ent.Comp.ExtractedMaterial, changed);
 
-        QueueDel(used);
-
-        return true;
+        _audio.PlayPvs(ent.Comp.ExtractSound, ent);
+        QueueDel(args.Used);
+        args.Handled = true;
     }
-
-    private bool ExtractFromStorage(Entity<ProduceMaterialExtractorComponent> ent, EntityUid used)
-    {
-        if (!TryComp<StorageComponent>(used, out var storage))
-            return false;
-
-        bool success = false;
-
-        foreach (var (item, _location) in storage.StoredItems)
-            if (ExtractFromProduce(ent, item))
-                success = true;
-
-        return success;
-    }
-    // END Frontier
 }

@@ -49,7 +49,8 @@ using Content.Shared._NF.Bank.BUI; // Frontier
 using Content.Shared.SSDIndicator; // Frontier
 using Content.Server.Power.EntitySystems; // Frontier
 using Content.Server._NF.Mail.Components; // Frontier
-using Robust.Server.Player; // Frontier
+using Robust.Server.Player;
+using Content.Shared.Station.Components; // Frontier
 
 namespace Content.Server._DV.Mail.EntitySystems
 {
@@ -547,7 +548,7 @@ namespace Content.Server._DV.Mail.EntitySystems
             // Frontier: TODO - should this be removed for Frontier?
             foreach (var access in recipient.AccessTags)
             {
-                accessReader.AccessLists.Add([access]);
+                _accessSystem.AddAccess((uid, accessReader), access);
             }
         }
 
@@ -618,7 +619,7 @@ namespace Content.Server._DV.Mail.EntitySystems
                 string stationName;
                 if (_stationSystem.GetOwningStation(receiverUid) is { Valid: true } station
                     && TryComp<StationDataComponent>(station, out var stationData)
-                    && _stationSystem.GetLargestGrid(stationData) is { Valid: true } stationGrid
+                    && _stationSystem.GetLargestGrid((station, stationData)) is { Valid: true } stationGrid
                     && TryName(stationGrid, out var gridName)
                     && gridName != null)
                 {

@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Threading;
-using Content.Server.Salvage.Expeditions;
 using Content.Shared.CCVar;
 using Content.Shared.Examine;
 using Content.Shared.Salvage.Expeditions;
@@ -18,7 +17,10 @@ using Content.Shared._NF.CCVar; // Frontier
 using Content.Shared.Shuttles.Components; // Frontier
 using Robust.Shared.Configuration;
 using Content.Shared.Ghost;
-using System.Numerics; // Frontier
+using System.Numerics;
+using Content.Server.Salvage.Expeditions;
+using Content.Shared.Station.Components;
+using Content.Server.Salvage.Expeditions.Structure; // Frontier
 
 namespace Content.Server.Salvage;
 
@@ -54,7 +56,6 @@ public sealed partial class SalvageSystem
         SubscribeLocalEvent<SalvageExpeditionComponent, ComponentShutdown>(OnExpeditionShutdown);
         SubscribeLocalEvent<SalvageExpeditionComponent, ComponentGetState>(OnExpeditionGetState);
         SubscribeLocalEvent<SalvageExpeditionComponent, EntityTerminatingEvent>(OnMapTerminating); // Frontier
-
         SubscribeLocalEvent<SalvageStructureComponent, ExaminedEvent>(OnStructureExamine);
 
         _cooldown = _cfgManager.GetCVar(CCVars.SalvageExpeditionCooldown);
@@ -161,7 +162,7 @@ public sealed partial class SalvageSystem
 
             // Frontier: disable cooldown when still in FTL
             if (!TryComp<StationDataComponent>(uid, out var stationData)
-                || !HasComp<FTLComponent>(_station.GetLargestGrid(stationData)))
+                || !HasComp<FTLComponent>(_station.GetLargestGrid((uid, stationData))))
             {
                 comp.Cooldown = false;
             }
@@ -268,7 +269,7 @@ public sealed partial class SalvageSystem
         _salvageQueue.EnqueueJob(job);
     }
 
-    private void OnStructureExamine(EntityUid uid, SalvageStructureComponent component, ExaminedEvent args)
+    private void OnStructureExamine(Entity<SalvageStructureComponent> ent, ref ExaminedEvent args)
     {
         args.PushMarkup(Loc.GetString("salvage-expedition-structure-examine"));
     }

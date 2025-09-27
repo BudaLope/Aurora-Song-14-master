@@ -4,6 +4,7 @@ using Content.Server.Speech.EntitySystems;
 using Content.Shared._DV.Storage.Components;
 using Content.Shared._DV.Storage.EntitySystems;
 using Content.Shared.Nutrition;
+using Content.Shared.Speech;
 using Content.Shared.Storage;
 
 namespace Content.Server._DV.Storage.EntitySystems;
@@ -37,6 +38,6 @@ public sealed class MouthStorageSystem : SharedMouthStorageSystem
 
         var firstItem = storage.Container.ContainedEntities[0];
         args.Blocker = firstItem;
-        args.Cancel();
+        args.Cancelled = true;
     }
 }

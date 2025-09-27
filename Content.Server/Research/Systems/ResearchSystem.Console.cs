@@ -87,7 +87,7 @@ public sealed partial class ResearchSystem
         if (TryGetClientServer(uid, out var serverUid, out var server, clientComponent) &&
             TryComp<TechnologyDatabaseComponent>(serverUid, out var db))
         {
-            var unlockedTechs = new HashSet<string>(db.UnlockedTechnologies);
+            var unlockedTechs = new HashSet<string>((IEnumerable<string>)db.UnlockedTechnologies);
             techList = allTechs.ToDictionary(
                 proto => proto.ID,
                 proto =>

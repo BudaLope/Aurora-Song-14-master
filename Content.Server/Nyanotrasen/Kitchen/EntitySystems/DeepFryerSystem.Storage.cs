@@ -3,6 +3,7 @@ using Content.Server.Nyanotrasen.Kitchen.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Database;
 using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Item;
 using Content.Shared.Nyanotrasen.Kitchen.UI;
@@ -80,11 +81,8 @@ public sealed partial class DeepFryerSystem
 
     private void OnInsertItem(EntityUid uid, DeepFryerComponent component, DeepFryerInsertItemMessage args)
     {
-        if (!TryComp<HandsComponent>(args.Actor, out var handsComponent) ||
-            handsComponent.ActiveHandEntity == null)
-            return;
-
-        if (handsComponent.ActiveHandEntity != null)
-            TryInsertItem(uid, component, args.Actor, handsComponent.ActiveHandEntity.Value);
+        if (TryComp<HandsComponent>(args.Actor, out var handsComponent) // Aurora Song
+            && _handsSystem.TryGetActiveItem((args.Actor, handsComponent), out var item))
+            TryInsertItem(uid, component, args.Actor, item.Value);
     }
 }

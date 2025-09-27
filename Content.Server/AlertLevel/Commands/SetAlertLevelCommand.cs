@@ -3,15 +3,16 @@ using Content.Server._NF.SectorServices;
 using Content.Server.Administration;
 using Content.Server.Station.Systems;
 using Content.Shared.Administration;
+using JetBrains.Annotations;
 using Robust.Shared.Console;
 
 namespace Content.Server.AlertLevel.Commands
 {
+    [UsedImplicitly]
     [AdminCommand(AdminFlags.Fun)]
-    public sealed class SetAlertLevelCommand : LocalizedEntityCommands
+    public sealed class SetAlertLevelCommand : LocalizedCommands
     {
-        [Dependency] private readonly AlertLevelSystem _alertLevelSystem = default!;
-        [Dependency] private readonly StationSystem _stationSystem = default!;
+        [Dependency] private readonly IEntitySystemManager _entitySystems = default!;
 
         public override string Command => "setalertlevel";
 
@@ -63,7 +64,7 @@ namespace Content.Server.AlertLevel.Commands
                 return;
             }
 
-            var stationUid = _stationSystem.GetOwningStation(player.AttachedEntity.Value);
+            var stationUid = _entitySystems.GetEntitySystem<StationSystem>().GetOwningStation(player.AttachedEntity.Value);
             if (stationUid == null)
             {
                 shell.WriteLine(LocalizationManager.GetString("cmd-setalertlevel-invalid-grid"));
@@ -78,7 +79,7 @@ namespace Content.Server.AlertLevel.Commands
                 return;
             }
 
-            _alertLevelSystem.SetLevel(stationUid.Value, level, true, true, true, locked);
+            _entitySystems.GetEntitySystem<AlertLevelSystem>().SetLevel(stationUid.Value, level, true, true, true, locked);
         }
 
         // Frontier: sector-wide alert level names

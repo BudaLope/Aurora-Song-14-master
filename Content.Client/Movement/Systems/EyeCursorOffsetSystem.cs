@@ -5,8 +5,6 @@ using Content.Shared.Camera;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Shared.Map;
-using Robust.Client.Player;
-using Robust.Client.UserInterface; // Frontier
 
 namespace Content.Client.Movement.Systems;
 
@@ -37,14 +35,6 @@ public sealed partial class EyeCursorOffsetSystem : EntitySystem
 
     public Vector2? OffsetAfterMouse(EntityUid uid, EyeCursorOffsetComponent? component)
     {
-        var localPlayer = _player.LocalEntity;
-        var mousePos = _inputManager.MouseScreenPosition;
-        var screenControl = _eyeManager.MainViewport as Control; // Frontier
-        var screenSize = screenControl?.PixelSize ?? _clyde.MainWindow.Size; // Frontier: fix separated UI layout offsets
-        var minValue = MathF.Min(screenSize.X / 2, screenSize.Y / 2) * _edgeOffset;
-
-        var mouseNormalizedPos = new Vector2(-(mousePos.X - screenSize.X / 2) / minValue, (mousePos.Y - screenSize.Y / 2) / minValue); // X needs to be inverted here for some reason, otherwise it ends up flipped.
-
         // We need the main viewport where the game content is displayed, as certain UI layouts (e.g. Separated HUD) can make it a different size to the game window.
         if (_eyeManager.MainViewport is not ScalingViewport vp)
             return null;

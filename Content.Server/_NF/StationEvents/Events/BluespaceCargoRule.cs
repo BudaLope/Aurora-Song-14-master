@@ -10,6 +10,7 @@ using Content.Server.Atmos.EntitySystems;
 using Content.Shared.GameTicking.Components;
 using Content.Shared._NF.CCVar;
 using Robust.Server.GameObjects;
+using Content.Shared.Station.Components;
 
 namespace Content.Server.StationEvents.Events;
 
@@ -35,7 +36,7 @@ public sealed class BluespaceCargoRule : StationEventSystem<BluespaceCargoRuleCo
         if (!TryComp<StationDataComponent>(chosenStation, out var stationData))
             return;
 
-        var grid = StationSystem.GetLargestGrid(stationData);
+        var grid = StationSystem.GetLargestGrid((chosenStation.Value, stationData));
 
         if (grid is null)
             return;

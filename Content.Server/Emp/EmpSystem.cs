@@ -17,6 +17,8 @@ using Robust.Shared; // Frontier: EMP Blast PVS
 using Content.Shared.Verbs; // Frontier: examine verb
 using Robust.Shared.Utility; // Frontier: examine verb
 using Content.Server.Examine; // Frontier: examine verb
+using Content.Shared.Trigger.Components.Effects;
+using Content.Shared.Trigger;
 
 namespace Content.Server.Emp;
 
@@ -52,7 +54,7 @@ public sealed class EmpSystem : SharedEmpSystem
     /// <param name="energyConsumption">The amount of energy consumed by the EMP pulse.</param>
     /// <param name="duration">The duration of the EMP effects.</param>
     /// <param name="immuneGrids">Frontier: a list of the grids that should not be affected by the pulse.</param>
-    public override EmpPulse(MapCoordinates coordinates, float range, float energyConsumption, float duration, List<EntityUid>? immuneGrids = null)
+    public void EmpPulse(MapCoordinates coordinates, float range, float energyConsumption, float duration, List<EntityUid>? immuneGrids = null)
     {
         foreach (var uid in _lookup.GetEntitiesInRange(coordinates, range))
         {
@@ -119,8 +121,8 @@ public sealed class EmpSystem : SharedEmpSystem
     {
         var ev = new EmpPulseEvent(energyConsumption, false, false, TimeSpan.FromSeconds(duration));
         RaiseLocalEvent(uid, ref ev);
-
         if (ev.Affected)
+        {
             Spawn(EmpDisabledEffectPrototype, Transform(uid).Coordinates);
         }
         if (ev.Disabled)
@@ -176,7 +178,7 @@ public sealed class EmpSystem : SharedEmpSystem
         if (!args.CanInteract || !args.CanAccess)
             return;
 
-        var msg = GetEmpDescription(component.Range, component.EnergyConsumption, component.DisableDuration);
+        var msg = GetEmpDescription(component.Range, component.EnergyConsumption, (float)component.DisableDuration.TotalSeconds);
 
         _examine.AddDetailedExamineVerb(args, component, msg,
             Loc.GetString("emp-examinable-verb-text"), "/Textures/Interface/VerbIcons/smite.svg.192dpi.png",
@@ -213,7 +215,7 @@ public sealed class EmpSystem : SharedEmpSystem
 
     private void HandleEmpTrigger(EntityUid uid, EmpOnTriggerComponent comp, TriggerEvent args)
     {
-        EmpPulse(_transform.GetMapCoordinates(uid), comp.Range, comp.EnergyConsumption, comp.DisableDuration);
+        EmpPulse(_transform.GetMapCoordinates(uid), comp.Range, comp.EnergyConsumption, (float)comp.DisableDuration.TotalSeconds);
         args.Handled = true;
     }
 
@@ -242,7 +244,9 @@ public sealed class EmpSystem : SharedEmpSystem
 /// <summary>
 /// Raised on an entity before <see cref="EmpPulseEvent"/>. Cancel this to prevent the emp event being raised.
 /// </summary>
-public sealed partial class EmpAttemptEvent : CancellableEntityEventArgs;
+public sealed partial class EmpAttemptEvent : CancellableEntityEventArgs
+{
+}
 
 [ByRefEvent]
 public record struct EmpPulseEvent(float EnergyConsumption, bool Affected, bool Disabled, TimeSpan Duration);

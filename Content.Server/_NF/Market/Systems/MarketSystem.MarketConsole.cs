@@ -14,6 +14,7 @@ using Content.Shared.Storage;
 using Content.Shared.Materials;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Shared.Storage.Components;
 
 
 namespace Content.Server._NF.Market.Systems;
@@ -57,7 +58,7 @@ public sealed partial class MarketSystem
     }
 
     /// <summary>
-    /// Recursively updates/inserts an entity and everything it contains into the cargo market. 
+    /// Recursively updates/inserts an entity and everything it contains into the cargo market.
     /// </summary>
     /// <param name="market">The market data set that will store these entities.</param>
     /// <param name="sold">The entity to add.</param>

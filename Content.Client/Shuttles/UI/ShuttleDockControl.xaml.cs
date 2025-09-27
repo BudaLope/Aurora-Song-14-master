@@ -215,11 +215,11 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
 
                 if (HighlightedDock == dock.Entity)
                 {
-                    otherDockColor = Color.ToSrgb(dock.HighlightedColor);
+                    otherDockColor = Color.ToSrgb(dock.HighlightedRadarColor);
                 }
                 else
                 {
-                    otherDockColor = Color.ToSrgb(dock.Color);
+                    otherDockColor = Color.ToSrgb(dock.RadarColor);
                 }
 
                 /*
@@ -313,7 +313,7 @@ public sealed partial class ShuttleDockControl : BaseShuttleControl
             ScalePosition(Vector2.Transform(new Vector2(-0.5f, 0.5f), rotation)),
             ScalePosition(Vector2.Transform(new Vector2(0.5f, -0.5f), rotation)));
 
-        var dockColor = _viewedState?.HighlightedColor ?? _fallbackHighlightedColor;
+        var dockColor = _viewedState?.HighlightedRadarColor ?? _fallbackHighlightedColor;
         var connectionColor = Color.Pink;
 
         handle.DrawRect(ourDockConnection, connectionColor.WithAlpha(0.2f));

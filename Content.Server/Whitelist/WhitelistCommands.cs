@@ -25,13 +25,16 @@ public sealed class AddWhitelistCommand : LocalizedCommands
             return;
         }
 
+        var db = IoCManager.Resolve<IServerDbManager>();
+        var loc = IoCManager.Resolve<IPlayerLocator>();
+
         var name = string.Join(' ', args).Trim();
-        var data = await _locator.LookupIdByNameOrIdAsync(name);
+        var data = await loc.LookupIdByNameOrIdAsync(name);
 
         if (data != null)
         {
             var guid = data.UserId;
-            var isWhitelisted = await _dbManager.GetWhitelistStatusAsync(guid);
+            var isWhitelisted = await db.GetWhitelistStatusAsync(guid);
             if (isWhitelisted)
             {
                 shell.WriteLine(Loc.GetString("cmd-whitelistadd-existing", ("username", data.Username)));
@@ -73,13 +76,16 @@ public sealed class RemoveWhitelistCommand : LocalizedCommands
             return;
         }
 
+        var db = IoCManager.Resolve<IServerDbManager>();
+        var loc = IoCManager.Resolve<IPlayerLocator>();
+
         var name = string.Join(' ', args).Trim();
-        var data = await _locator.LookupIdByNameOrIdAsync(name);
+        var data = await loc.LookupIdByNameOrIdAsync(name);
 
         if (data != null)
         {
             var guid = data.UserId;
-            var isWhitelisted = await _dbManager.GetWhitelistStatusAsync(guid);
+            var isWhitelisted = await db.GetWhitelistStatusAsync(guid);
             if (!isWhitelisted)
             {
                 shell.WriteLine(Loc.GetString("cmd-whitelistremove-existing", ("username", data.Username)));
@@ -121,12 +127,18 @@ public sealed class KickNonWhitelistedCommand : LocalizedCommands
             return;
         }
 
-        if (!_configManager.GetCVar(CCVars.WhitelistEnabled))
+        var cfg = IoCManager.Resolve<IConfigurationManager>();
+
+        if (!cfg.GetCVar(CCVars.WhitelistEnabled))
             return;
 
-        foreach (var session in _playerManager.NetworkedSessions)
+        var player = IoCManager.Resolve<IPlayerManager>();
+        var db = IoCManager.Resolve<IServerDbManager>();
+        var net = IoCManager.Resolve<IServerNetManager>();
+
+        foreach (var session in player.NetworkedSessions)
         {
-            if (await _dbManager.GetAdminDataForAsync(session.UserId) is not null)
+            if (await db.GetAdminDataForAsync(session.UserId) is not null)
                 continue;
 
             if (!_jobWhitelist.IsGloballyWhitelisted(session.UserId)) // Frontier: use JobWhitelistManager as a wrapper.

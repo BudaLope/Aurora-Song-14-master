@@ -6,6 +6,7 @@ using Content.Shared._NF.CrateMachine.Components;
 using Content.Shared.Maps;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 
 namespace Content.Server._NF.CrateMachine;
 
@@ -19,6 +20,7 @@ public sealed partial class CrateMachineSystem : SharedCrateMachineSystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly EntityStorageSystem _storage = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly SharedMapSystem _mapSystem = default!; // Aurora Song
 
     /// <summary>
     /// Checks if there is a crate on the crate machine.
@@ -31,15 +33,21 @@ public sealed partial class CrateMachineSystem : SharedCrateMachineSystem
     {
         if (!TryComp(crateMachineUid, out TransformComponent? crateMachineTransform))
             return true;
-        var tileRef = crateMachineTransform.Coordinates.GetTileRef(EntityManager, _mapManager);
-        if (tileRef == null)
-            return true;
+
+        // Aurora Song
+        var gridUid = _transform.GetGrid(crateMachineTransform.Coordinates);
+        if (gridUid == null)
+            return false;
+
+        var grid = Comp<MapGridComponent>(gridUid.Value);
+        var tileRef = _mapSystem.GetTileRef(gridUid.Value, grid, crateMachineTransform.Coordinates);
+        // End Aurora Song
 
         if (!ignoreAnimation && (component.OpeningTimeRemaining > 0 || component.ClosingTimeRemaining > 0f))
             return true;
 
         // Finally check if there is a crate intersecting the crate machine.
-        return _lookup.GetLocalEntitiesIntersecting(tileRef.Value, flags: LookupFlags.All | LookupFlags.Approximate)
+        return _lookup.GetLocalEntitiesIntersecting(tileRef, flags: LookupFlags.All | LookupFlags.Approximate)
             .Any(entity => MetaData(entity).EntityPrototype?.ID ==
                            component.CratePrototype);
     }

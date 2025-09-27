@@ -1,18 +1,37 @@
+using Content.Server.Administration.Logs;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Atmos.Piping.Components;
 using Content.Server.Atmos.Piping.Unary.EntitySystems;
+using Content.Server.Body.Components;
+using Content.Server.Body.Systems;
 using Content.Server.Medical.Components;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.NodeGroups;
 using Content.Server.NodeContainer.Nodes;
 using Content.Server.Temperature.Components;
-using Content.Shared.Atmos;
-using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Atmos;
+using Content.Shared.UserInterface;
+using Content.Shared.Chemistry;
+using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Climbing.Systems;
+using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Database;
+using Content.Shared.DoAfter;
+using Content.Shared.DragDrop;
+using Content.Shared.Emag.Systems;
+using Content.Shared.Examine;
+using Content.Shared.Interaction;
 using Content.Shared.Medical.Cryogenics;
 using Content.Shared.MedicalScanner;
-using Content.Shared.UserInterface;
+using Content.Shared.Power;
+using Content.Shared.Verbs;
+using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
+using Robust.Shared.Timing;
+using SharedToolSystem = Content.Shared.Tools.Systems.SharedToolSystem;
+using Content.Shared.Body.Components;
 
 namespace Content.Server.Medical;
 
@@ -20,8 +39,8 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
 {
     [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
     [Dependency] private readonly GasCanisterSystem _gasCanisterSystem = default!;
-    [Dependency] private readonly NodeContainerSystem _nodeContainer = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
+    [Dependency] private readonly ClimbSystem _climbSystem = default!;
+    [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private readonly BloodstreamSystem _bloodstreamSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
@@ -70,7 +89,7 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
             metaDataQuery.TryGetComponent(uid, out var metaDataComponent);
             if (curTime < cryoPod.NextInjectionTime + _metaDataSystem.GetPauseTime(uid, metaDataComponent))
                 continue;
-            cryoPod.NextInjectionTime = curTime + TimeSpan.FromSeconds(cryoPod.BeakerTransferTime);
+            cryoPod.NextInjectionTime = curTime + cryoPod.BeakerTransferTime;
 
             if (!itemSlotsQuery.TryGetComponent(uid, out var itemSlotsComponent))
             {
@@ -101,13 +120,13 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
                 solutionToInject.ScaleSolution(cryoPod.PotencyMultiplier);
                 // End Frontier
 
-                _bloodstreamSystem.TryAddToChemicals(patient.Value, solutionToInject, bloodstream);
+                _bloodstreamSystem.TryAddToChemicals(patient.Value, solutionToInject);
                 _reactiveSystem.DoEntityReaction(patient.Value, solutionToInject, ReactionMethod.Injection);
             }
         }
     }
 
-    public override EntityUid? EjectBody(EntityUid uid, CryoPodComponent? cryoPodComponent)
+    public EntityUid? EjectBody(EntityUid uid, CryoPodComponent? cryoPodComponent)
     {
         if (!Resolve(uid, ref cryoPodComponent))
             return null;
@@ -240,4 +259,5 @@ public sealed partial class CryoPodSystem : SharedCryoPodSystem
         // if body is ejected - no need to display health-analyzer
         _uiSystem.CloseUi(cryoPod.Owner, HealthAnalyzerUiKey.Key);
     }
+    #endregion Interaction
 }

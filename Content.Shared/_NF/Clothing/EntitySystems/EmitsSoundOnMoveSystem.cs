@@ -52,15 +52,14 @@ public sealed class EmitsSoundOnMoveSystem : EntitySystem
 
     private void UpdateSound(EntityUid uid, EmitsSoundOnMoveComponent component)
     {
-        if (!_xformQuery.TryGetComponent(uid, out var xform) ||
-            !_physicsQuery.TryGetComponent(uid, out var physics))
+        if (!_xformQuery.TryGetComponent(uid, out var xform))
             return;
 
         // Space does not transmit sound
         if (xform.GridUid == null)
             return;
 
-        if (component.RequiresGravity && _gravity.IsWeightless(uid, physics, xform))
+        if (component.RequiresGravity && _gravity.IsWeightless(uid)) // Modified by Aurora to match new IsWeightless function
             return;
 
         var parent = xform.ParentUid;

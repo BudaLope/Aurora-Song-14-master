@@ -1,7 +1,6 @@
-
-using Content.Server.Storage.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
+using Content.Shared.Storage.Components;
 
 namespace Content.Server._AS.Touched;
 

@@ -35,9 +35,7 @@ public sealed partial class SSDIndicatorComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan FallAsleepTime = TimeSpan.Zero;
 
-    /// <summary>
-    /// The next time this component will be updated.
-    /// </summary>
+
     [AutoNetworkedField, AutoPausedField]
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan NextUpdate = TimeSpan.Zero;
@@ -45,16 +43,6 @@ public sealed partial class SSDIndicatorComponent : Component
     /// <summary>
     /// The time between updates checking if the entity should be force slept.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    [AutoNetworkedField]
-    public bool ForcedSleepAdded = false;
-
-    // Frontier: skip sleeping
-    /// <summary>
-    ///     Required to don't remove forced sleep from other sources
-    /// </summary>
     [DataField]
-    [AutoNetworkedField]
-    public bool PreventSleep = false;
-    // End Frontier
+    public TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
 }

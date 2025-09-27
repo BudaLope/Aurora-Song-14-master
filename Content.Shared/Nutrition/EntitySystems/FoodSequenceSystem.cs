@@ -10,7 +10,7 @@ using Content.Shared.Storage.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Content.Server._NF.Kitchen.Components; // Frontier
+using Content.Shared._NF.Kitchen.Components;
 
 namespace Content.Shared.Nutrition.EntitySystems;
 
@@ -215,13 +215,7 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
         if (!Resolve(element, ref element.Comp, false))
             return;
 
-<<<<<<< HEAD:Content.Server/Nutrition/EntitySystems/FoodSequenceSystem.cs
-        startFood.RequiresSpecialDigestion |= elementFood.RequiresSpecialDigestion; // Frontier: merge special digestion
-
-        if (!_solutionContainer.TryGetSolution(start, startFood.Solution, out var startSolutionEntity, out var startSolution))
-=======
         if (!_solutionContainer.TryGetSolution(start.Owner, start.Comp.Solution, out var startSolutionEntity, out var startSolution))
->>>>>>> wizden/stable:Content.Shared/Nutrition/EntitySystems/FoodSequenceSystem.cs
             return;
 
         if (!_solutionContainer.TryGetSolution(element.Owner, element.Comp.Solution, out _, out var elementSolution))

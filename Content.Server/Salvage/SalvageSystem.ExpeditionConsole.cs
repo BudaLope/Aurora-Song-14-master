@@ -14,7 +14,8 @@ using Content.Shared.NPC.Components; // Frontier
 using Content.Server.Salvage.Expeditions; // Frontier
 using Content.Shared.Mind.Components; // Frontier
 using Content.Shared.Mobs.Components; // Frontier
-using Robust.Shared.Physics; // Frontier
+using Robust.Shared.Physics;
+using Content.Shared.Station.Components; // Frontier
 
 namespace Content.Server.Salvage;
 
@@ -68,7 +69,7 @@ public sealed partial class SalvageSystem
         if (_salvage.ProximityCheck && !component.Debug)
         {
             if (!TryComp<StationDataComponent>(station, out var stationData)
-                || _station.GetLargestGrid(stationData) is not { Valid: true } ourGrid
+                || _station.GetLargestGrid((station.Value, stationData)) is not { Valid: true } ourGrid
                 || !TryComp<MapGridComponent>(ourGrid, out var gridComp))
             {
                 PlayDenySound((uid, component));
@@ -235,7 +236,7 @@ public sealed partial class SalvageSystem
 
         // Frontier: if we have a lingering FTL component, we cannot start a new mission
         if (!TryComp<StationDataComponent>(station, out var stationData) ||
-                _station.GetLargestGrid(stationData) is not { Valid: true } grid ||
+                _station.GetLargestGrid((station.Value, stationData)) is not { Valid: true } grid ||
                 HasComp<FTLComponent>(grid))
         {
             state.Cooldown = true; //Hack: disable buttons

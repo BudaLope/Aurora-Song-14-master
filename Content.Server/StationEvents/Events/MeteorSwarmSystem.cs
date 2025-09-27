@@ -5,6 +5,7 @@ using Content.Server.Station.Systems;
 using Content.Server.StationEvents.Components;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Station.Components;
 using Robust.Server.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
@@ -50,7 +51,7 @@ public sealed class MeteorSwarmSystem : GameRuleSystem<MeteorSwarmComponent>
             return;
 
         var station = RobustRandom.Pick(stations);
-        if (_station.GetLargestGrid(Comp<StationDataComponent>(station)) is not { } grid)
+        if (_station.GetLargestGrid((station, Comp<StationDataComponent>(station))) is not { } grid)
             return;
 
         var mapId = Transform(grid).MapID;

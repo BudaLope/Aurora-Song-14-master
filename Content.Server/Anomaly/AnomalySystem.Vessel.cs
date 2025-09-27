@@ -31,6 +31,42 @@ public sealed partial class AnomalySystem
         SubscribeLocalEvent<AnomalyVesselComponent, EntParentChangedMessage>(OnVesselParentChanged); // Frontier
     }
 
+    private void OnScannerAnomalyShutdown(ref AnomalyShutdownEvent args)
+    {
+        var query = EntityQueryEnumerator<AnomalyScannerComponent>();
+        while (query.MoveNext(out var uid, out var component))
+        {
+            if (component.ScannedAnomaly != args.Anomaly)
+                continue;
+
+            _ui.CloseUi(uid, AnomalyScannerUiKey.Key);
+        }
+    }
+
+    public void UpdateScannerUi(EntityUid uid, AnomalyScannerComponent? component = null)
+    {
+        if (!Resolve(uid, ref component))
+            return;
+
+        TimeSpan? nextPulse = null;
+        if (TryComp<AnomalyComponent>(component.ScannedAnomaly, out var anomalyComponent))
+            nextPulse = anomalyComponent.NextPulseTime;
+
+        var state = new AnomalyScannerUserInterfaceState(GetScannerMessage(component), nextPulse);
+        _ui.SetUiState(uid, AnomalyScannerUiKey.Key, state);
+    }
+
+    private void OnScannerAnomalyStabilityChanged(ref AnomalyStabilityChangedEvent args)
+    {
+        var query = EntityQueryEnumerator<AnomalyScannerComponent>();
+        while (query.MoveNext(out var uid, out var component))
+        {
+            if (component.ScannedAnomaly != args.Anomaly)
+                continue;
+            UpdateScannerUi(uid, component);
+        }
+    }
+
     private void OnStabilityChanged(ref AnomalyStabilityChangedEvent args)
     {
         OnVesselAnomalyStabilityChanged(ref args);

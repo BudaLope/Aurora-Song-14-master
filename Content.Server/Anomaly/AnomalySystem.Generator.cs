@@ -22,7 +22,6 @@ namespace Content.Server.Anomaly;
 public sealed partial class AnomalySystem
 {
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ChatSystem _chat = default!; // Frontier
 
     private void InitializeGenerator()
@@ -129,7 +128,7 @@ public sealed partial class AnomalySystem
                 continue;
 
             var pos = _mapSystem.GridTileToLocal(grid, gridComp, tile);
-            var mapPos = _transform.ToMapCoordinates(pos);
+            var mapPos = _coords.ToMapCoordinates(pos);
             // don't spawn in AntiAnomalyZones
             var antiAnomalyZonesQueue = AllEntityQuery<AntiAnomalyZoneComponent, TransformComponent>();
             while (antiAnomalyZonesQueue.MoveNext(out _, out var zone, out var antiXform))
@@ -137,7 +136,7 @@ public sealed partial class AnomalySystem
                 if (antiXform.MapID != mapPos.MapId)
                     continue;
 
-                var antiCoordinates = _transform.GetWorldPosition(antiXform);
+                var antiCoordinates = _coords.GetWorldPosition(antiXform);
 
                 var delta = antiCoordinates - mapPos.Position;
                 if (delta.LengthSquared() < zone.ZoneRadius * zone.ZoneRadius)
@@ -157,14 +156,14 @@ public sealed partial class AnomalySystem
         // Frontier: one final test - if the spawn point is within an anti-anomaly zone, just don't generate it.
         if (!validTarget) // Frontier
         {
-            var mapPos = _transform.ToMapCoordinates(targetCoords);
+            var mapPos = _coords.ToMapCoordinates(targetCoords);
             var antiAnomalyZonesQueue = AllEntityQuery<AntiAnomalyZoneComponent, TransformComponent>();
             while (antiAnomalyZonesQueue.MoveNext(out _, out var zone, out var antiXform))
             {
                 if (antiXform.MapID != mapPos.MapId)
                     continue;
 
-                var antiCoordinates = _transform.GetWorldPosition(antiXform);
+                var antiCoordinates = _coords.GetWorldPosition(antiXform);
 
                 var delta = antiCoordinates - mapPos.Position;
                 if (delta.LengthSquared() < zone.ZoneRadius * zone.ZoneRadius)

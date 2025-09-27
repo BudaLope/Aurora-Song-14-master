@@ -318,14 +318,14 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
         while (query.MoveNext(out var update))
         {
-            SetLaws(lawset, update, provider.LawUploadSound);
+            SetLaws(lawset.Laws, update, provider.LawUploadSound);
 
             // Corvax-Next-AiRemoteControl-Start
             if (TryComp<StationAiHeldComponent>(update, out var stationAiHeldComp)
                 && stationAiHeldComp.CurrentConnectedEntity != null
                 && HasComp<SiliconLawProviderComponent>(stationAiHeldComp.CurrentConnectedEntity))
             {
-                SetLaws(lawset, stationAiHeldComp.CurrentConnectedEntity.Value, provider.LawUploadSound);
+                SetLaws(lawset.Laws, stationAiHeldComp.CurrentConnectedEntity.Value, provider.LawUploadSound);
             }
             // Corvax-Next-AiRemoteControl-End
         }

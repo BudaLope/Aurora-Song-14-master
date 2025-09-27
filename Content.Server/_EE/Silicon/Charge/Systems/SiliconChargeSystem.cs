@@ -25,6 +25,7 @@ using Content.Server._EE.Power.Components;
 // Begin TheDen - IPC Dynamic Power draw
 using Content.Shared.Movement.Components;
 using Robust.Shared.Physics.Components;
+using Content.Shared.Atmos.Components;
 // End TheDen
 
 namespace Content.Server._EE.Silicon.Charge;

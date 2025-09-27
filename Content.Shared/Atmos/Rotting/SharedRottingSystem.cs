@@ -1,5 +1,4 @@
-﻿using Content.Shared._DEN.Unrotting;
-using Content.Shared.Examine;
+﻿using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -122,9 +121,6 @@ public abstract class SharedRottingSystem : EntitySystem
 
         // only dead things or inanimate objects can rot
         if (TryComp<MobStateComponent>(uid, out var mobState) && !_mobState.IsDead(uid, mobState))
-            return false;
-
-        if (HasComp<DragonUnrottingComponent>(uid))
             return false;
 
         if (_container.TryGetOuterContainer(uid, Transform(uid), out var container) &&

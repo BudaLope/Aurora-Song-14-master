@@ -54,18 +54,6 @@ public sealed class RadioSystem : EntitySystem
         }
     }
 
-    //Nuclear-14
-    /// <summary>
-    /// Gets the message frequency, if there is no such frequency, returns the standard channel frequency.
-    /// </summary>
-    public int GetFrequency(EntityUid source, RadioChannelPrototype channel)
-    {
-        if (TryComp<RadioMicrophoneComponent>(source, out var radioMicrophone))
-            return radioMicrophone.Frequency;
-
-        return channel.Frequency;
-    }
-
     private void OnIntrinsicReceive(EntityUid uid, IntrinsicRadioReceiverComponent component, ref RadioReceiveEvent args)
     {
         if (TryComp(uid, out ActorComponent? actor))
@@ -152,9 +140,6 @@ public sealed class RadioSystem : EntitySystem
 
         var radioQuery = EntityQueryEnumerator<ActiveRadioComponent, TransformComponent>();
 
-        if (frequency == null) // Nuclear-14
-            frequency = GetFrequency(messageSource, channel); // Nuclear-14
-
         while (canSend && radioQuery.MoveNext(out var receiver, out var radio, out var transform))
         {
             if (!radio.ReceiveAllChannels)
@@ -163,9 +148,6 @@ public sealed class RadioSystem : EntitySystem
                                                              !intercom.SupportedChannels.Contains(channel.ID)))
                     continue;
             }
-
-            if (!HasComp<GhostComponent>(receiver) && GetFrequency(receiver, channel) != frequency) // Nuclear-14
-                continue; // Nuclear-14
 
             if (!channel.LongRange && transform.MapID != sourceMapId && !radio.GlobalReceive)
                 continue;

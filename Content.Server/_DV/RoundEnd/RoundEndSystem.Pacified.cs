@@ -40,11 +40,11 @@ public sealed class PacifiedRoundEnd : EntitySystem
             RemComp<ExplosiveComponent>(uid);
         }
 
-        var grenadeQuery = EntityQueryEnumerator<OnUseTimerTriggerComponent>();
-        while (grenadeQuery.MoveNext(out var uid, out _))
-        {
-            RemComp<OnUseTimerTriggerComponent>(uid);
-        }
+        // var grenadeQuery = EntityQueryEnumerator<OnUseTimerTriggerComponent>(); Aurora Song
+        // while (grenadeQuery.MoveNext(out var uid, out _))
+        // {
+        //     RemComp<OnUseTimerTriggerComponent>(uid);
+        // }
 
         var flashQuery = EntityQueryEnumerator<FlashComponent>();
         while (flashQuery.MoveNext(out var uid, out _))

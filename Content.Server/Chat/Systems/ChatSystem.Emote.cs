@@ -1,6 +1,6 @@
 using System.Collections.Frozen;
-using Content.Server.Popups;
 using System.Collections.Immutable;
+using Content.Server.Popups;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Emoting;
 using Content.Shared.Speech;
@@ -13,9 +13,8 @@ namespace Content.Server.Chat.Systems;
 // emotes using emote prototype
 public partial class ChatSystem
 {
-    [Dependency] private readonly PopupSystem _popupSystem = default!;
-
     private FrozenDictionary<string, ImmutableList<EmotePrototype>> _wordEmoteDict = FrozenDictionary<string, ImmutableList<EmotePrototype>>.Empty; // DeltaV - Multiple emotes
+    [Dependency] private readonly PopupSystem _popupSystem = default!;
 
     protected override void OnPrototypeReload(PrototypesReloadedEventArgs obj)
     {
@@ -174,8 +173,7 @@ public partial class ChatSystem
     /// </summary>
     /// <param name="uid"></param>
     /// <param name="textInput"></param>
-    /// <returns>True if the chat message should be displayed (because the emote was explicitly cancelled), false if it should not be.</returns>
-    private bool TryEmoteChatInput(EntityUid uid, string textInput)
+    private bool TryEmoteChatInput(EntityUid uid, string textInput) // Frontier: void<bool
     {
         var actionTrimmedLower = TrimPunctuation(textInput.ToLower());
         if (!_wordEmoteDict.TryGetValue(actionTrimmedLower, out var emotes)) // DeltaV, renames to emotes
@@ -187,9 +185,7 @@ public partial class ChatSystem
             if (!AllowedToUseEmote(uid, emote))
                 continue;
 
-            InvokeEmoteEvent(uid, emote);
-            validEmote = true; // DeltaV
-            break; // Frontier: break on first emote (avoid playing multiple sounds at once)
+            validEmote = TryInvokeEmoteEvent(uid, emote);
         }
 
         return validEmote; // Frontier

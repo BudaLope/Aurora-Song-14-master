@@ -8,6 +8,7 @@ using Content.Shared.Physics;
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Map.Components;
 
 namespace Content.Server._DV.Abilities;
 
@@ -18,6 +19,8 @@ public sealed partial class CrawlUnderObjectsSystem : SharedCrawlUnderObjectsSys
     [Dependency] private readonly MovementSpeedModifierSystem _movespeed = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly SharedMapSystem _mapSystem = default!; // Aurora Song
+    [Dependency] private readonly SharedTransformSystem _transform = default!; // Aurora Song
 
     public override void Initialize()
     {
@@ -31,12 +34,17 @@ public sealed partial class CrawlUnderObjectsSystem : SharedCrawlUnderObjectsSys
 
     private bool IsOnCollidingTile(EntityUid uid)
     {
+        // Aurora Song
         var xform = Transform(uid);
-        var tile = xform.Coordinates.GetTileRef();
-        if (tile == null)
+        var gridUid = _transform.GetGrid(xform.Coordinates);
+        if (gridUid == null)
             return false;
 
-        return _turf.IsTileBlocked(tile.Value, CollisionGroup.MobMask);
+        var grid = Comp<MapGridComponent>(gridUid.Value);
+        var tile = _mapSystem.GetTileRef(gridUid.Value, grid, xform.Coordinates);
+        // End Aurora Song
+
+        return _turf.IsTileBlocked(tile, CollisionGroup.MobMask);
     }
 
     private void OnInit(EntityUid uid, CrawlUnderObjectsComponent component, ComponentInit args)

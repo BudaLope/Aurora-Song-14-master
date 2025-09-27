@@ -2,7 +2,7 @@ using System.Linq;
 using Content.Server._NF.Bank;
 using System.Numerics;
 using Content.Server.Cargo.Systems;
-//using Content.Server.Emp; // Frontier: Upstream - #28984
+using Content.Server.Emp;
 using Content.Server.Cargo.Components;
 using Content.Server.Popups;
 using Content.Server.Power.Components;
@@ -28,7 +28,8 @@ using Content.Server._NF.Contraband.Systems; // Frontier
 using Content.Shared.Stacks; // Frontier
 using Content.Server.Stack; // Frontier
 using Robust.Shared.Containers; // Frontier
-using Content.Shared._NF.Bank.Components; // Frontier
+using Content.Shared._NF.Bank.Components;
+using Content.Shared.Popups; // Frontier
 
 namespace Content.Server.VendingMachines
 {

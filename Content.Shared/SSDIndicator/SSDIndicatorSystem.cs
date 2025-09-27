@@ -82,15 +82,15 @@ public sealed class SSDIndicatorSystem : EntitySystem
         while (query.MoveNext(out var uid, out var ssd))
         {
             // Forces the entity to sleep when the time has come
-            if(ssd.IsSSD &&
-                !ssd.PreventSleep && // Frontier
-                ssd.FallAsleepTime <= _timing.CurTime &&
-                !TerminatingOrDeleted(uid) &&
-                !HasComp<ForcedSleepingComponent>(uid)) // Don't add the component if the entity has it from another sources
-            {
-                EnsureComp<ForcedSleepingComponent>(uid);
-                ssd.ForcedSleepAdded = true;
-            }
+            if (!ssd.IsSSD
+                || ssd.NextUpdate > curTime
+                || ssd.FallAsleepTime > curTime
+                || TerminatingOrDeleted(uid))
+                continue;
+
+            _statusEffects.TryUpdateStatusEffectDuration(uid, StatusEffectSSDSleeping);
+            ssd.NextUpdate += ssd.UpdateInterval;
+            Dirty(uid, ssd);
         }
     }
 }

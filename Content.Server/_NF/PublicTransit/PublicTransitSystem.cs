@@ -25,6 +25,7 @@ using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.Examine;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Shuttles.Components;
+using Content.Shared.Station.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.EntitySerialization.Systems;
@@ -553,7 +554,7 @@ public sealed class PublicTransitSystem : EntitySystem
                 continue;
 
             // Assuming the largest grid is the depot.
-            var depotGrid = _station.GetLargestGrid(stationData);
+            var depotGrid = _station.GetLargestGrid((depotStation, stationData));
             if (depotGrid == null)
                 continue;
 

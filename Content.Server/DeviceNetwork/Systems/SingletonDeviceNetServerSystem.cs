@@ -4,7 +4,6 @@ using Content.Server.Medical.CrewMonitoring;
 using Content.Server.Station.Systems;
 using Content.Shared.Power;
 using Content.Shared.DeviceNetwork.Components;
-using Robust.Shared.Map; // Frontier
 
 namespace Content.Server.DeviceNetwork.Systems;
 
@@ -15,7 +14,7 @@ namespace Content.Server.DeviceNetwork.Systems;
 public sealed class SingletonDeviceNetServerSystem : EntitySystem
 {
     [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
-    // [Dependency] private readonly StationSystem _stationSystem = default!; // Frontier: map-wide singletons
+    [Dependency] private readonly StationSystem _stationSystem = default!;
 
     public override void Initialize()
     {
@@ -31,9 +30,8 @@ public sealed class SingletonDeviceNetServerSystem : EntitySystem
         return Resolve(serverId, ref serverComponent) && serverComponent.Active;
     }
 
-    // Frontier: map-wide servers
     /// <summary>
-    /// Returns the address of the currently active server for the given map (instead of station id) if there is one.<br/>
+    /// Returns the address of the currently active server for the given station id if there is one.<br/>
     /// What kind of server you're trying to get the active instance of is determined by the component type parameter TComp.<br/>
     /// <br/>
     /// Setting TComp to <see cref="CrewMonitoringServerComponent"/>, for example, gives you the address of an entity containing the crew monitoring server component.<br/>
@@ -42,22 +40,19 @@ public sealed class SingletonDeviceNetServerSystem : EntitySystem
     /// <param name="address">The address of the active server if it exists</param>
     /// <typeparam name="TComp">The component type that determines what type of server you're getting the address of</typeparam>
     /// <returns>True if there is an active serve. False otherwise</returns>
-    public bool TryGetActiveServerAddress<TComp>(MapId map, [NotNullWhen(true)] out string? address) where TComp : IComponent
+    public bool TryGetActiveServerAddress<TComp>(EntityUid stationId, [NotNullWhen(true)] out string? address) where TComp : IComponent
     {
         var servers = EntityQueryEnumerator<
             SingletonDeviceNetServerComponent,
             DeviceNetworkComponent,
-            TComp,
-            TransformComponent // Frontier
+            TComp
         >();
 
         (EntityUid id, SingletonDeviceNetServerComponent server, DeviceNetworkComponent device)? last = default;
 
-        while (servers.MoveNext(out var uid, out var server, out var device, out _, out var xform))
+        while (servers.MoveNext(out var uid, out var server, out var device, out _))
         {
-            // Frontier PR 1053 QoL tweaks to displayed coordinates
-            //if (!_stationSystem.GetOwningStation(uid)?.Equals(stationId) ?? true)
-            if (xform.MapID != map) //Frontier
+            if (!_stationSystem.GetOwningStation(uid)?.Equals(stationId) ?? true)
                 continue;
 
             if (!server.Available)
@@ -86,7 +81,6 @@ public sealed class SingletonDeviceNetServerSystem : EntitySystem
         address = null;
         return address != null;
     }
-    // End Frontier
 
     /// <summary>
     /// Disconnects the server losing power

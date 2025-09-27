@@ -514,7 +514,7 @@ namespace Content.Server.Lathe
         /// <param name="uid">The lathe whose queue is being altered.</param>
         /// <param name="component"></param>
         /// <param name="args"></param>
-        public void OnLatheDeleteRequestMessage(EntityUid uid, LatheComponent component, ref LatheDeleteRequestMessage args)
+        public void OnLatheDeleteRequestMessage(EntityUid uid, LatheComponent component, ref Shared.Lathe.LatheDeleteRequestMessage args)
         {
             if (args.Index < 0 || args.Index >= component.Queue.Count)
                 return;
@@ -535,7 +535,7 @@ namespace Content.Server.Lathe
             UpdateUserInterfaceState(uid, component);
         }
 
-        public void OnLatheMoveRequestMessage(EntityUid uid, LatheComponent component, ref LatheMoveRequestMessage args)
+        public void OnLatheMoveRequestMessage(EntityUid uid, LatheComponent component, ref Shared.Lathe.LatheMoveRequestMessage args)
         {
             if (args.Change == 0 || args.Index < 0 || args.Index >= component.Queue.Count)
                 return;
@@ -580,7 +580,7 @@ namespace Content.Server.Lathe
             UpdateUserInterfaceState(uid, component);
         }
 
-        public void OnLatheAbortFabricationMessage(EntityUid uid, LatheComponent component, ref LatheAbortFabricationMessage args)
+        public void OnLatheAbortFabricationMessage(EntityUid uid, LatheComponent component, ref Shared.Lathe.LatheAbortFabricationMessage args)
         {
             if (component.CurrentRecipe == null)
                 return;
@@ -593,5 +593,58 @@ namespace Content.Server.Lathe
             FinishProducing(uid, component);
         }
         #endregion
+
+        // Frontier: modify item value, remove from queue
+        #region Frontier
+        private void ModifyPrintedEntityPrice(EntityUid uid, LatheComponent component, EntityUid target)
+        {
+            // Cannot reduce value, leave item as-is
+            if (component.ProductValueModifier == null
+            || !float.IsFinite(component.ProductValueModifier.Value)
+            || component.ProductValueModifier < 0f)
+                return;
+
+            if (TryComp<StackPriceComponent>(target, out var stackPrice))
+            {
+                if (stackPrice.Price > 0)
+                    stackPrice.Price *= component.ProductValueModifier.Value;
+            }
+            if (TryComp<StaticPriceComponent>(target, out var staticPrice))
+            {
+                if (staticPrice.Price > 0)
+                    staticPrice.Price *= component.ProductValueModifier.Value;
+            }
+
+            // Recurse into contained entities
+            if (TryComp<ContainerManagerComponent>(target, out var containers))
+            {
+                foreach (var container in containers.Containers.Values)
+                {
+                    foreach (var ent in container.ContainedEntities)
+                    {
+                        ModifyPrintedEntityPrice(uid, component, ent);
+                    }
+                }
+            }
+        }
+
+        // New Frontiers - Lathe Upgrades - upgrading lathe speed through machine parts
+        // This code is licensed under AGPLv3. See AGPLv3.txt
+        private void OnPartsRefresh(EntityUid uid, LatheComponent component, RefreshPartsEvent args)
+        {
+            var printTimeRating = args.PartRatings[component.MachinePartPrintSpeed];
+            var materialUseRating = args.PartRatings[component.MachinePartMaterialUse];
+
+            component.FinalTimeMultiplier = component.TimeMultiplier * MathF.Pow(component.PartRatingPrintTimeMultiplier, printTimeRating - 1);
+            component.FinalMaterialUseMultiplier = component.MaterialUseMultiplier * MathF.Pow(component.PartRatingMaterialUseMultiplier, materialUseRating - 1);
+            Dirty(uid, component);
+        }
+
+        private void OnUpgradeExamine(EntityUid uid, LatheComponent component, UpgradeExamineEvent args)
+        {
+            args.AddPercentageUpgrade("lathe-component-upgrade-speed", 1 / component.FinalTimeMultiplier);
+            args.AddPercentageUpgrade("lathe-component-upgrade-material-use", component.FinalMaterialUseMultiplier);
+        }
+        #endregion Frontier
     }
 }
