@@ -785,7 +785,6 @@
   - type: Sprite
     sprite: Clothing/Head/Hardsuits/piratecaptainhelm.rsi
   - type: ToggleableVisuals
-  - type: ToggleableVisuals
     clothingVisuals:
       head:
       - state: equipped-HELMET-light

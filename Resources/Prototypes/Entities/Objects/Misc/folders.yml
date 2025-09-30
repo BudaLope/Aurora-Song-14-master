@@ -347,7 +347,6 @@
   id: BoxFolderCentComClipboardThreePapers
 
 - type: entity
-  parent: [BoxFolderClipboardEmpty, BaseGrandTheftContraband]
   id: BoxFolderQmClipboard
   parent: [BaseC2ContrabandUnredeemable, BoxFolderClipboard] # Frontier: BaseGrandTheftContraband<BaseC2ContrabandUnredeemable
   name: requisition digi-board

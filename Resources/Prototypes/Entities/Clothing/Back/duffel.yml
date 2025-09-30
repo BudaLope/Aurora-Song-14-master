@@ -188,6 +188,14 @@
       tags: [] # ignore "WhitelistChameleon" tag
 
 - type: entity
+  parent: NFClothingDuffel # Aurora Song ClothingBackpackDuffel>NFClothingDuffel
+  id: ClothingBackpackDuffelBundle
+  abstract: true
+  components:
+  - type: Tag
+    tags: [] # ignore "WhitelistChameleon" tag
+
+- type: entity
   parent: ClothingBackpackDuffelSyndicate
   id: ClothingBackpackDuffelSyndicateAmmo
   components:

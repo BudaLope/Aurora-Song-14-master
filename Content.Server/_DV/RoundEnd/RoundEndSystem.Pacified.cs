@@ -7,6 +7,7 @@ using Content.Shared.Explosion.Components;
 using Content.Shared.Flash.Components;
 using Content.Shared.Store.Components;
 using Robust.Shared.Configuration;
+using Content.Shared.Trigger.Components;
 
 namespace Content.Server._DV.RoundEnd;
 
@@ -40,11 +41,11 @@ public sealed class PacifiedRoundEnd : EntitySystem
             RemComp<ExplosiveComponent>(uid);
         }
 
-        // var grenadeQuery = EntityQueryEnumerator<OnUseTimerTriggerComponent>(); Aurora Song
-        // while (grenadeQuery.MoveNext(out var uid, out _))
-        // {
-        //     RemComp<OnUseTimerTriggerComponent>(uid);
-        // }
+        var grenadeQuery = EntityQueryEnumerator<TimerTriggerComponent>();
+        while (grenadeQuery.MoveNext(out var uid, out _))
+        {
+            RemComp<TimerTriggerComponent>(uid);
+        }
 
         var flashQuery = EntityQueryEnumerator<FlashComponent>();
         while (flashQuery.MoveNext(out var uid, out _))

@@ -198,7 +198,7 @@
 
 - type: entity
   name: Estoc DMR
-  parent: [BaseWeaponRifle, BaseSyndicateContraband]
+  parent: [BaseWeaponRifle, BaseC3Contraband ]
   id: WeaponRifleEstoc
   description: A designated marksman rifle, favored for medium-to-long range engagements. Uses .20 rifle ammo.
   components:

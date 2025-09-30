@@ -684,7 +684,7 @@
     sprite: Clothing/Mask/scaredmime.rsi
 
 - type: entity
-  parent: [ClothingMaskMime, BaseSecurityContraband]
+  parent: [ClothingMaskMime, BaseC1Contraband]
   id: ClothingMaskMimeSecurity
   name: security mime mask
   description: You have the right to remain silent.

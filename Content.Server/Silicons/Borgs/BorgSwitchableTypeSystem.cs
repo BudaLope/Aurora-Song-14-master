@@ -1,5 +1,4 @@
 ﻿using Content.Server.Inventory;
-using Content.Server.Radio.Components;
 using Content.Shared._Corvax.Silicons.Borgs.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Radio.Components;

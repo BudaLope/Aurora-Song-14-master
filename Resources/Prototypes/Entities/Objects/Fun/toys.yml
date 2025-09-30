@@ -1133,39 +1133,39 @@
     entries:
       CottonBurger: HumanPlushie
 
-- type: entity
-  parent: BasePlushie
-  id: PlushieMoth
-  name: moth plushie
-  description: Cute and fluffy moth plushie. Enjoy, bz!
-  components:
-  - type: Sprite
-    state: plushie_moth
-  - type: EmitSoundOnUse
-    sound:
-      path: /Audio/Voice/Moth/moth_chitter.ogg
-  - type: EmitSoundOnLand
-    sound:
-      path: /Audio/Voice/Moth/moth_chitter.ogg
-  - type: EmitSoundOnActivate
-    sound:
-      path: /Audio/Voice/Moth/moth_chitter.ogg
-  - type: EmitSoundOnTrigger
-    sound:
-      path: /Audio/Voice/Moth/moth_chitter.ogg
-  - type: EmitSoundOnCollide
-    sound:
-      path: /Audio/Voice/Moth/moth_chitter.ogg
-  - type: MeleeWeapon
-    soundHit:
-      path: /Audio/Voice/Moth/moth_chitter.ogg
-  - type: Food
-    requiresSpecialDigestion: true
-    useSound:
-      path: /Audio/Voice/Moth/moth_chitter.ogg
-  - type: FoodSequenceElement
-    entries:
-      CottonBurger: MothPlushie
+# - type: entity Aurora Song
+#   parent: BasePlushie
+#   id: PlushieMoth
+#   name: moth plushie
+#   description: Cute and fluffy moth plushie. Enjoy, bz!
+#   components:
+#   - type: Sprite
+#     state: plushie_moth
+#   - type: EmitSoundOnUse
+#     sound:
+#       path: /Audio/Voice/Moth/moth_chitter.ogg
+#   - type: EmitSoundOnLand
+#     sound:
+#       path: /Audio/Voice/Moth/moth_chitter.ogg
+#   - type: EmitSoundOnActivate
+#     sound:
+#       path: /Audio/Voice/Moth/moth_chitter.ogg
+#   - type: EmitSoundOnTrigger
+#     sound:
+#       path: /Audio/Voice/Moth/moth_chitter.ogg
+#   - type: EmitSoundOnCollide
+#     sound:
+#       path: /Audio/Voice/Moth/moth_chitter.ogg
+#   - type: MeleeWeapon
+#     soundHit:
+#       path: /Audio/Voice/Moth/moth_chitter.ogg
+#   - type: Food
+#     requiresSpecialDigestion: true
+#     useSound:
+#       path: /Audio/Voice/Moth/moth_chitter.ogg
+#   - type: FoodSequenceElement
+#     entries:
+#       CottonBurger: MothPlushie
 
 ## Rubber
 

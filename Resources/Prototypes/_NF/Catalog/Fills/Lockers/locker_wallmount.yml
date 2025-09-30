@@ -344,7 +344,7 @@
 - type: entity
   id: LockerWallColorHydroponicsFilled
   suffix: Filled, Frontier
-  parent: [LockerWallColorHydroponics, LockerBotanistFilled]
+  parent: [LockerWallColorHydroponics, LockerBotanistFilled ]
   components: # fixes sprite errors from parenting
   - type: EntityStorageVisuals
     stateBaseClosed: base

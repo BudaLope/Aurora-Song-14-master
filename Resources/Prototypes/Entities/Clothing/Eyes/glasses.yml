@@ -288,7 +288,7 @@
   - type: FlashImmunity
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband]
+  parent: [ClothingEyesBase, ShowSecurityIcons]
   id: ClothingEyesGlassesNoir
   name: noir-tech glasses
   description: A pair of glasses that simulate what the world looked like before the invention of color.

@@ -192,6 +192,26 @@
     - Shake
 
 - type: entity
+  id: BartenderMixer
+  abstract: true
+  components:
+  - type: DrainableSolution
+    solution: drink
+  - type: Drink
+  - type: DrawableSolution
+    solution: drink
+  - type: RefillableSolution
+    solution: drink
+  - type: SolutionTransfer
+    canChangeTransferAmount: true
+  - type: Spillable
+    solution: drink
+  - type: UserInterface
+    interfaces:
+      enum.TransferAmountUiKey.Key:
+        type: TransferAmountBoundUserInterface
+
+- type: entity
   parent: [DrinkBaseMaterialMetal, DrinkBase]
   id: DrinkJigger
   name: jigger

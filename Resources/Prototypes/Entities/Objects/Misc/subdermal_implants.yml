@@ -103,7 +103,7 @@
       mobState:
       - Critical
       - Dead
-    - type: Rattle
+    - type: RattleOnTrigger
       radioChannel: "Nfsd"
     # End Frontier: no sensor, add rattle
 
@@ -194,7 +194,7 @@
   components:
     - type: SubdermalImplant
       implantAction: ActionActivateEmpImplant
-    - type: TriggerImplantAction
+    - type: TriggerOnActivateImplant
     - type: EmpOnTrigger
       range: 2.75
       energyConsumption: 2700000 # Frontier: 50000<2700000

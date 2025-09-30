@@ -91,7 +91,7 @@
 
 - type: entity
   id: CrateArmoryRifle
-  parent: [ CrateWeaponSecure, BaseSecurityContraband ]
+  parent: [ CrateWeaponSecure, BaseC3Contraband ]
   name: rifle crate
   description: Contains two high-powered assault rifles with four mags. Requires Armory access to open.
   components:
