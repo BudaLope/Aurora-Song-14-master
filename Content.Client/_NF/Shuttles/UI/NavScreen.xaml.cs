@@ -41,6 +41,7 @@ namespace Content.Client.Shuttles.UI
             ServiceFlagServices.OnPressed += _ => ToggleServiceFlags(ServiceFlags.Services);
             ServiceFlagTrade.OnPressed += _ => ToggleServiceFlags(ServiceFlags.Trade);
             ServiceFlagSocial.OnPressed += _ => ToggleServiceFlags(ServiceFlags.Social);
+            ServiceFlagNSFW.OnPressed += _ => ToggleServiceFlags(ServiceFlags.NSFW); // Aurora song
 
             TargetX.OnTextChanged += _ => _targetCoordsModified = true;
             TargetY.OnTextChanged += _ => _targetCoordsModified = true;
@@ -128,6 +129,7 @@ namespace Content.Client.Shuttles.UI
             ServiceFlagServices.Pressed = NavRadar.ServiceFlags.HasFlag(ServiceFlags.Services);
             ServiceFlagTrade.Pressed = NavRadar.ServiceFlags.HasFlag(ServiceFlags.Trade);
             ServiceFlagSocial.Pressed = NavRadar.ServiceFlags.HasFlag(ServiceFlags.Social);
+            ServiceFlagNSFW.Pressed = NavRadar.ServiceFlags.HasFlag(ServiceFlags.NSFW); // Aurora song
         }
 
         private void NfAddShuttleDesignation(EntityUid? shuttle)

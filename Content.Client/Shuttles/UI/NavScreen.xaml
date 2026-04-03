@@ -165,7 +165,8 @@
                                              Text="{controls:Loc 'shuttle-console-service-flag-Services-label'}"
                                              TextAlign="Center"
                                              ToggleMode="True"
-                                             MinWidth="30"
+                                             MinWidth="20"
+                                             MaxWidth="70"
                                              ToolTip="{controls:Loc 'shuttle-console-service-flag-Services-description'}"
                                              StyleClasses="OpenRight"
                                              Margin="0"/>
@@ -173,7 +174,8 @@
                                              Text="{controls:Loc 'shuttle-console-service-flag-Trade-label'}"
                                              TextAlign="Center"
                                              ToggleMode="True"
-                                             MinWidth="30"
+                                             MinWidth="20"
+                                             MaxWidth="70"
                                              ToolTip="{controls:Loc 'shuttle-console-service-flag-Trade-description'}"
                                              StyleClasses="OpenBoth"
                                              Margin="0"/>
@@ -181,8 +183,18 @@
                                              Text="{controls:Loc 'shuttle-console-service-flag-Social-label'}"
                                              TextAlign="Center"
                                              ToggleMode="True"
-                                             MinWidth="30"
+                                             MinWidth="20"
+                                             MaxWidth="70"
                                              ToolTip="{controls:Loc 'shuttle-console-service-flag-Social-description'}"
+                                             StyleClasses="OpenBoth"
+                                             Margin="0"/>
+                            <controls:Button Name="ServiceFlagNSFW"
+                                             Text="{controls:Loc 'shuttle-console-service-flag-NSFW-label'}"
+                                             TextAlign="Center"
+                                             ToggleMode="True"
+                                             MinWidth="20"
+                                             MaxWidth="70"
+                                             ToolTip="{controls:Loc 'shuttle-console-service-flag-NSFW-description'}"
                                              StyleClasses="OpenLeft"
                                              Margin="0"/>
                         </controls:BoxContainer>

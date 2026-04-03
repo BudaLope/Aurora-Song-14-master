@@ -75,4 +75,5 @@ public enum ServiceFlags : byte
     Services = 1,
     Trade = 2,
     Social = 4,
+    NSFW = 8, // Aurora song
 }
