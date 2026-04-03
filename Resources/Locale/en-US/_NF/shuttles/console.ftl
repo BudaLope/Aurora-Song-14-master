@@ -11,12 +11,12 @@ shuttle-console-service-flags = Advertise Features
 shuttle-console-service-flag-Services-label = Service
 shuttle-console-service-flag-Trade-label = Shops
 shuttle-console-service-flag-Social-label = Social
-shuttle-console-service-flag-NSFW-label = NSFW
+shuttle-console-service-flag-NSFW-label = 18+
 
 shuttle-console-service-flag-Services-shortform = ♫
 shuttle-console-service-flag-Trade-shortform = $
 shuttle-console-service-flag-Social-shortform = ☺
-shuttle-console-service-flag-NSFW-shortform = 18+
+shuttle-console-service-flag-NSFW-shortform = ♥
 
 shuttle-console-service-flag-Services-description = Services (e.g. medical, dining, engineering) offered onboard.
 shuttle-console-service-flag-Trade-description = Goods sold onboard.
