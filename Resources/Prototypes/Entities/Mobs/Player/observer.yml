@@ -54,7 +54,7 @@
   - type: Examiner
     skipChecks: true
   - type: Ghost
-  # - type: GhostHearing # Aurora's Song commented out
+  # - type: GhostHearing # Aurora's Song commented out to make the default ghost hearing be local only
   - type: ShowElectrocutionHUD
   - type: IntrinsicRadioReceiver
   - type: ActiveRadio
