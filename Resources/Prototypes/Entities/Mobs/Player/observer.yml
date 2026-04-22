@@ -54,7 +54,7 @@
   - type: Examiner
     skipChecks: true
   - type: Ghost
-  - type: GhostHearing
+  # - type: GhostHearing # Aurora's Song commented out
   - type: ShowElectrocutionHUD
   - type: IntrinsicRadioReceiver
   - type: ActiveRadio
@@ -162,9 +162,9 @@
   description: Toggle between hearing all messages and hearing only radio & nearby messages.
   components:
   - type: Action
-    icon:
+    icon: Interface/Actions/ghostHearingToggled.png # Aurora Song: Flipped icon states
+    iconOn:
       sprite: Clothing/Ears/Headsets/base.rsi
       state: icon
-    iconOn: Interface/Actions/ghostHearingToggled.png
   - type: InstantAction
     event: !type:ToggleGhostHearingActionEvent
