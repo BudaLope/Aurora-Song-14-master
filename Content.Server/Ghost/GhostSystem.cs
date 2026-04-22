@@ -137,7 +137,7 @@ namespace Content.Server.Ghost
             else
             {
                 AddComp<GhostHearingComponent>(uid);
-                _actions.SetToggled(component.ToggleGhostHearingActionEntity, true);// Aurora Song: false > true
+                _actions.SetToggled(component.ToggleGhostHearingActionEntity, true); // Aurora Song: false > true
             }
 
             var str = HasComp<GhostHearingComponent>(uid)
