@@ -31,7 +31,7 @@ public abstract class SharedGasTankSystem : EntitySystem
         SubscribeLocalEvent<GasTankComponent, BeforeActivatableUIOpenEvent>(BeforeUiOpen);
         SubscribeLocalEvent<GasTankComponent, GetItemActionsEvent>(OnGetActions);
         SubscribeLocalEvent<GasTankComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<GasTankComponent, ToggleInternalsActionEvent>(OnActionToggle);
+        SubscribeLocalEvent<GasTankComponent, ToggleInternalsActionEvent>(OnActionToggle); // Aurora's Song: ToggleActionEvent > ToggleInternalsActionEvent
         SubscribeLocalEvent<GasTankComponent, GasTankSetPressureMessage>(OnGasTankSetPressure);
         SubscribeLocalEvent<GasTankComponent, GasTankToggleInternalsMessage>(OnGasTankToggleInternals);
         SubscribeLocalEvent<GasTankComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAlternativeVerb);
