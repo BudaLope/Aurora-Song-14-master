@@ -2,6 +2,7 @@ using Content.Shared.Actions;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Examine;
+using Content.Shared.Internals;
 using Content.Shared.Timing;
 using Content.Shared.Toggleable;
 using Content.Shared.UserInterface;
@@ -30,7 +31,7 @@ public abstract class SharedGasTankSystem : EntitySystem
         SubscribeLocalEvent<GasTankComponent, BeforeActivatableUIOpenEvent>(BeforeUiOpen);
         SubscribeLocalEvent<GasTankComponent, GetItemActionsEvent>(OnGetActions);
         SubscribeLocalEvent<GasTankComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<GasTankComponent, ToggleActionEvent>(OnActionToggle);
+        SubscribeLocalEvent<GasTankComponent, ToggleInternalsActionEvent>(OnActionToggle);
         SubscribeLocalEvent<GasTankComponent, GasTankSetPressureMessage>(OnGasTankSetPressure);
         SubscribeLocalEvent<GasTankComponent, GasTankToggleInternalsMessage>(OnGasTankToggleInternals);
         SubscribeLocalEvent<GasTankComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAlternativeVerb);
@@ -84,7 +85,7 @@ public abstract class SharedGasTankSystem : EntitySystem
         args.PushMarkup(Loc.GetString(component.IsValveOpen ? "comp-gas-tank-examine-open-valve" : "comp-gas-tank-examine-closed-valve"));
     }
 
-    private void OnActionToggle(Entity<GasTankComponent> gasTank, ref ToggleActionEvent args)
+    private void OnActionToggle(Entity<GasTankComponent> gasTank, ref ToggleInternalsActionEvent args)
     {
         if (args.Handled)
             return;
