@@ -1,8 +1,8 @@
+using Content.Shared._AS.Internals; // Aurora's Song
 using Content.Shared.Actions;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Examine;
-using Content.Shared.Internals;
 using Content.Shared.Timing;
 using Content.Shared.Toggleable;
 using Content.Shared.UserInterface;
