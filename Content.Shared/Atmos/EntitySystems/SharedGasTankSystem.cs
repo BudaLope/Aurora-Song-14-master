@@ -85,7 +85,7 @@ public abstract class SharedGasTankSystem : EntitySystem
         args.PushMarkup(Loc.GetString(component.IsValveOpen ? "comp-gas-tank-examine-open-valve" : "comp-gas-tank-examine-closed-valve"));
     }
 
-    private void OnActionToggle(Entity<GasTankComponent> gasTank, ref ToggleInternalsActionEvent args)
+    private void OnActionToggle(Entity<GasTankComponent> gasTank, ref ToggleInternalsActionEvent args) // Aurora's Song: ToggleActionEvent > ToggleInternalsActionEvent
     {
         if (args.Handled)
             return;
