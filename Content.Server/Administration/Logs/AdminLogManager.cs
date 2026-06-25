@@ -22,6 +22,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Reflection;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared._AS.CCVar; // Aurora's Song
 
 namespace Content.Server.Administration.Logs;
 
@@ -95,6 +96,9 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
     private int _savingLogs;
     private int _logsDropped;
 
+    // Aurora's Song
+    private bool _showAdminLinks;
+
     public void Initialize()
     {
         _sawmill = _logManager.GetSawmill(SawmillId);
@@ -115,6 +119,9 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
             value => _dropThreshold = value, true);
         _configuration.OnValueChanged(CCVars.AdminLogsHighLogPlaytime,
             value => _highImpactLogPlaytime = value, true);
+
+        _configuration.OnValueChanged(ASCCVars.ShowAdminLinks, // Aurora's Song
+            value => _showAdminLinks = value, true);
 
         if (_metricsEnabled)
         {
@@ -479,13 +486,16 @@ public sealed partial class AdminLogManager : SharedAdminLogManager, IAdminLogMa
         {
             _chat.SendAdminAlert(logMessage);
 
-            if (CreateTpLinks(playerNetEnts, out var tpLinks))
-                _chat.SendAdminAlertNoFormatOrEscape(tpLinks);
+            if (_showAdminLinks) // Aurora's Song
+            {
+                if (CreateTpLinks(playerNetEnts, out var tpLinks))
+                    _chat.SendAdminAlertNoFormatOrEscape(tpLinks);
 
-            var coords = GetCoordinates(handler.Values);
+                var coords = GetCoordinates(handler.Values);
 
-            if (CreateCordLinks(coords, out var cordLinks))
-                _chat.SendAdminAlertNoFormatOrEscape(cordLinks);
+                if (CreateCordLinks(coords, out var cordLinks))
+                    _chat.SendAdminAlertNoFormatOrEscape(cordLinks);
+            }
         }
     }
 
