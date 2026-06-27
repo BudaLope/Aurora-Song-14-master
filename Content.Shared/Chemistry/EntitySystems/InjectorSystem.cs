@@ -484,7 +484,7 @@ public sealed partial class InjectorSystem : EntitySystem
         RaiseLocalEvent(target, ref ev);
 
         // Jugsuit blocking Hyposprays when
-        if (ev.Cancelled || TryComp<BlockInjectionComponent>(target, out var blockInjection)) // Aurora: Check for BlockInjectionComponent
+        if (ev.Cancelled || HasComp<BlockInjectionComponent>(target)) // Aurora's Song: Check for BlockInjectionComponent
         {
             var userMessage = Loc.GetString("injector-component-blocked-user");
             var otherMessage = Loc.GetString("injector-component-blocked-other", ("target", target), ("user", user));

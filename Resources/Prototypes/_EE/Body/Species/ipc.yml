@@ -272,8 +272,10 @@
       - ReagentId: Oil
         Quantity: 300
   - type: BlockInjection
-    blockHypospray: true
-    blockInjectOnProjectile: true
+    # Aurora's Song Start: These fields are broken and thus no longer used
+    #blockHypospray: true
+    #blockInjectOnProjectile: true
+    # Aurora's Song End
   - type: CanNotVomit
   # Aurora's Song End
 

@@ -8,21 +8,23 @@ namespace Content.Shared._DV.Chemistry.Components;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class BlockInjectionComponent : Component
 {
+    // Aurora's Song Start: These fields are no longer used after being broken by the unification of the syringe and hypospray systems.
     /// <summary>
     /// If true, this component will block injections from syringes.
     /// </summary>
-    [DataField]
-    public bool BlockSyringe = true;
+    //[DataField]
+    //public bool BlockSyringe = true;
 
     /// <summary>
     /// If true, this component will block injections from hypospray.
     /// </summary>
-    [DataField]
-    public bool BlockHypospray;
+    //[DataField]
+    //public bool BlockHypospray;
 
     /// <summary>
     /// If true, this component will block injections from projectile.
     /// </summary>
-    [DataField]
-    public bool BlockInjectOnProjectile;
+    //[DataField]
+    //public bool BlockInjectOnProjectile;
+    // Aurora's Song End
 }
