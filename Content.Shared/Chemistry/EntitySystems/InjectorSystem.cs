@@ -51,7 +51,6 @@ public sealed partial class InjectorSystem : EntitySystem
         SubscribeLocalEvent<InjectorComponent, InjectorDoAfterEvent>(OnInjectDoAfter);
         SubscribeLocalEvent<InjectorComponent, MeleeHitEvent>(OnAttack);
         SubscribeLocalEvent<InjectorComponent, GetVerbsEvent<AlternativeVerb>>(AddVerbs);
-        SubscribeLocalEvent<InjectorComponent, TargetBeforeInjectEvent>(OnTargetBeforeInject); // Aurora's Song - Convert hypo blocking to function
     }
 
     #region Events Handling
@@ -110,18 +109,6 @@ public sealed partial class InjectorSystem : EntitySystem
             return; // Frontier
 
         TryMobsDoAfter(injector, args.User, args.HitEntities[0]);
-    }
-
-    // Aurora's Song - Move hypospray blocking to event
-    private void OnTargetBeforeInject(Entity<InjectorComponent> ent, ref TargetBeforeInjectEvent args)
-    {
-        if (args.Cancelled)
-            return;
-
-        if (TryComp<BlockInjectionComponent>(ent, out var blockInjection) && blockInjection.BlockHypospray)
-        {
-            args.Cancel();
-        }
     }
 
     /// <summary>
@@ -497,7 +484,7 @@ public sealed partial class InjectorSystem : EntitySystem
         RaiseLocalEvent(target, ref ev);
 
         // Jugsuit blocking Hyposprays when
-        if (ev.Cancelled)
+        if (ev.Cancelled || TryComp<BlockInjectionComponent>(target, out var blockInjection))
         {
             var userMessage = Loc.GetString("injector-component-blocked-user");
             var otherMessage = Loc.GetString("injector-component-blocked-other", ("target", target), ("user", user));
