@@ -762,6 +762,7 @@
     tags:
     - Cooked
     - NFHotdog
+    - Meat
   - type: FlavorProfile
     flavors:
       - meaty

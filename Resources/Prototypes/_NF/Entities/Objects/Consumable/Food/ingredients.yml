@@ -328,6 +328,9 @@
   - type: Construction
     graph: NFHotdogStove
     node: start
+  - type: Tag
+    tags:
+    - Meat
 
 - type: entity
   parent: BaseItem
