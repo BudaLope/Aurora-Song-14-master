@@ -223,10 +223,8 @@
       types:
         Heat: -0.025
   - type: BlockInjection
-    # Aurora's Song Start: These fields are broken and thus no longer used
-    #blockHypospray: true
-    #blockInjectOnProjectile: true
-    # Aurora's Song End
+    #blockHypospray: true # Aurora's Song: This field is broken and thus no longer used
+    blockInjectOnProjectile: true
   - type: InventorySlotFriction
   - type: AutoToggleableOuterClothing
 

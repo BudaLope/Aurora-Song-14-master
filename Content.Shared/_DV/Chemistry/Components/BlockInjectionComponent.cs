@@ -20,11 +20,11 @@ public sealed partial class BlockInjectionComponent : Component
     /// </summary>
     //[DataField]
     //public bool BlockHypospray;
+    // Aurora's Song End
 
     /// <summary>
     /// If true, this component will block injections from projectile.
     /// </summary>
-    //[DataField]
-    //public bool BlockInjectOnProjectile;
-    // Aurora's Song End
+    [DataField]
+    public bool BlockInjectOnProjectile;
 }
