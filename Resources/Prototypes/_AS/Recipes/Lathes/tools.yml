@@ -4,5 +4,6 @@
   categories:
   - Materials
   completetime: 0.1
+  applyMaterialDiscount: false
   materials:
     Steel: 50
