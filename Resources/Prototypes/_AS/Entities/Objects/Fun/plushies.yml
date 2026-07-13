@@ -59,3 +59,27 @@
     - Payload
     - ClothMade
     - PlushieLizard
+
+- type: entity
+  parent: PlushieXeno
+  id: PlushieCustomTreble
+  name: alligator plushie
+  description: they might have a bone to pick with you
+  components:
+  - type: Solution # Aurora's Song - Convert to solution
+    solution:
+      reagents:
+      - ReagentId: Hemorrhinol
+        Quantity: 10
+      - ReagentId: BlackRussian
+        Quantity: 10
+  - type: Speech
+    speechVerb: Reptilian # for pais (In the secret stash)
+  - type: FoodSequenceElement
+    entries:
+      CottonBurger: LizardPlushie
+  - type: Tag
+    tags:
+    - Payload
+    - ClothMade
+    - PlushieLizard
