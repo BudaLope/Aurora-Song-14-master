@@ -8,9 +8,9 @@
     sprite: _DEN/Tiles/Planet/water.rsi
     layers:
     - state: pool_water
-  - type: FishingSpot
-    fishList: !type:NestedSelector
-      tableId: ToiletFishingLootTable # TODO: Make a unique loot pool for pool water
+  # - type: FishingSpot # Aurora's Song commented out
+  #   fishList: !type:NestedSelector
+  #     tableId: ToiletFishingLootTable # TODO: Make a unique loot pool for pool water
   - type: SolutionContainerManager
     solutions:
       pool:
@@ -32,6 +32,6 @@
         Quantity: 99
       - ReagentId: Chlorine
         Quantity: 1
-  - type: Drink
-    solution: pool
-    transferAmount: 1
+  # - type: Drink # Aurora's Song commented out
+  #   solution: pool
+  #   transferAmount: 1
