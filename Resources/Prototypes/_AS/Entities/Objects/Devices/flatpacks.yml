@@ -27,16 +27,16 @@
 
 # region Engineering
 
-- type: entity
-  parent: BaseNFFlatpack
-  id: PoweredTinyFanFlatpack
-  name: powered tiny fan flatpack
-  description: A flatpack used for constructing a powered tiny fan.
-  components:
-  - type: Flatpack
-    entity: PoweredAtmosDeviceFanTiny
-  - type: StaticPrice
-    vendPrice: 12500
+# - type: entity Removed as Tiny Fan is more easily abusable, and the directional serve its purpose fine without
+#   parent: BaseNFFlatpack
+#   id: PoweredTinyFanFlatpack
+#   name: powered tiny fan flatpack
+#   description: A flatpack used for constructing a powered tiny fan.
+#   components:
+#   - type: Flatpack
+#     entity: PoweredAtmosDeviceFanTiny
+#   - type: StaticPrice
+#     vendPrice: 12500
 
 - type: entity
   parent: BaseNFFlatpack

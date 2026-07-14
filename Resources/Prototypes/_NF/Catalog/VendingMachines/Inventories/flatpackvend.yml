@@ -44,7 +44,7 @@
     AirlockShuttleFlatpack: 4294967295 # Infinite
     AirlockGlassShuttleFlatpack: 4294967295 # Infinite
     PoweredDirectionalFanFlatpack: 4294967295 # Infinite - Aurora's Song - Added for shipbuilding
-    PoweredTinyFanFlatpack: 4294967295 # Infinite - Aurora's Song - Added for shipbuilding
+    # PoweredTinyFanFlatpack: 4294967295 # Infinite - Aurora's Song - Removed as Tiny Fan is more easily abusable, and the directional serve its purpose fine without
     # Science
     MachineArtifactAnalyzerFlatpack: 4294967295 # Infinite
     ResearchAndDevelopmentServerFlatpack: 4294967295 # Infinite
