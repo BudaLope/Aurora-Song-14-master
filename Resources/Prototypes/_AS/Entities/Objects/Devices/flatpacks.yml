@@ -27,7 +27,8 @@
 
 # region Engineering
 
-# - type: entity Removed as Tiny Fan is more easily abusable, and the directional serve its purpose fine without
+# Removed as Tiny Fan is more easily abusable, and the directional serve its purpose fine without
+# - type: entity
 #   parent: BaseNFFlatpack
 #   id: PoweredTinyFanFlatpack
 #   name: powered tiny fan flatpack

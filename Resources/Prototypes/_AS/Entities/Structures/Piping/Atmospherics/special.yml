@@ -1,5 +1,6 @@
 # Devices which are not portable but don't link up to anything
-# - type: entity Removed as Tiny Fan is more easily abusable, and the directional serve its purpose fine without
+# Removed as Tiny Fan is more easily abusable, and the directional serve its purpose fine without
+# - type: entity
 #   parent: AtmosDeviceFanTiny
 #   id: PoweredAtmosDeviceFanTiny
 #   name: tiny fan
