@@ -156,7 +156,7 @@
     state: icon
   completetime: 1
   materials:
-    Biomass: 12
+    Biomass: 10 # Aurora's Song 12>10
 
 - type: latheRecipe
   id: BioGenMilkSoy
@@ -169,7 +169,7 @@
     state: icon
   completetime: 1
   materials:
-    Biomass: 12
+    Biomass: 10 # Aurora's Song 12>10
 
 - type: latheRecipe
   id: BioGenEthanol
@@ -182,7 +182,7 @@
     state: icon
   completetime: 1
   materials:
-    Biomass: 18
+    Biomass: 10 # Aurora's Song 18>10
 
 - type: latheRecipe
   id: BioGenCream
@@ -195,7 +195,7 @@
     state: icon
   completetime: 1
   materials:
-    Biomass: 18
+    Biomass: 10 # Aurora's Song 18>10
 
 - type: latheRecipe
   id: BioGenBlackpepper
@@ -208,7 +208,7 @@
     state: packet-pepper
   completetime: 1
   materials:
-    Biomass: 18
+    Biomass: 10 # Aurora's Song 18>10
 
 - type: latheRecipe
   id: BioGenEnzyme
@@ -221,7 +221,7 @@
     state: bottle-empty
   completetime: 1
   materials:
-    Biomass: 18
+    Biomass: 10 # Aurora's Song 18>10
 
 - type: latheRecipe
   id: BioGenFlour
@@ -234,7 +234,7 @@
     state: flour-big
   completetime: 1
   materials:
-    Biomass: 18
+    Biomass: 10 # Aurora's Song 18>10
 
 - type: latheRecipe
   id: BioGenSugar
@@ -247,7 +247,7 @@
     state: sugar-big
   completetime: 1
   materials:
-    Biomass: 18
+    Biomass: 10 # Aurora's Song 18>10
 
 - type: latheRecipe
   id: BioGenDiseaseSwab
