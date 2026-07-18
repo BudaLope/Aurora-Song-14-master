@@ -173,15 +173,6 @@
     sprite:
       sprite: Effects/creampie.rsi
       state: creampie_vulpkanin
-  # Frontier: interaction & tall/short traits
-  - type: ShortWhitelist
-    scale: 0.8
-    density: 140
-    pseudoItem: true
-    cosmeticOnly: false
-  - type: TallWhitelist
-    scale: 1.2
-  # End Frontier
 
 - type: entity
   parent: OrganBaseOrganic

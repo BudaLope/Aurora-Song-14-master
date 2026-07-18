@@ -16,7 +16,6 @@ public sealed partial class HumanoidProfileEditor
         }
 
         SetDirty();
-        ReloadPreview();
         UpdateSpriteViewScale();
     }
 
@@ -47,7 +46,6 @@ public sealed partial class HumanoidProfileEditor
         }
 
         SetDirty();
-        ReloadPreview();
         UpdateSpriteViewScale();
     }
 

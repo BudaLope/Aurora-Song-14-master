@@ -10,8 +10,8 @@
 
 - type: trait
   id: LightweightDrunk
-  name: trait-lightweight-name
-  description: trait-lightweight-desc
+  name: trait-lightweight-drunk-name # Aurora's Song: lightweight > lightweight-drunk
+  description: trait-lightweight-drunk-desc # Aurora's Song: lightweight > lightweight-drunk
   category: Quirks
   components:
   - type: LightweightDrunk
