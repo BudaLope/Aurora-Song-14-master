@@ -95,6 +95,7 @@
                             </BoxContainer>
                             <!-- Height -->
                             <BoxContainer HorizontalExpand="True">
+                                <!-- Aurora's Song: Added HeightLabel -->
                                 <Label Name="HeightLabel" Text="{Loc 'humanoid-profile-editor-height-label'}" HorizontalAlignment="Right" />
                                 <Control HorizontalExpand="True"/>
                                 <Slider Name="HeightSlider" MinValue="0.2" MaxValue="1.3" Value="1.0" HorizontalAlignment="Right" MinSize="200 0" />
@@ -102,6 +103,7 @@
                             </BoxContainer>
                             <!-- Width -->
                             <BoxContainer HorizontalExpand="True">
+                                <!-- Aurora's Song: Added WidthLabel -->
                                 <Label Name="WidthLabel" Text="{Loc 'humanoid-profile-editor-width-label'}" HorizontalAlignment="Right" />
                                 <Control HorizontalExpand="True"/>
                                 <Slider Name="WidthSlider" MinValue="0.2" MaxValue="1.3" Value="1.0" HorizontalAlignment="Right" MinSize="200 0" />

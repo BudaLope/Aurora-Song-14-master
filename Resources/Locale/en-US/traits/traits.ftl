@@ -12,7 +12,7 @@ trait-pacifist-desc = You cannot attack or hurt any living beings.
 
 permanent-blindness-trait-examined = [color=lightblue]{CAPITALIZE(POSS-ADJ($target))} eyes are glassy and unfocused. It doesn't seem like {SUBJECT($target)} can see you well, if at all.[/color]
 
-# Aurora's Song: lightweight > lightweight-drunk
+# Aurora's Song: trait-lightweight-name > trait-lightweight-drunk-name
 trait-lightweight-drunk-name = Lightweight drunk
 trait-lightweight-drunk-desc = Alcohol has a stronger effect on you.
 

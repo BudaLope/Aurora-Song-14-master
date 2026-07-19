@@ -24,6 +24,7 @@ humanoid-profile-editor-save-button = Save
 humanoid-profile-editor-reset-button = Reset
 humanoid-profile-editor-spawn-priority-label = Spawn priority:
 # Mono Start
+# Aurora's Song: Added height and width vars
 humanoid-profile-editor-height-label = Height: {$height}cm {$feet}' {$inches}" {$value}
 humanoid-profile-editor-width-label = Width: {$width}cm {$inches}" {$value}
 # Mono End

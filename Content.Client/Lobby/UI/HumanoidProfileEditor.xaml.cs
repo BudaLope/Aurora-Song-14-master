@@ -258,6 +258,7 @@ namespace Content.Client.Lobby.UI
 
             #endregion Eyes
 
+            // Aurora's Song Start
             #region Height
 
             HeightSlider.OnValueChanged += args =>
@@ -287,7 +288,7 @@ namespace Content.Client.Lobby.UI
             };
 
             #endregion Width
-
+            // Aurora's Song End
             #endregion Appearance
 
             #region Jobs
@@ -509,7 +510,8 @@ namespace Content.Client.Lobby.UI
             SpriteView.OverrideDirection = (Direction)((int)direction % 4 * 2);
         }
 
-        private void UpdateHeightSliderLabel()
+        // Aurora's Song Start
+        private void UpdateHeightSliderLabel() // Aurora's Song: Pulled from Den and Modified
         {
             var species = _species.Find(x => x.ID == Profile?.Species) ?? _species.First();
             var height = MathF.Round(species.AverageHeight * HeightSlider.Value);
@@ -521,7 +523,7 @@ namespace Content.Client.Lobby.UI
                 ("value", HeightSlider.Value.ToString("0.00")));
         }
 
-        private void UpdateWidthSliderLabel()
+        private void UpdateWidthSliderLabel() // Aurora's Song: Pulled from Den and Modified
         {
             var species = _species.Find(x => x.ID == Profile?.Species) ?? _species.First();
             var width = MathF.Round(species.AverageWidth * WidthSlider.Value);
@@ -532,7 +534,7 @@ namespace Content.Client.Lobby.UI
                 ("value", WidthSlider.Value.ToString("0.00")));
         }
 
-        private static (int feet, int inches) CentimetersToFeetAndInches(float centimeters)
+        private static (int feet, int inches) CentimetersToFeetAndInches(float centimeters) // Aurora's Song: Pulled from Den
         {
             var inchesPerFoot = 12;
             var totalInches = CentimetersToInches(centimeters);
@@ -548,9 +550,10 @@ namespace Content.Client.Lobby.UI
             return (feet, inches);
         }
 
-        private static float CentimetersToInches(float centimeters)
+        private static float CentimetersToInches(float centimeters) // Aurora's Song: Pulled from Den
         {
             return centimeters * 0.393701f;
         }
+        // Aurora's Song End
     }
 }
