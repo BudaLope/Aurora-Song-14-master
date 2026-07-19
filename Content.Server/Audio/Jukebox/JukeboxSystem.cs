@@ -115,9 +115,14 @@ public sealed partial class JukeboxSystem : SharedJukeboxSystem
         }
     }
 
-    private void ChangeJukeboxVolume()
+    private void OnVolumeChanged(Entity<JukeboxComponent> ent, ref JukeboxVolumeChangedMessage args)
     {
-
+        var volume = SharedAudioSystem.GainToVolume(args.Volume);
+        if (!float.IsFinite(volume))
+            volume = -30.0f;
+        else
+            volume = Math.Clamp(volume, -30.0f, 3.0f);
+        Audio.SetVolume(ent.Comp.AudioStream, volume);
     }
     // Aurora's Song End
 
@@ -283,16 +288,4 @@ public sealed partial class JukeboxSystem : SharedJukeboxSystem
 
         Audio.SetPlaybackPosition(entity.Comp.AudioStream, songTime);
     }
-
-    // Aurora's Song Start
-    private void OnVolumeChanged(Entity<JukeboxComponent> ent, ref JukeboxVolumeChangedMessage args)
-    {
-        var volume = SharedAudioSystem.GainToVolume(args.Volume);
-        if (!float.IsFinite(volume))
-            volume = -30.0f;
-        else
-            volume = Math.Clamp(volume, -30.0f, 3.0f);
-        Audio.SetVolume(ent.Comp.AudioStream, volume);
-    }
-    // Aurora's Song End
 }
