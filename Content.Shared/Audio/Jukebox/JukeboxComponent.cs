@@ -54,7 +54,7 @@ public sealed partial class JukeboxComponent : Component
     public bool ManuallyStopped = false; // Used to track if you pressed the stop button, so it doesn't shuffle on stop
 
     [DataField]
-    public float Volume = 0.5f;
+    public float Volume = 1f;
     // Aurora's Song End
 }
 
