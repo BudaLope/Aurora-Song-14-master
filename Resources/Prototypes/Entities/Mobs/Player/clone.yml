@@ -72,7 +72,7 @@
   - DogVision # Frontier
   - StinkyTrait # Frontier
   - NFSalvageMobRestrictions # Frontier
-  - SizeScaling # Aurora's Song
+  - DensityScaling # Aurora's Song
   eventComponents:
   - Puller
   - Vocal # voice sounds
