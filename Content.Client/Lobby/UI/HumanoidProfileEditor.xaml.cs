@@ -260,6 +260,7 @@ namespace Content.Client.Lobby.UI
             // Aurora's Song Start
             #region Height
 
+            UpdateHeightSliderLabel();
             HeightSlider.OnValueChanged += args =>
             {
                 UpdateHeightSliderLabel();
@@ -275,6 +276,7 @@ namespace Content.Client.Lobby.UI
 
             #region Width
 
+            UpdateWidthSliderLabel();
             WidthSlider.OnValueChanged += args =>
             {
                 UpdateWidthSliderLabel();
