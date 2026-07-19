@@ -49,9 +49,12 @@ public sealed partial class JukeboxComponent : Component
     public Vector2 AudioOffset = Vector2.Zero;
     // End Frontier
 
-    // Aurora's Song Start - Used to track if you pressed the stop button, so it doesn't shuffle on stop
+    // Aurora's Song Start
     [DataField]
-    public bool ManuallyStopped = false;
+    public bool ManuallyStopped = false; // Used to track if you pressed the stop button, so it doesn't shuffle on stop
+
+    [DataField]
+    public float Volume = 0.5f;
     // Aurora's Song End
 }
 
@@ -85,14 +88,9 @@ public sealed class JukeboxSetPlaybackModeMessage(JukeboxPlaybackMode playbackMo
 
 // Aurora's Song: Volume Slider
 [Serializable, NetSerializable]
-public sealed class JukeboxVolumeChangedMessage : BoundUserInterfaceMessage
+public sealed class JukeboxVolumeChangedMessage(float volume) : BoundUserInterfaceMessage
 {
-    public float Volume { get; }
-
-    public JukeboxVolumeChangedMessage(float volume)
-    {
-        Volume = volume;
-    }
+    public float Volume = volume;
 }
 
 [Serializable, NetSerializable]

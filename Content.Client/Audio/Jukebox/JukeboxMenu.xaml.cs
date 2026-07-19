@@ -81,9 +81,15 @@ public sealed partial class JukeboxMenu : FancyWindow
         // Aurora's Song Start
         VolumeSlider.MinValue = 0f;
         VolumeSlider.MaxValue = 1f;
-        VolumeSlider.Value = 0.5f;
-        VolumeSlider.OnValueChanged += OnVolumeSliderValueChanged;
-        UpdateVolumeSliderLabel();
+        VolumeSlider.OnKeyBindUp += args =>
+        {
+            VolumeSet?.Invoke(VolumeSlider.Value);
+        };
+        VolumeSlider.OnValueChanged += range =>
+        {
+            VolumeSlider.Value = range.Value;
+            UpdateVolumeSliderLabel(range.Value);
+        };
         // Aurora's Song End
 
         SetPlayPauseButton(_audioSystem.IsPlaying(_audio), force: true);
@@ -198,6 +204,7 @@ public sealed partial class JukeboxMenu : FancyWindow
             return;
 
         UpdateJukeboxButtons(convState);
+        UpdateVolumeSlider(convState); // Aurora's Song
     }
 
     private void UpdateJukeboxButtons(JukeboxInterfaceState state)
@@ -208,16 +215,17 @@ public sealed partial class JukeboxMenu : FancyWindow
     // End Frontier: Shuffle & Repeat
 
     // Aurora's Song Start
-    private void OnVolumeSliderValueChanged(Robust.Client.UserInterface.Controls.Range range)
+    public void UpdateVolumeSlider(JukeboxInterfaceState state)
     {
-        VolumeSlider.Value = range.Value;
-        UpdateVolumeSliderLabel();
-        VolumeSet?.Invoke(VolumeSlider.Value);
+        if (!VolumeSlider.Grabbed)
+            VolumeSlider.SetValueWithoutEvent(state.Volume);
+        VolumeSlider.Value = state.Volume;
+        UpdateVolumeSliderLabel(state.Volume);
     }
 
-    private void UpdateVolumeSliderLabel()
+    public void UpdateVolumeSliderLabel(float volume)
     {
-        VolumeLabel.Text = Loc.GetString("jukebox-volume-slider-label", ("volume", MathF.Truncate(VolumeSlider.Value * 100)));
+        VolumeLabel.Text = Loc.GetString("jukebox-volume-slider-label", ("volume", MathF.Truncate(volume * 100)));
     }
     // Aurora's Song End
 }

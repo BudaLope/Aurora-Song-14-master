@@ -21,8 +21,9 @@ public abstract partial class SharedJukeboxSystem : EntitySystem
 
 // Frontier: Shuffle & Repeat
 [Serializable, NetSerializable]
-public sealed class JukeboxInterfaceState(JukeboxPlaybackMode playbackMode) : BoundUserInterfaceState
+public sealed class JukeboxInterfaceState(JukeboxPlaybackMode playbackMode, float volume) : BoundUserInterfaceState
 {
     public JukeboxPlaybackMode PlaybackMode { get; set; } = playbackMode;
+    public float Volume { get; set; } = volume;
 }
 // End Frontier: Shuffle & Repeat

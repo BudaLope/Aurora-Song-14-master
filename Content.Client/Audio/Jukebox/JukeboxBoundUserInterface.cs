@@ -50,7 +50,7 @@ public sealed partial class JukeboxBoundUserInterface : BoundUserInterface
         };
         // End Frontier: Shuffle & Repeat
 
-        _menu.VolumeSet += OnVolumeSet;
+        _menu.VolumeSet += OnVolumeSet; // Aurora's Song
 
         _menu.SetTime += SetTime;
         PopulateMusic();
