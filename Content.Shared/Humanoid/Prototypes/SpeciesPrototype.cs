@@ -101,7 +101,13 @@ public sealed partial class SpeciesPrototype : IPrototype
     /// Average width of a species in CM
     /// </summary>
     [DataField("averageWidth")]
-    public float AverageWidth { get; private set; } = 40f;
+    public float AverageWidth { get; private set; } = 40.0f;
+
+    /// <summary>
+    /// Default Scaling
+    /// </summary>
+    [DataField("defaultScale")]
+    public float DefaultScale { get; private set; } = 1.0f;
     // Aurora height and width sliders end
 
     [DataField]

@@ -12,3 +12,5 @@
   maxHeight: 0.75
   minWidth: 0.35
   maxWidth: 0.75
+  defaultScale: 0.4
+  averageHeight: 68
