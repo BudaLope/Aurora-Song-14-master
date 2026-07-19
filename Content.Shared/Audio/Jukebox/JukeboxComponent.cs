@@ -83,6 +83,18 @@ public sealed class JukeboxSetPlaybackModeMessage(JukeboxPlaybackMode playbackMo
     public JukeboxPlaybackMode PlaybackMode = playbackMode;
 }
 
+// Aurora's Song: Volume Slider
+[Serializable, NetSerializable]
+public sealed class JukeboxVolumeChangedMessage : BoundUserInterfaceMessage
+{
+    public float Volume { get; }
+
+    public JukeboxVolumeChangedMessage(float volume)
+    {
+        Volume = volume;
+    }
+}
+
 [Serializable, NetSerializable]
 public enum JukeboxPlaybackMode : byte
 {

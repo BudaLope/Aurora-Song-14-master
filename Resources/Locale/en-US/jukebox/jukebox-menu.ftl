@@ -8,3 +8,6 @@ jukebox-menu-buttonstop = Stop
 jukebox-menu-buttonshuffle = Shuffle
 jukebox-menu-buttonrepeat = Repeat
 # End Frontier: Shuffle & Repeat
+
+# Aurora's Song
+jukebox-volume-slider-label = Volume: {$volume}%

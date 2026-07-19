@@ -5,6 +5,7 @@ using Content.Shared.Power;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Components;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random; // Aurora's Song
@@ -32,6 +33,8 @@ public sealed partial class JukeboxSystem : SharedJukeboxSystem
 
         SubscribeLocalEvent<JukeboxComponent, ComponentStartup>(OnComponentStartup); // Frontier
         SubscribeLocalEvent<JukeboxComponent, PowerChangedEvent>(OnPowerChanged);
+
+        SubscribeLocalEvent<JukeboxComponent, JukeboxVolumeChangedMessage>(OnVolumeChanged); // Aurora's Song
     }
 
     private void OnComponentInit(Entity<JukeboxComponent> ent, ref ComponentInit args)
@@ -95,21 +98,26 @@ public sealed partial class JukeboxSystem : SharedJukeboxSystem
         switch (entity.Comp.PlaybackMode)
         {
             case JukeboxPlaybackMode.Shuffle:
-            {
-                if (!_protoManager.TryGetRandom<JukeboxPrototype>(_random, out var prototype))
                 {
-                    Stop(entity.AsNullable());
+                    if (!_protoManager.TryGetRandom<JukeboxPrototype>(_random, out var prototype))
+                    {
+                        Stop(entity.AsNullable());
+                        return;
+                    }
+
+                    SetSelectedTrack(entity.AsNullable(), prototype.ID);
+                    TryPlay(entity.AsNullable());
                     return;
                 }
-
-                SetSelectedTrack(entity.AsNullable(), prototype.ID);
-                TryPlay(entity.AsNullable());
-                return;
-            }
             case JukeboxPlaybackMode.Repeat:
                 TryPlay(entity.AsNullable());
                 break;
         }
+    }
+
+    private void ChangeJukeboxVolume()
+    {
+
     }
     // Aurora's Song End
 
@@ -275,4 +283,16 @@ public sealed partial class JukeboxSystem : SharedJukeboxSystem
 
         Audio.SetPlaybackPosition(entity.Comp.AudioStream, songTime);
     }
+
+    // Aurora's Song Start
+    private void OnVolumeChanged(Entity<JukeboxComponent> ent, ref JukeboxVolumeChangedMessage args)
+    {
+        var volume = SharedAudioSystem.GainToVolume(args.Volume);
+        if (!float.IsFinite(volume))
+            volume = -30.0f;
+        else
+            volume = Math.Clamp(volume, -30.0f, 3.0f);
+        Audio.SetVolume(ent.Comp.AudioStream, volume);
+    }
+    // Aurora's Song End
 }

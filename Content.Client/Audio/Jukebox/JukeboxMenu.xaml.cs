@@ -32,6 +32,7 @@ public sealed partial class JukeboxMenu : FancyWindow
     public event Action<JukeboxPlaybackMode>? OnModeChanged; // Frontier
     public event Action<ProtoId<JukeboxPrototype>>? OnSongSelected;
     public event Action<float>? SetTime;
+    public event Action<float>? VolumeSet; // Aurora's Song
 
     private EntityUid? _audio;
 
@@ -76,6 +77,14 @@ public sealed partial class JukeboxMenu : FancyWindow
             OnModeChanged?.Invoke(RepeatButton.Pressed ? JukeboxPlaybackMode.Repeat : JukeboxPlaybackMode.Single);
         };
         // End Frontier: Shuffle & Repeat
+
+        // Aurora's Song Start
+        VolumeSlider.MinValue = 0f;
+        VolumeSlider.MaxValue = 1f;
+        VolumeSlider.Value = 0.5f;
+        VolumeSlider.OnValueChanged += OnVolumeSliderValueChanged;
+        UpdateVolumeSliderLabel();
+        // Aurora's Song End
 
         SetPlayPauseButton(_audioSystem.IsPlaying(_audio), force: true);
     }
@@ -197,4 +206,18 @@ public sealed partial class JukeboxMenu : FancyWindow
         RepeatButton.Pressed = state.PlaybackMode == JukeboxPlaybackMode.Repeat;
     }
     // End Frontier: Shuffle & Repeat
+
+    // Aurora's Song Start
+    private void OnVolumeSliderValueChanged(Robust.Client.UserInterface.Controls.Range range)
+    {
+        VolumeSlider.Value = range.Value;
+        UpdateVolumeSliderLabel();
+        VolumeSet?.Invoke(VolumeSlider.Value);
+    }
+
+    private void UpdateVolumeSliderLabel()
+    {
+        VolumeLabel.Text = Loc.GetString("jukebox-volume-slider-label", ("volume", MathF.Truncate(VolumeSlider.Value * 100)));
+    }
+    // Aurora's Song End
 }
