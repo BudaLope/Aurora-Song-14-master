@@ -1,7 +1,7 @@
 ﻿- type: startingGear
   id: ASNanoTrasenRogueGruntMk58
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSec
+    jumpsuit: ClothingUniformJumpsuitSecUnsensored
     head: ClothingHeadHelmetBasic #ClothingHeadHelmetSwat for harder difficulty later
     shoes: ClothingShoesBootsCombat
     gloves: ClothingHandsGlovesCombat
@@ -12,7 +12,7 @@
 - type: startingGear
   id: ASNanoTrasenRogueGruntBaton
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSec
+    jumpsuit: ClothingUniformJumpsuitSecUnsensored
     head: ClothingHeadHelmetBasic
     shoes: ClothingShoesBootsCombat
     gloves: ClothingHandsGlovesCombat
@@ -25,7 +25,7 @@
 - type: startingGear
   id: ASNanoTrasenRogueOfficerLecter
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSec
+    jumpsuit: ClothingUniformJumpsuitSecUnsensored
     head: ASClothingHeadHelmetHardsuitConstableUnremoveable
     shoes: ClothingShoesBootsCombat
     gloves: ClothingHandsGlovesColorBlackLecter
@@ -36,7 +36,7 @@
 - type: startingGear
   id: ASNanoTrasenRogueOfficerLaser
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSec
+    jumpsuit: ClothingUniformJumpsuitSecUnsensored
     head: ASClothingHeadHelmetHardsuitConstableUnremoveable
     shoes: ClothingShoesBootsCombat
     gloves: ClothingHandsGlovesColorBlackLaser
@@ -47,7 +47,7 @@
 - type: startingGear
   id: ASNanoTrasenRogueOfficerDrozd
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSec
+    jumpsuit: ClothingUniformJumpsuitSecUnsensored
     head: ASClothingHeadHelmetHardsuitSheduUnremoveable
     shoes: ClothingShoesBootsCombat
     gloves: ClothingHandsGlovesColorBlackDrozd
@@ -58,7 +58,7 @@
 - type: startingGear
   id: ASNanoTrasenRogueOfficerWt550
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSec
+    jumpsuit: ClothingUniformJumpsuitSecUnsensored
     head: ASClothingHeadHelmetHardsuitSheduUnremoveable
     shoes: ClothingShoesBootsCombat
     gloves: ClothingHandsGlovesColorBlackWT550
@@ -69,7 +69,7 @@
 - type: startingGear
   id: ASNanoTrasenRogueWarden
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSec
+    jumpsuit: ClothingUniformJumpsuitSecUnsensored
     head: ASClothingHeadHelmetHardsuitHauberkUnremoveable
     shoes: ClothingShoesBootsCombat
     gloves: ClothingHandsGlovesColorBlackEnforcer
@@ -103,7 +103,7 @@
 - type: startingGear
   id: ASNanoTrasenRogueBlueShield
   equipment:
-    jumpsuit: ClothingUniformJumpsuitSec
+    jumpsuit: ClothingUniformJumpsuitSecUnsensored
     head: ClothingHeadHelmetHardsuitBlueshield
     shoes: ClothingShoesBootsCombat
     gloves: ClothingHandsGlovesColorBlackCombatChester

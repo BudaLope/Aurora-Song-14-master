@@ -275,7 +275,7 @@
       orGroup: DripBag
     - id: ClothingBackpackCommandveteran
       orGroup: DripBag
-    - id: ClothingBackpackDuffelCommandveteran
+    - id: ClothingBackpackDuffelCommVet
       orGroup: DripBag
     - id: EncryptionKeyNanotrasen
 

@@ -1,3 +1,4 @@
+using System.Linq; // Aurora's Song
 using System.Numerics; // Aurora's Song
 using Content.Client.Humanoid;
 using Content.Client.Message;
@@ -256,10 +257,13 @@ namespace Content.Client.Lobby.UI
 
             #endregion Eyes
 
+            // Aurora's Song Start
             #region Height
 
+            UpdateHeightSliderLabel();
             HeightSlider.OnValueChanged += args =>
             {
+                UpdateHeightSliderLabel();
                 SetHeight((float)args.Value);
             };
 
@@ -272,8 +276,10 @@ namespace Content.Client.Lobby.UI
 
             #region Width
 
+            UpdateWidthSliderLabel();
             WidthSlider.OnValueChanged += args =>
             {
+                UpdateWidthSliderLabel();
                 SetWidth((float)args.Value);
             };
 
@@ -283,6 +289,7 @@ namespace Content.Client.Lobby.UI
             };
 
             #endregion Width
+            // Aurora's Song End
 
             #endregion Appearance
 
@@ -504,5 +511,51 @@ namespace Content.Client.Lobby.UI
         {
             SpriteView.OverrideDirection = (Direction)((int)direction % 4 * 2);
         }
+
+        // Aurora's Song Start
+        private void UpdateHeightSliderLabel() // Aurora's Song: Pulled from Den and Modified
+        {
+            var species = _species.Find(x => x.ID == Profile?.Species) ?? _species.First();
+            var height = MathF.Round(species.AverageHeight * HeightSlider.Value);
+            var (heightFt, heightIn) = CentimetersToFeetAndInches(height);
+            HeightLabel.Text = Loc.GetString("humanoid-profile-editor-height-label",
+                ("height", (int)height),
+                ("feet", heightFt),
+                ("inches", heightIn),
+                ("value", HeightSlider.Value.ToString("0.00")));
+        }
+
+        private void UpdateWidthSliderLabel() // Aurora's Song: Pulled from Den and Modified
+        {
+            var species = _species.Find(x => x.ID == Profile?.Species) ?? _species.First();
+            var width = MathF.Round(species.AverageWidth * WidthSlider.Value);
+            var widthIn = CentimetersToInches(width);
+            WidthLabel.Text = Loc.GetString("humanoid-profile-editor-width-label",
+                ("width", (int)width),
+                ("inches", (int)widthIn),
+                ("value", WidthSlider.Value.ToString("0.00")));
+        }
+
+        private static (int feet, int inches) CentimetersToFeetAndInches(float centimeters) // Aurora's Song: Pulled from Den
+        {
+            var inchesPerFoot = 12;
+            var totalInches = CentimetersToInches(centimeters);
+            var feet = (int)(totalInches / inchesPerFoot);
+            var inches = (int)Math.Round(totalInches % inchesPerFoot);
+
+            if (inches == inchesPerFoot)
+            {
+                feet++;
+                inches = 0;
+            }
+
+            return (feet, inches);
+        }
+
+        private static float CentimetersToInches(float centimeters) // Aurora's Song: Pulled from Den
+        {
+            return centimeters * 0.393701f;
+        }
+        // Aurora's Song End
     }
 }

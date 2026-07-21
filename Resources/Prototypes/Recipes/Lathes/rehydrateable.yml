@@ -3,11 +3,11 @@
 - type: latheRecipe
   abstract: true
   id: BaseCubeRecipe
-  completetime: 60 # Frontier: 30<180, Aurora 180<60
+  completetime: 60 # Frontier: 30<180, Aurora 180>60
   categories: [ NFAnimalCubes ] # Frontier
   applyMaterialDiscount: false
   materials:
-    Biomass: 70 # Frontier: 16<70, same as BioGenMonkeyCube recipe
+    Biomass: 50 # Frontier: 16<70 Aurora's Song: 70>50
 
 # Recipes
 
@@ -27,7 +27,8 @@
   id: CowCube
   result: CowCube
   materials:
-    Biomass: 300 # Frontier: 120<350, went with 1 pound = 1 biomass, used average weight from wiki. Reduced to 300 to make it competitive with just producing milk
+    Biomass: 200 # Frontier: 120<350, went with 1 pound = 1 biomass, used average weight from wiki. Reduced to 300 to make it competitive with just producing milk
+                 # Aurora's Song 300>200
 
 - type: latheRecipe
   parent: BaseCubeRecipe

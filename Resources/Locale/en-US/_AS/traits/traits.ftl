@@ -10,6 +10,9 @@ trait-archaic-desc = Thy language is quite outdated, and thou still hold thyself
 trait-milbrat-name = Military Jargon
 trait-milbrat-desc = You make subtle references to a past stint in the military by using strange terminology and acronyms.
 
+trait-emphasis-accent-name = Emphasized speech
+trait-emphasis-accent-desc = You Tend To Place Equal Emphasis On Every Word.
+
 trait-silicon-synth-name = Silicon speech synthesizer
 trait-silicon-synth-desc = Your chassis uses a speech synthesizer typically used by most silicons.
 
@@ -48,3 +51,9 @@ trait-goblin-blood-desc = You have green, foul-smelling blood, as seen in Goblin
 
 trait-cryox-blood-name = Cryoxadone blood
 trait-cryox-blood-desc = You have cryoxadone for blood, as seen in Sheleg and many space animals.
+
+trait-heavyweight-name = Heavyweight
+trait-heavyweight-desc = Makes you harder to move.
+
+trait-lightweight-name = Lightweight
+trait-lightweight-desc = Makes you easier to move.

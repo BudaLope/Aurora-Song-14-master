@@ -2037,3 +2037,76 @@ Entries:
   id: 9614
   time: '2026-07-18T18:41:39.0000000+00:00'
   url: https://github.com/AuroraSong14/Aurora-Song-14/pull/1259
+- author: ZigTag
+  changes:
+    - type: Tweak
+      message: dwarves now use different limbs instead of scaling
+  id: 9615
+  time: '2026-07-19T01:26:23.0000000+00:00'
+  url: https://github.com/AuroraSong14/Aurora-Song-14/pull/1265
+- author: meatsmall
+  changes:
+    - type: Add
+      message: Added alien and glowing eye markings from Den
+    - type: Add
+      message: Fairies get ears
+  id: 9616
+  time: '2026-07-19T01:37:14.0000000+00:00'
+  url: https://github.com/AuroraSong14/Aurora-Song-14/pull/1256
+- author: BudaLope
+  changes:
+    - type: Tweak
+      message: More biogenerator recipes are buffed
+  id: 9617
+  time: '2026-07-19T03:31:22.0000000+00:00'
+  url: https://github.com/AuroraSong14/Aurora-Song-14/pull/1264
+- author: BudaLope
+  changes:
+    - type: Add
+      message: Adds a plushie
+  id: 9618
+  time: '2026-07-19T03:49:24.0000000+00:00'
+  url: https://github.com/AuroraSong14/Aurora-Song-14/pull/1247
+- author: BudaLope
+  changes:
+    - type: Add
+      message: Jukebox volume slider
+  id: 9619
+  time: '2026-07-19T04:22:29.0000000+00:00'
+  url: https://github.com/AuroraSong14/Aurora-Song-14/pull/1267
+- author: BudaLope
+  changes:
+    - type: Tweak
+      message: Height and Width sliders now display real height values
+    - type: Add
+      message: lightweight and heavyweight trait which alters player density by 30%
+    - type: Remove
+      message: tall and short trait are no longer
+  id: 9620
+  time: '2026-07-19T05:22:57.0000000+00:00'
+  url: https://github.com/AuroraSong14/Aurora-Song-14/pull/1266
+- author: GreyScaleHarlequin
+  changes:
+    - type: Fix
+      message: NT UIV spawns properly, and the barriers are deployed!
+    - type: Tweak
+      message: 8g HE shells have been tweaked, pending further change
+    - type: Tweak
+      message: NT rogues are mostly off sensors now
+  id: 9621
+  time: '2026-07-20T07:52:01.0000000+00:00'
+  url: https://github.com/AuroraSong14/Aurora-Song-14/pull/1270
+- author: Danielemental
+  changes:
+    - type: Add
+      message: Adds the GHE Runabout, a new budget mining/salvage shuttle.
+  id: 9622
+  time: '2026-07-20T10:34:08.0000000+00:00'
+  url: https://github.com/AuroraSong14/Aurora-Song-14/pull/1272
+- author: Sunburstschitin
+  changes:
+    - type: Add
+      message: Added The Emphasized Speech Trait, Which Makes You Speak Like This.
+  id: 9623
+  time: '2026-07-20T13:13:26.0000000+00:00'
+  url: https://github.com/AuroraSong14/Aurora-Song-14/pull/1257

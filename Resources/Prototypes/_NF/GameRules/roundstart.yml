@@ -21,14 +21,15 @@
   id: MajorBluespaceEventsTable
   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
     children:
-#    - id: BluespaceCacheError # Aurora
+#    - id: BluespaceCacheError # Aurora's Song | Doesn't fit our vision
     - id: BluespaceCave
-#    - id: BluespaceVaultError # Aurora
-#    - id: BluespaceVaultSmallError # Aurora
+#    - id: BluespaceVaultError # Aurora's SOng | Doesn't fit our vision
+#    - id: BluespaceVaultSmallError # Aurora's Song | Doesn't fit our vision
     - id: BluespaceSyndicateFTLInterception
     - id: BluespaceWizardFederationScout
     - id: BluespaceBloodMoon
-    - id: BluespaceMercenaryFTLCrash # Aurora
+    - id: BluespaceMercenaryFTLCrash # Aurora's Song | Mercenary FTL UIV
+    - id: ASBluespaceNanoTrasenCrash # Aurora's Song | NT Overhaul
 
 - type: entity # Aurora
   id: BluespaceMinourEventScheduler

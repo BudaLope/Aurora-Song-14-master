@@ -1,0 +1,44 @@
+# Author Info
+# GitHub: Danielemental
+# Discord: astral_amy
+
+# Maintainer Info
+# GitHub: Danielemental
+# Discord: astral_amy
+
+# Shuttle Notes:
+#
+- type: vessel
+  id: Runabout
+  parent: BaseVessel
+  name: GHE Runabout
+  description: A mining and salvage ship designed for upgradability.
+  price: 32500 # ~23000 appraise, ~30% markup
+  category: Small
+  group: Shipyard
+  shuttlePath: /Maps/_AS/Shuttles/runabout.yml
+  guidebookPage: Null
+  class:
+  - Cargo
+  - Salvage
+  engine:
+  - Uranium
+
+- type: gameMap
+  id: Runabout
+  mapName: 'GHE Runabout'
+  mapPath: /Maps/_AS/Shuttles/runabout.yml
+  minPlayers: 0
+  stations:
+    Runabout:
+      stationProto: StandardFrontierVessel
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: 'Runabout {1}'
+        nameGenerator: !type:NanotrasenNameGenerator
+          prefixCreator: '14'
+      - type: StationJobs
+        availableJobs:
+          ContractorInterview: [ 0, 0 ]
+          PilotInterview: [ 0, 0 ]
+          MercenaryInterview: [ 0, 0 ]

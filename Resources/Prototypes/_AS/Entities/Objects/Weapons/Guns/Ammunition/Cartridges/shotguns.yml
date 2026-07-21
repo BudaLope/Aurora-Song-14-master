@@ -40,8 +40,8 @@
 
 - type: entity
   id: AS8gShellHE
-  name: shell (8g HE)]
-  parent: ASBaseShellShotgun8g
+  name: shell (8g HE)
+  parent: [ASBaseShellShotgun8g, BaseC3ContrabandUnredeemable]
   components:
   - type: Sprite
     layers:

@@ -23,10 +23,6 @@
       right:
       - state: shana-inhand-right
 
-
-
-
-
 - type: entity
   parent: PlushieCustomEix
   id: PlushieEix
@@ -57,3 +53,11 @@
     maxVocalizeInterval: 14m
     hideChat: true
 
+- type: entity
+  parent: PlushieCustomTreble
+  id: PlushieTreble
+  name: alligator plushie
+  components:
+  - type: Sprite
+    sprite: _AS/Objects/Fun/customplushie.rsi
+    state: treble

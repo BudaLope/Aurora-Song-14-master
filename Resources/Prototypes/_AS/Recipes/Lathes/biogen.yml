@@ -22,35 +22,35 @@
   result: TreeCube
   parent: BaseCubeRecipe
   materials:
-    Biomass: 100
+    Biomass: 50
 
 - type: latheRecipe
   id: ASBioGenTreeSnowyCube
   result: TreeCubeSnowy
   parent: BaseCubeRecipe
   materials:
-    Biomass: 100
+    Biomass: 50
 
 - type: latheRecipe
   id: ASBioGenTreeConiferCube
   result: TreeCubeConifer
   parent: BaseCubeRecipe
   materials:
-    Biomass: 100
+    Biomass: 50
 
 - type: latheRecipe
   id: ASBioGenTreeLargeCube
   result: TreeCubeLarge
   parent: BaseCubeRecipe
   materials:
-    Biomass: 300
+    Biomass: 150
 
 - type: latheRecipe
   id: ASBioGenTreeShadowCube
   result: TreeCubeShadow
   parent: BaseCubeRecipe
   materials:
-    Biomass: 100
+    Biomass: 50
     Plasma: 1000
 
 - type: latheRecipe
@@ -58,7 +58,7 @@
   result: TreeCubeLight
   parent: BaseCubeRecipe
   materials:
-    Biomass: 100
+    Biomass: 50
     Plasma: 1000
 
 - type: latheRecipe

@@ -71,10 +71,8 @@
   - UltraVision # Frontier
   - DogVision # Frontier
   - StinkyTrait # Frontier
-  - TallWhitelist # Frontier
-  - ShortWhitelist # Frontier
-  - SizeAttribute # Frontier
   - NFSalvageMobRestrictions # Frontier
+  - DensityScaling # Aurora's Song
   eventComponents:
   - Puller
   - Vocal # voice sounds

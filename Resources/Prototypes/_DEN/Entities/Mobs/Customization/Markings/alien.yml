@@ -1,0 +1,105 @@
+# EARS / ANTENNAE
+# "HeadSide" is preferred, as HeadTop is often used for "mandatory ears" markings (e.g. vulps, tajaran).
+# Species restrictions are inverted as they work pretty much fine unless they don't - erring on the side of leniency.
+
+- type: marking
+  id: AlienAntenna
+  bodyPart: HeadSide
+  # markingCategory: HeadSide # Aurora's Song
+  # speciesRestriction: [ Resomi ] # Aurora's Song
+  # invertSpeciesRestriction: true # Aurora's Song
+  sprites:
+  - sprite: _DEN/Mobs/Customization/Head/alien_markings.rsi
+    state: alien_antenna_double
+
+- type: marking
+  id: AlienAntennaSide
+  bodyPart: HeadSide
+  # markingCategory: HeadSide # Aurora's Song
+  # speciesRestriction: [ Resomi ] # Aurora's Song
+  # invertSpeciesRestriction: true # Aurora's Song
+  sprites:
+  - sprite: _DEN/Mobs/Customization/Head/alien_markings.rsi
+    state: alien_antenna_side
+
+- type: marking
+  id: AlienAntennaSingle
+  bodyPart: HeadSide
+  # markingCategory: HeadSide # Aurora's Song
+  # speciesRestriction: [ Resomi ] # Aurora's Song
+  # invertSpeciesRestriction: true # Aurora's Song
+  sprites:
+  - sprite: _DEN/Mobs/Customization/Head/alien_markings.rsi
+    state: alien_antenna_single
+
+# EYES
+# Species restrictions are inverted; excluded species are those where the eyes do not fit the head very well,
+# such as if the species has very large eyes.
+
+- type: marking
+  id: AlienEyes
+  bodyPart: Eyes
+  # markingCategory: Face # Aurora's Song
+  groupWhitelist: [ Moth, Arachnid, IPC, Vox ] # Aurora's Song - removed den species, speciesRestriction>groupWhitelist
+  invertGroupWhitelist: true # Aurora's Song - invertSpeciesRestriction>invertGroupWhitelist
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+  sprites:
+  - sprite: _DEN/Mobs/Customization/Head/alien_markings.rsi
+    state: eyes_alien
+
+- type: marking
+  id: AlienEyesBig
+  bodyPart: Eyes
+  # markingCategory: Face # Aurora's Song
+  groupWhitelist: [ Moth, Arachnid, IPC, Vox ] # Aurora's Song - removed den species, speciesRestriction>groupWhitelist
+  invertGroupWhitelist: true # Aurora's Song - invertSpeciesRestriction>invertGroupWhitelist
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+  sprites:
+  - sprite: _DEN/Mobs/Customization/Head/alien_markings.rsi
+    state: eyes_alien_big
+
+- type: marking
+  id: AlienEyesThree
+  bodyPart: Eyes
+  # markingCategory: Face # Aurora's Song
+  groupWhitelist: [ Moth, Arachnid, IPC, Vox ] # Aurora's Song - removed den species, speciesRestriction>groupWhitelist
+  invertGroupWhitelist: true # Aurora's Song - invertSpeciesRestriction>invertGroupWhitelist
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+  sprites:
+  - sprite: _DEN/Mobs/Customization/Head/alien_markings.rsi
+    state: eyes_alien_three
+
+- type: marking
+  id: AlienEyesWide
+  bodyPart: Eyes
+  # markingCategory: Face # Aurora's Song
+  groupWhitelist: [ Moth, Arachnid, IPC, Vox ] # Aurora's Song - removed den species, speciesRestriction>groupWhitelist
+  invertGroupWhitelist: true # Aurora's Song - invertSpeciesRestriction>invertGroupWhitelist
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+  sprites:
+  - sprite: _DEN/Mobs/Customization/Head/alien_markings.rsi
+    state: eyes_alien_wide
+
+# OVERLAYS # Aurora's Song - ignore overlay
+#
+#- type: marking
+#  id: AlienOverlayHead
+#  bodyPart: Head
+#  markingCategory: Head
+#  # Specifically includes "flat-faced" species; not recommended to add this to species with prominent snouts.
+#  speciesRestriction: [ Human, Felinid, Canid, Harpy, Oni, Ovinia, Rodentia, Tajaran ]
+#  sprites:
+#  - sprite: _DEN/Mobs/Customization/Head/alien_markings.rsi
+#    state: head

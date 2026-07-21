@@ -1,5 +1,15 @@
 # Free
 # 1 cost
+
+- type: trait
+  id: EmphasisAccent
+  name: trait-emphasis-accent-name
+  description: trait-emphasis-accent-desc
+  category: SpeechTraits
+  cost: 1
+  components:
+  - type: EmphasisAccent
+
 # 2 cost
 
 - type: trait

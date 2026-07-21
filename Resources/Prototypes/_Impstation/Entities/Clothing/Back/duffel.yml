@@ -1,6 +1,6 @@
 - type: entity
   parent: ClothingBackpackDuffel
-  id: ClothingBackpackDuffelCommandveteran
+  id: ClothingBackpackDuffelCommVet # Aurora's Song | ClothingBackPackDuffelCommandVeteran > ClothingBackpackDuffelCommVet - truncated for in game UX
   name: command veteran duffel bag
   description: A sleek duffel bag, earned through a long career as command.
   components:

@@ -7,7 +7,7 @@ public sealed partial class HumanoidProfileEditor
     private new void SetHeight(float newHeight)
     {
         if (Profile != null &&
-            _prototypeManager.TryIndex<SpeciesPrototype>(Profile.Species, out var species))
+            _prototypeManager.TryIndex(Profile.Species, out var species))
         {
             newHeight = Math.Clamp(newHeight, species.MinHeight, species.MaxHeight);
 
@@ -16,20 +16,19 @@ public sealed partial class HumanoidProfileEditor
         }
 
         SetDirty();
-        ReloadPreview();
         UpdateSpriteViewScale();
     }
 
     private void ResetHeight()
     {
         if (Profile != null &&
-            _prototypeManager.TryIndex<SpeciesPrototype>(Profile.Species, out var species))
+            _prototypeManager.TryIndex(Profile.Species, out var species))
         {
-            var midpoint = (species.MinHeight + species.MaxHeight) / 2f;
-            SetHeight(midpoint);
+            var defaultScale = species.DefaultScale;
+            SetHeight(defaultScale);
 
             if (HeightSlider != null)
-                HeightSlider.Value = midpoint;
+                HeightSlider.Value = defaultScale;
         }
 
         UpdateHeightControls();
@@ -38,7 +37,7 @@ public sealed partial class HumanoidProfileEditor
     private new void SetWidth(float newWidth)
     {
         if (Profile != null &&
-            _prototypeManager.TryIndex<SpeciesPrototype>(Profile.Species, out var species))
+            _prototypeManager.TryIndex(Profile.Species, out var species))
         {
             newWidth = Math.Clamp(newWidth, species.MinWidth, species.MaxWidth);
 
@@ -47,20 +46,19 @@ public sealed partial class HumanoidProfileEditor
         }
 
         SetDirty();
-        ReloadPreview();
         UpdateSpriteViewScale();
     }
 
     private void ResetWidth()
     {
         if (Profile != null &&
-            _prototypeManager.TryIndex<SpeciesPrototype>(Profile.Species, out var species))
+            _prototypeManager.TryIndex(Profile.Species, out var species))
         {
-            var midpoint = (species.MinWidth + species.MaxWidth) / 2f;
-            SetWidth(midpoint);
+            var defaultScale = species.DefaultScale;
+            SetWidth(defaultScale);
 
             if (WidthSlider != null)
-                WidthSlider.Value = midpoint;
+                WidthSlider.Value = defaultScale;
         }
 
         UpdateWidthControls();

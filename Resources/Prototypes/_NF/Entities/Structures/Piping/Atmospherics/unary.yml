@@ -85,8 +85,8 @@
   - type: Machine
     board: GasMiningDrillMachineCircuitboard
   - type: GasDepositExtractor
-    baseExtractionRate: 50 # 50 mol/s => 20 kmol in ~6.6 min
-    extractionRate: 50
+    baseExtractionRate: 500 # Aurora's Song 500 > 50
+    extractionRate: 500 # Aurora's Song 500 > 50
     extractionRateMultiplier: 1.2 # max rate: 86.4 mol/s => 20 kmol in ~3.9 min
     port: outlet
   - type: Fixtures

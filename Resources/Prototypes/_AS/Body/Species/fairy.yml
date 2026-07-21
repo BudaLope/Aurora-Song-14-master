@@ -18,7 +18,7 @@
       required: true
       default: [ MothWingsDefault ]
     enum.HumanoidVisualLayers.HeadTop:
-      limit: 1
+      limit: 2
       required: false
     enum.HumanoidVisualLayers.UndergarmentTop:
       limit: 1
@@ -103,8 +103,6 @@
       0: Alive
       50: Critical
       75: Dead
-  - type: SizeAttribute
-    short: true
   - type: Speech
     speechSounds: Fairy
     speechVerb: Fairy

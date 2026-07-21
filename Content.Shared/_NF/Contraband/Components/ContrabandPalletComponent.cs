@@ -99,6 +99,7 @@ public sealed partial class ContrabandPalletConsoleComponent : Component
         {"ASWeaponSubMachineGunAP4CExpedition","ASWeaponSubMachineGunAP4C"},
         {"ASWeaponShotgunFalchionExpedition","ASWeaponShotgunSurpFalchion"},
         {"ASWeaponShotgunHushpupExpedition","ASWeaponShotgunHushpup"},
+        {"ASWeaponPistolBRDIP15Expedition", "ASWeaponPistolBRDIP15"},
         {"ASWeaponShotgunLeverChesterExpedition", "ASWeaponShotgunLeverChesterRegistered"},
 
         {"ClothingOuterHardsuitSyndie","ClothingOuterHardsuitShanlinUnpainted"},

@@ -5,3 +5,4 @@
   prototype: MobDwarf
   dollPrototype: AppearanceDwarf
   skinColoration: HumanAnimal # Aurora's Song - Replaced with HumanAnimal
+  averageHeight: 136 # Aurora's Song
