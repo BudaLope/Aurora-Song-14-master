@@ -87,6 +87,7 @@
         whitelist:
           tags:
           - Knife
+          - Baton # Aurora's Song
   - type: Appearance
   - type: ItemMapper
     mapLayers:
@@ -94,6 +95,7 @@
         whitelist:
           tags:
           - Knife
+          - Baton # Aurora's Song
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
