@@ -13,16 +13,16 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.65
+        Blunt: 0.2 # .7 > .2 more in line with a stab vest
+        Slash: 0.2 # .7 > .2 more in line with a stab vest
+        Piercing: 0.75 # .65 > .75 more in line with a stab vest
         Heat: 0.7
         Caustic: 0.65
   - type: ClothingSpeedModifier
-    walkModifier: 1.0
-    sprintModifier: 1.0
+    walkModifier: 1.05 # 1.0 > 1.05 More mobile as a counter choice
+    sprintModifier: 1.05 # 1.0 > 1.05 More mobile as a counter choice
   - type: ExplosionResistance
-    damageCoefficient: 0.60
+    damageCoefficient: 0.80 # .6 > .8 more in line with a stab vest
   - type: GroupExamine
 
 #region Command
