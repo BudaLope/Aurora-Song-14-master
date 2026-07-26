@@ -5,6 +5,8 @@ using System.Numerics;
 using Robust.Shared.Utility;
 using Content.Server.Shuttles.Events;
 using Content.Shared.Verbs; // Aurora's Song: LR Config
+using Content.Shared.Examine; // Aurora's Song
+using Robust.Shared.Map; // Aurora's Song
 
 namespace Content.Server.Pinpointer;
 
@@ -101,6 +103,7 @@ public sealed partial class PinpointerSystem : SharedPinpointerSystem
         while (query.MoveNext(out var uid, out var pinpointer))
         {
             UpdateDirectionToTarget((uid, pinpointer));
+            UpdateTargetCoordinates((uid, pinpointer));
         }
     }
 
@@ -129,6 +132,20 @@ public sealed partial class PinpointerSystem : SharedPinpointerSystem
 
         // return uid with a smallest distance
         return l.Count > 0 ? l.First().Value : null;
+    }
+
+    // Aurora's Song Start
+    private void UpdateTargetCoordinates(Entity<PinpointerComponent?> ent)
+    {
+        if (!Resolve(ent, ref ent.Comp))
+            return;
+
+        if (ent.Comp.Target != null)
+        {
+            var xform = Transform(ent.Comp.Target.Value);
+            var coords = _transform.GetWorldPosition(xform);
+            SetTargetCoordinates(ent, coords);
+        }
     }
 
     /// <summary>

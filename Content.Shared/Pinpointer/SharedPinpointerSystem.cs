@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared._NF.Pinpointer;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -7,6 +8,7 @@ using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
+using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Pinpointer;
@@ -240,6 +242,14 @@ public abstract partial class SharedPinpointerSystem : EntitySystem
         args.Handled = true;
     }
     // End Frontier: demag
+
+    public void SetTargetCoordinates(Entity<PinpointerComponent?> ent, Vector2 coords)
+    {
+        if (!Resolve(ent, ref ent.Comp))
+            return;
+        ent.Comp.TargetCoordinates = coords;
+        Dirty(ent);
+    }
 }
 
 // Frontier - do-after

@@ -1,3 +1,5 @@
+using Content.Client.GPS.UI;
+using Content.Client.Items;
 using Content.Shared.Pinpointer;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -8,6 +10,13 @@ public sealed partial class PinpointerSystem : SharedPinpointerSystem
 {
     [Dependency] private IEyeManager _eyeManager = default!;
     [Dependency] private SpriteSystem _sprite = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        Subs.ItemStatus<PinpointerComponent>(ent => new PinpointerStatusControl(ent));
+    }
 
     public override void Update(float frameTime)
     {
