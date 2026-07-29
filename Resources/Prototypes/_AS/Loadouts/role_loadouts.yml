@@ -1,3 +1,33 @@
+#region Civilian
+
+- type: roleLoadout
+  id: JobOffDutyOfficer
+  groups:
+  - OffDutyOfficerHead
+  - OffDutyOfficerNeck
+  - OffDutyOfficerJumpsuit
+  - OffDutyOfficerGloves
+  - OffDutyOfficerBackpack
+  - OffDutyOfficerOuterClothing
+  - SLEForcedOuterClothing
+  - OffDutyOfficerShoes
+  - OffDutyOfficerFace
+  - OffDutyOfficerGlasses
+  - OffDutyOfficerBelt
+  - OffDutyOfficerEars
+  - SLEBoxSurvival
+  - OffDutyOfficerPDA
+  - ContractorWallet
+  - ContractorCartridge
+  - ContractorImplanter
+  - ContractorEncryptionKey
+  - OffDutyOfficerBackpackItems
+  - ContractorHandItems
+  - MercenaryLongarm
+  - MercenarySidearm
+  - MercenaryAmmo
+  - SLESpeciesSpecific
+
 #region Medical
 
 - type: roleLoadout
@@ -24,6 +54,7 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
+  - ASDecapoidSpeciesSpecific
 
 #region Service
 
@@ -51,6 +82,7 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific
+  - ASDecapoidSpeciesSpecific
 
 #region SLE
 
@@ -78,6 +110,7 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - SLESpeciesSpecific
+  - ASDecapoidSpeciesSpecific
 
 - type: roleLoadout
   id: JobOfficer
@@ -103,6 +136,7 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - SLESpeciesSpecific
+  - ASDecapoidSpeciesSpecific
 
 - type: roleLoadout
   id: JobCorpsman
@@ -128,6 +162,7 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - SLESpeciesSpecific
+  - ASDecapoidSpeciesSpecific
 
 - type: roleLoadout
   id: JobASDetective
@@ -153,6 +188,7 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - SLESpeciesSpecific
+  - ASDecapoidSpeciesSpecific
 
 - type: roleLoadout
   id: JobPublicAffairsLiaison
@@ -177,6 +213,7 @@
   - ContractorBackpackItems
   - ContractorHandItems
   - NFSpeciesSpecific # Explicitly civilian variant
+  - ASDecapoidSpeciesSpecific
 
 # - type: roleLoadout # Fix when this is actully used
   # id: JobPrisonGuard
@@ -227,6 +264,7 @@
   - SergeantBackpackItems
   - ContractorHandItems
   - SLESpeciesSpecific
+  - ASDecapoidSpeciesSpecific
 
 - type: roleLoadout
   id: JobSergeant
@@ -252,6 +290,7 @@
   - SergeantBackpackItems
   - ContractorHandItems
   - SLESpeciesSpecific
+  - ASDecapoidSpeciesSpecific
 
 - type: roleLoadout
   id: JobCommissioner
@@ -273,9 +312,10 @@
   - ContractorWallet
   - ContractorCartridge
   - ContractorImplanter
-  - SergeantBackpackItems
+  - CommissionerBackpackItems
   - ContractorHandItems
   - SLESpeciesSpecific
+  - ASDecapoidSpeciesSpecific
 
 #region Command
 
@@ -302,6 +342,7 @@
 #  - ContractorEncryptionKey # The CR has all comms
   - ContractorHandItems
   - NFSpeciesSpecific
+  - ASDecapoidSpeciesSpecific
 
 #region Engineering
 
@@ -320,7 +361,7 @@
   - ContractorFace
   - SiteManagerGlasses
   - SiteManagerPDA
-  - ContractorBackpackItems
+  - SiteManagerBackpackItems # Apparently this doubles the backpack items for Site Managers. I do not see any other "BackpackItems" in this list, so how in the FUCK did that happen?!
   - ContractorBoxSurvival
   - ContractorWallet
   - ContractorCartridge
@@ -328,6 +369,7 @@
   - ContractorEncryptionKey
   - ContractorHandItems
   - NFSpeciesSpecific
+  - ASDecapoidSpeciesSpecific
 
 - type: roleLoadout
   id: JobSiteWorker
@@ -352,6 +394,7 @@
   - ContractorEncryptionKey
   - ContractorHandItems
   - NFSpeciesSpecific
+  - ASDecapoidSpeciesSpecific
 
 #region CAF
 

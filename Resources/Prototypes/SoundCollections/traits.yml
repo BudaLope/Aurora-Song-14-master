@@ -217,10 +217,12 @@
   # - /Audio/_EE/Supermatter/status/ohfuck.ogg
   # - /Audio/_Goobstation/Heretic/Ambience/Antag/Heretic/heretic_gain.ogg
   # - /Audio/_Goobstation/Heretic/castsummon.ogg
-  # - /Audio/_Impstation/Allulalo/allulalo_say.ogg
-  # - /Audio/_Impstation/Allulalo/allulalo_ask.ogg
-  # - /Audio/_Impstation/Allulalo/allulalo_exclaim.ogg
-  # - /Audio/_Impstation/Allulalo/allulalo_deathgasp.ogg
+  # Aurora's Song Edit End
+  - /Audio/_MACRO/Voice/Allulalo/allulalo_say.ogg
+  - /Audio/_MACRO/Voice/Allulalo/allulalo_ask.ogg
+  - /Audio/_MACRO/Voice/Allulalo/allulalo_exclaim.ogg
+  - /Audio/_MACRO/Voice/Allulalo/allulalo_deathgasp.ogg
+  # Aurora's Song Edit Start
   # - /Audio/_Impstation/Animals/bananadeer_eee.ogg
   # - /Audio/_Impstation/Animals/bros_hurt.ogg
   # - /Audio/_Impstation/Animals/finfin3.ogg
@@ -252,9 +254,11 @@
   # - /Audio/_Impstation/Voice/Anomalocarid/anomalocarid_exclaim.ogg
   # - /Audio/_Impstation/Voice/Anomalocarid/anomalocarid_deathgasp.ogg
   # - /Audio/_Impstation/Voice/Arachnid/arachnid_gasp.ogg
-  # - /Audio/_Impstation/Voice/Decapoid/decapoid_gasp.ogg
-  # - /Audio/_Impstation/Voice/Decapoid/decapoid_deathgasp.ogg
-  # - /Audio/_Impstation/Voice/Decapoid/decapoid_scream.ogg
+  # Aurora's Song Edit End
+  - /Audio/_MACRO/Voice/Decapoid/decapoid_gasp.ogg
+  - /Audio/_MACRO/Voice/Decapoid/decapoid_deathgasp.ogg
+  - /Audio/_MACRO/Voice/Decapoid/decapoid_scream.ogg
+  # Aurora's Song Edit Start
   # - /Audio/_Impstation/Voice/Gastropoid/snail_gasp.ogg
   # - /Audio/_Impstation/Voice/Gastropoid/snail_deathgasp.ogg
   # - /Audio/_Impstation/Voice/Gastropoid/snail_scream.ogg
