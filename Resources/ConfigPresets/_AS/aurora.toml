@@ -22,6 +22,7 @@ auto_call_time = 2880
 
 [atmos]
 delta_pressure_damage = false
+space_wind = false
 
 [hub]
 advertise = false
