@@ -11,8 +11,8 @@ using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Content.Shared._Goobstation.Vehicles;
 using Content.Server._AS.Touched;
-using Content.Shared.Tag;
-using Robust.Shared.Prototypes;
+using Content.Shared.Tag; // Aurora's Song
+using Robust.Shared.Prototypes; // Aurora's Song
 
 namespace Content.Server.StationEvents.Events;
 
@@ -20,9 +20,9 @@ public sealed partial class LinkedLifecycleGridSystem : EntitySystem
 {
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedMindSystem _mind = default!;
-    [Dependency] private TagSystem _tagSystem = default!;
+    [Dependency] private TagSystem _tagSystem = default!; // Aurora's Song
 
-    private static readonly ProtoId<TagPrototype> TrashProto = "Trash";
+    private static readonly ProtoId<TagPrototype> TrashProto = "Trash"; // Aurora's Song
 
     public override void Initialize()
     {
