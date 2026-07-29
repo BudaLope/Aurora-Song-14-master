@@ -39,6 +39,10 @@ player_pause_distance = 40
 [nf14.respawn]
 time = 20
 
+[nf14.gc]
+idle_count = 1
+period = 300
+
 [infolinks]
 discord    = "https://discord.gg/aurorasong"
 github     = "https://github.com/AuroraSong14/Aurora-Song-14"
