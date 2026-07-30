@@ -1,6 +1,5 @@
-using System.Numerics;
+using System.Numerics; // Aurora's Song
 using Robust.Shared.GameStates;
-using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Pinpointer;
@@ -94,6 +93,7 @@ public sealed partial class PinpointerComponent : Component
     [DataField]
     public float UpdateRate = 1.5f;
 
+    // Aurora's Song
     [DataField, AutoNetworkedField]
     public Vector2 TargetCoordinates = new();
 }

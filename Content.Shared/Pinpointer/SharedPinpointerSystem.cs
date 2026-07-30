@@ -1,4 +1,4 @@
-using System.Numerics;
+using System.Numerics; // Aurora's Song
 using Content.Shared._NF.Pinpointer;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -8,7 +8,6 @@ using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
-using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Pinpointer;
@@ -243,6 +242,7 @@ public abstract partial class SharedPinpointerSystem : EntitySystem
     }
     // End Frontier: demag
 
+    // Aurora's Song Start
     public void SetTargetCoordinates(Entity<PinpointerComponent?> ent, Vector2 coords)
     {
         if (!Resolve(ent, ref ent.Comp))
@@ -250,6 +250,7 @@ public abstract partial class SharedPinpointerSystem : EntitySystem
         ent.Comp.TargetCoordinates = coords;
         Dirty(ent);
     }
+    // Aurora's Song End
 }
 
 // Frontier - do-after
