@@ -19,8 +19,8 @@
       grid: !type:GridSpawnGroup
         nameDataset: NamesScrap
         nameDatasetType: Nanotrasen # they're shuttles
-        minCount: 2
-        maxCount: 3
+        minCount: 1
+        maxCount: 2
         minimumDistance: 1000
         maximumDistance: 2000
         addComponents:
