@@ -10,6 +10,8 @@ using Content.Shared.Destructible;
 using Content.Shared.Doors.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Electrocution;
+using Content.Shared.Hands.Components; // Aurora's Song
+using Content.Shared.Hands.EntitySystems; // Aurora's Song
 using Content.Shared.Intellicard;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle;
@@ -66,6 +68,7 @@ public abstract partial class SharedStationAiSystem : EntitySystem
     [Dependency] private IPrototypeManager _protoManager = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedAiRemoteControlSystem _remoteSystem = default!; // Corvax-Next-AiRemoteControl
+    [Dependency] private SharedHandsSystem _sharedHandsSystem = default!; // Aurora's Song
 
     // StationAiHeld is added to anything inside of an AI core.
     // StationAiHolder indicates it can hold an AI positronic brain (e.g. holocard / core).
@@ -79,6 +82,7 @@ public abstract partial class SharedStationAiSystem : EntitySystem
 
     private static readonly EntProtoId DefaultAi = "StationAiBrain";
     private readonly ProtoId<ChatNotificationPrototype> _downloadChatNotificationPrototype = "IntellicardDownload";
+    private static readonly EntProtoId DefaultShipmind = "BorgChassisShipmind"; // Aurora's Song - Defines the Proto to check against if you want an intellicard to be dropped on downloading an AI
 
     public override void Initialize()
     {
@@ -242,6 +246,10 @@ public abstract partial class SharedStationAiSystem : EntitySystem
         // Try to insert our thing into them
         if (_slots.CanEject(ent.Owner, args.User, ent.Comp.Slot))
         {
+            var protoIdentity = MetaData(args.User).EntityPrototype?.ID; // Aurora's Song - Falcon I swear I tried to make this one line but the compiler won
+            if (protoIdentity != null && protoIdentity == DefaultShipmind && TryComp<HandsComponent>(args.User, out var handsComp)) // Aurora's Song - This block checks if the entity pulling the mind out is a shipmind chassis
+                _sharedHandsSystem.TryDrop((args.User, handsComp), args.Args.Target.Value, null, true, true); // Aurora's Song - And then drops the intellicard if it is, to prevent softlocking via autolobotomization
+
             // Corvax-Next-AiRemoteControl-Start
             if (ent.Comp.Slot.Item != null
                 && TryComp<StationAiHeldComponent>(ent.Comp.Slot.Item, out var stationAiHeldComp))
@@ -383,7 +391,7 @@ public abstract partial class SharedStationAiSystem : EntitySystem
 
     private void OnCorePower(Entity<StationAiCoreComponent> ent, ref PowerChangedEvent args)
     {
-        if (!args.Powered)
+        if (!args.Powered && MetaData(ent).EntityPrototype?.ID != "PlayerStationAiShipmind") //Aurora's Song - Prevent death from powerloss if shipmind (TODO: change things to ensure shipmind doesn't run out of power before played)
         {
             KillHeldAi(ent);
         }
@@ -449,8 +457,7 @@ public abstract partial class SharedStationAiSystem : EntitySystem
         if (_net.IsClient)
             return false;
 
-        var comparison = new EntityUid(0); // TODO: Someone smarter than me come up with a more elegent solution
-        if (ent.Comp.RemoteEntity != null && ent.Comp.RemoteEntity != comparison) // AS: Its null or 0 if the eye gets deleted somehow.
+        if (ent.Comp.RemoteEntity != null && ent.Comp.RemoteEntity != EntityUid.Invalid) // AS: Creation of comparison UID > Using EntityUid.Invalid
             return false; // We don't want to set up an eye if it already exists
 
         var proto = ent.Comp.RemoteEntityProto;
@@ -464,11 +471,8 @@ public abstract partial class SharedStationAiSystem : EntitySystem
         if (proto != null)
         {
             var eye = SpawnAtPosition(proto, coords.Value); // AS
-            if (ent.Comp.Remote)
-            {
-                var eyeComp = EnsureComp<StationAiEyeComponent>(eye); // AS
-                eyeComp.CoreEntity = ent; // AS
-            }
+            var eyeComp = EnsureComp<StationAiEyeComponent>(eye); // AS > removed if statement
+            eyeComp.CoreEntity = ent; // AS
             ent.Comp.RemoteEntity = eye; // AS
             Dirty(ent);
         }
@@ -676,9 +680,8 @@ public abstract partial class SharedStationAiSystem : EntitySystem
     // Aurora's Song Start
     private void OnComponentShutdown(EntityUid uid, StationAiEyeComponent component, ComponentShutdown args) // AS
     {
-
-        var comparison = new EntityUid(0); // TODO: Someone smarter than me come up with a more elegent solution
-        if (component.CoreEntity == null || component.CoreEntity == comparison) // If its been nulled or zero, it either doesn't exist or been set that way purposefully.
+        // Aurora's Song - Removed a line here setting a variable to EntityUid.Invalid, replace comparison on if below
+        if (component.CoreEntity == null || component.CoreEntity == EntityUid.Invalid) // Aurora's Song - If its been nulled or zero, it either doesn't exist or been set that way purposefully.
             return;
 
         if (!TryComp<StationAiCoreComponent>(component.CoreEntity.Value, out var coreComp))
