@@ -2990,3 +2990,10 @@ Entries:
   id: 9722
   time: '2026-08-10T11:35:05.0000000+00:00'
   url: https://github.com/AuroraSong14/Aurora-Song-14/pull/1397
+- author: HatBun
+  changes:
+    - type: Add
+      message: Adds the NA Sloop, a beat up pirate shuttle, to the scrap shipyard.
+  id: 9723
+  time: '2026-08-13T08:23:47.0000000+00:00'
+  url: https://github.com/AuroraSong14/Aurora-Song-14/pull/1354
