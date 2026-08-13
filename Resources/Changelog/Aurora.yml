@@ -2997,3 +2997,12 @@ Entries:
   id: 9723
   time: '2026-08-13T08:23:47.0000000+00:00'
   url: https://github.com/AuroraSong14/Aurora-Song-14/pull/1354
+- author: portfiend
+  changes:
+    - type: Tweak
+      message: >-
+        The "Public" bounty board has been renamed to "Requests" to clarify its
+        purpose better.
+  id: 9724
+  time: '2026-08-13T13:22:41.0000000+00:00'
+  url: https://github.com/AuroraSong14/Aurora-Song-14/pull/1402
