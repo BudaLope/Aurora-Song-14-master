@@ -3013,3 +3013,12 @@ Entries:
   id: 9725
   time: '2026-08-13T13:33:30.0000000+00:00'
   url: https://github.com/AuroraSong14/Aurora-Song-14/pull/1396
+- author: TrixxedHeart
+  changes:
+    - type: Tweak
+      message: >-
+        Enchanted brooms now make sweeping sounds, have unique petting text, and
+        use generic number identifiers instead of silicon ones
+  id: 9726
+  time: '2026-08-14T00:01:19.0000000+00:00'
+  url: https://github.com/AuroraSong14/Aurora-Song-14/pull/1399
